@@ -66,12 +66,7 @@ export class MyScene extends CGFscene {
     this.setSpecular(r, g, b, bl);
     this.setShininess(10.0);
   }
-  setcolorPink() {
-    this.setAmbient(1.0, 0.752941176, 0.796078431, 1.0);
-    this.setDiffuse(1.0, 0.752941176, 0.796078431, 1.0);
-    this.setSpecular(1.0, 0.752941176, 0.796078431, 1.0);
-    this.setShininess(10.0);
-  }
+  
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
