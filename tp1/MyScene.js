@@ -2,6 +2,8 @@ import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyDiamond } from "./MyDiamond.js";
 import { MyParallelogram } from "./MyParallelogram.js";
 import { MyTriangle } from "./MyTriangle.js";
+import { MyTriangleBig } from "./MyTriangleBig.js";
+import { MyTriangleSmall } from "./MyTriangleSmall.js";
 
 
 /**
@@ -30,12 +32,16 @@ export class MyScene extends CGFscene {
     this.axis = new CGFaxis(this);
     this.diamond = new MyDiamond(this);
     this.triangle = new MyTriangle(this);
+    this.bigtriangle = new MyTriangleBig(this);
+    this.smalltriangle = new MyTriangleSmall(this);
     this.parallelogram = new MyParallelogram(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayDiamond = true;
     this.displayTriangle = true;
+    this.displaySTriangle = true;
+    this.displayBTriangle = true;
     this.displayParallelogram = true;
     this.scaleFactor = 1;
   }
@@ -54,10 +60,16 @@ export class MyScene extends CGFscene {
       vec3.fromValues(0, 0, 0)
     );
   }
-  setDefaultAppearance() {
-    this.setAmbient(0.2, 0.4, 0.8, 1.0);
-    this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-    this.setSpecular(0.2, 0.4, 0.8, 1.0);
+  setDefaultAppearance(r, g, b, bl) {
+    this.setAmbient(r, g, b, bl);
+    this.setDiffuse(r, g, b, bl);
+    this.setSpecular(r, g, b, bl);
+    this.setShininess(10.0);
+  }
+  setcolorPink() {
+    this.setAmbient(1.0, 0.752941176, 0.796078431, 1.0);
+    this.setDiffuse(1.0, 0.752941176, 0.796078431, 1.0);
+    this.setSpecular(1.0, 0.752941176, 0.796078431, 1.0);
     this.setShininess(10.0);
   }
   display() {
@@ -73,8 +85,6 @@ export class MyScene extends CGFscene {
 
     // Draw axis
     if (this.displayAxis) this.axis.display();
-
-    this.setDefaultAppearance();
 
     var sca = [
       this.scaleFactor,
@@ -99,11 +109,30 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    if (this.displayDiamond) this.diamond.display();
+    if (this.displayDiamond) {
+      this.setDefaultAppearance(0.4, 0.8, 0.3, 1);
+      this.diamond.display();
+    }
    
-    if (this.displayTriangle) this.triangle.display();
+    if (this.displayTriangle) {
+      this.setDefaultAppearance(0.7,0,0.4,1.0)
+      this.triangle.display();
+    }
+    
+    if (this.displayBTriangle) {
+      this.setDefaultAppearance(0.2, 0.4, 0.8, 1.0);
+      this.bigtriangle.display();
+    }
+    
+    if (this.displaySTriangle){
+      this.setDefaultAppearance(1.0, 0.0, 0.0, 1.0);
+      this.smalltriangle.display();
+    }
 
-    if (this.displayParallelogram) this.parallelogram.display();
+    if (this.displayParallelogram){
+      this.setDefaultAppearance(0.9, 1.0, 0.3, 1.0);
+      this.parallelogram.display();
+    }
 
     // ---- END Primitive drawing section
   }
