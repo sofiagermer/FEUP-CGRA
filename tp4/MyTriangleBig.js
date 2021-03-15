@@ -5,12 +5,13 @@ import {CGFobject} from '../lib/CGF.js';
  * @param scene - Reference to MyScene object
  */
 export class MyTriangleBig extends CGFobject {
-	constructor(scene) {
+	constructor(scene, color) {
 		super(scene);
-		this.initBuffers();
+		this.color = color;
+		this.initBuffers(color);
 	}
 	
-	initBuffers() {
+	initBuffers(color) {
 		this.vertices = [
             -2, 0, 0,    //0
             0, 2, 0,    //1
@@ -21,6 +22,27 @@ export class MyTriangleBig extends CGFobject {
 		this.indices = [
 			0, 2, 1,
 		];
+
+		this.normals = [
+			0,0,1,
+			0,0,1,
+			0,0,1
+		];
+
+		if(color == "blue"){
+			this.texCoords = [
+				0,0,
+				1,0,
+				0.5,0.5
+			];
+		}
+		else if(color == "orange"){
+			this.texCoords = [
+				1,1,
+				0.5,0.5,
+				1,0
+			];
+		}
 
 		//The defined indices (and corresponding vertices)
 		//will be read in groups of three to draw triangles
