@@ -21,6 +21,8 @@ export class MyInterface extends CGFinterface {
 
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
+        this.gui.add(this.scene, 'displayQuad').name("Display Quad");
+        this.gui.add(this.scene, 'displayQuadMaterial').name("Display QuadMat");
 
         //Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateAppliedTexture.bind(this.scene));
@@ -42,6 +44,7 @@ export class MyInterface extends CGFinterface {
         f3.add(this.scene.texCoords, '2', -5.0, 5.0, 0.1).name('S Coord').onChange(this.scene.updateTexCoords.bind(this.scene)).step(0.001);
         f3.add(this.scene.texCoords, '3', -5.0, 5.0, 0.1).name('T Coord').onChange(this.scene.updateTexCoords.bind(this.scene)).step(0.001);
 
+        this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
         return true;
     }
 }
