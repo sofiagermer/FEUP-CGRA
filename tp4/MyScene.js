@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 import {MyTangram} from "./MyTangram.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -29,7 +30,7 @@ export class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.quad = new MyQuad(this);
         this.tangram = new MyTangram(this);
-
+        this.unitCubeQuad = new MyUnitCubeQuad(this, 'images/mineTop.png', 'images/mineSide.png','images/mineSide.png', 'images/mineSide.png','images/mineSide.png', 'images/mineBottom.png');
         //------ Applied Material
         this.quadMaterial = new CGFappearance(this);
         this.quadMaterial.setAmbient(0.1, 0.1, 0.1, 1);
@@ -44,18 +45,26 @@ export class MyScene extends CGFscene {
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
+        this.topTexture = new CGFtexture(this, 'images/mineTop.png');
+        this.sideTexture = new CGFtexture(this, 'images/mineSide.png');
+        this.bottomTexture = new CGFtexture(this, 'images/mineBottom.png');
+
+
         //-------
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
         this.displayQuad = true;
         this.displayQuadMaterial = true;
+        this.displayTangram = false;
+        this.displayCubeQuad = false;
+
         this.scaleFactor = 1;
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
 
-        this.textures = [this.texture1, this.texture2, this.texture3];
+        this.textures = [this.texture1, this.texture2, this.texture3, this.topTexture, this.sideTexture, this.bottomTexture];
         this.texCoords = [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0];
         this.wrappingMethods = ['REPEAT', 'CLAMP_TO_EDGE', 'MIRRORED_REPEAT'];
 
@@ -112,6 +121,8 @@ export class MyScene extends CGFscene {
 
         // Draw axis
         if (this.displayAxis) this.axis.display();
+        if(this.displayTangram) this.tangram.display();
+        if(this.displayCubeQuad) this.unitCubeQuad.display();
 
         this.setDefaultAppearance();
 
@@ -128,7 +139,7 @@ export class MyScene extends CGFscene {
 
         if(this.displayQuad)this.quad.display();
 
-        this.tangram.display();
+       
 
         // ---- END Primitive drawing section
     }
