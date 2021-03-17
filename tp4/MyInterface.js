@@ -25,13 +25,13 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayQuadMaterial').name("Display Mat");
         this.gui.add(this.scene, 'displayTangram').name("Display Tangram");
         this.gui.add(this.scene, 'displayCubeQuad').name("Display Cube");
+        this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
 
         //Dropdown for textures
         this.gui.add(this.scene, 'selectedTexture', this.scene.textureIds).name('Selected Texture').onChange(this.scene.updateAppliedTexture.bind(this.scene));
         //Dropdown for wrapping (S)
         this.gui.add(this.scene, 'wrapS', this.scene.wrappingS).name('Wrap S').onChange(this.scene.updateTextureWrapping.bind(this.scene));
         this.gui.add(this.scene, 'wrapT', this.scene.wrappingT).name('Wrap T').onChange(this.scene.updateTextureWrapping.bind(this.scene));
-
         //Groups for Texture coordinates per vertex (MyQuad)
         var f0 = this.gui.addFolder('Top Left Coords')
         f0.add(this.scene.texCoords, '4', -5.0, 5.0, 0.1).name('S Coord').onChange(this.scene.updateTexCoords.bind(this.scene)).step(0.001);
@@ -46,7 +46,7 @@ export class MyInterface extends CGFinterface {
         f3.add(this.scene.texCoords, '2', -5.0, 5.0, 0.1).name('S Coord').onChange(this.scene.updateTexCoords.bind(this.scene)).step(0.001);
         f3.add(this.scene.texCoords, '3', -5.0, 5.0, 0.1).name('T Coord').onChange(this.scene.updateTexCoords.bind(this.scene)).step(0.001);
 
-        this.gui.add(this.scene, 'scaleFactor', 0.1, 10.0).name('Scale');
+        
         return true;
     }
 }

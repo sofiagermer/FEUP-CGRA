@@ -26,12 +26,12 @@ export class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
 
-        //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.quad = new MyQuad(this);
-        this.tangram = new MyTangram(this);
-        this.unitCubeQuad = new MyUnitCubeQuad(this, 'images/mineTop.png', 'images/mineSide.png','images/mineSide.png', 'images/mineSide.png','images/mineSide.png', 'images/mineBottom.png');
-        //------ Applied Material
+         //Initialize scene objects
+         this.axis = new CGFaxis(this);
+         this.quad = new MyQuad(this);
+         this.tangram = new MyTangram(this);
+         this.unitCubeQuad = new MyUnitCubeQuad(this, 'images/mineTop.png','images/mineBottom.png' , 'images/mineSide.png');
+        //------ Applied Materia
         this.quadMaterial = new CGFappearance(this);
         this.quadMaterial.setAmbient(0.1, 0.1, 0.1, 1);
         this.quadMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
@@ -45,26 +45,22 @@ export class MyScene extends CGFscene {
         this.texture1 = new CGFtexture(this, 'images/board.jpg');
         this.texture2 = new CGFtexture(this, 'images/floor.png');
         this.texture3 = new CGFtexture(this, 'images/window.jpg');
-        this.topTexture = new CGFtexture(this, 'images/mineTop.png');
-        this.sideTexture = new CGFtexture(this, 'images/mineSide.png');
-        this.bottomTexture = new CGFtexture(this, 'images/mineBottom.png');
-
 
         //-------
 
         //-------Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayQuad = true;
-        this.displayQuadMaterial = true;
+        this.displayQuad = false;
+        this.displayQuadMaterial = false;
         this.displayTangram = false;
-        this.displayCubeQuad = false;
+        this.displayCubeQuad = true;
 
-        this.scaleFactor = 1;
+        this.scaleFactor = 2;
         this.selectedTexture = -1;        
         this.wrapS = 0;
         this.wrapT = 0;
 
-        this.textures = [this.texture1, this.texture2, this.texture3, this.topTexture, this.sideTexture, this.bottomTexture];
+        this.textures = [this.texture1, this.texture2, this.texture3];
         this.texCoords = [0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0];
         this.wrappingMethods = ['REPEAT', 'CLAMP_TO_EDGE', 'MIRRORED_REPEAT'];
 
@@ -121,8 +117,7 @@ export class MyScene extends CGFscene {
 
         // Draw axis
         if (this.displayAxis) this.axis.display();
-        if(this.displayTangram) this.tangram.display();
-        if(this.displayCubeQuad) this.unitCubeQuad.display();
+        
 
         this.setDefaultAppearance();
 
@@ -138,7 +133,8 @@ export class MyScene extends CGFscene {
         // this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
         if(this.displayQuad)this.quad.display();
-
+        if(this.displayCubeQuad) this.unitCubeQuad.display();
+        if(this.displayTangram) this.tangram.display();
        
 
         // ---- END Primitive drawing section
