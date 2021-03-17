@@ -26,53 +26,53 @@ export class MyUnitCubeQuad extends CGFobject{
     }
 
     initMaterials(){
-        this.top_text= new CGFappearance(this.scene);
-        this.top_text.setAmbient(0.1, 0.1, 0.1, 1);
-        this.top_text.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.top_text.setSpecular(0.1, 0.1, 0.1, 1);
-        this.top_text.setShininess(10.0);
-        this.top_text.loadTexture('images/mineTop.png');
-        this.top_text.setTextureWrap('REPEAT','REPEAT');
+        this.scene.top_text= new CGFappearance(this.scene);
+        this.scene.top_text.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.top_text.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.scene.top_text.setSpecular(0.1, 0.1, 0.1, 1);
+        this.scene.top_text.setShininess(10.0);
+        this.scene.top_text.loadTexture('images/mineTop.png');
+        this.scene.top_text.setTextureWrap('REPEAT','REPEAT');
 
-        this.bottom_text= new CGFappearance(this.scene);
-        this.bottom_text.setAmbient(0.1, 0.1, 0.1, 1);
-        this.bottom_text.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.bottom_text.setSpecular(0.1, 0.1, 0.1, 1);
-        this.bottom_text.setShininess(10.0);
-        this.bottom_text.loadTexture('images/mineTop.png');
-        this.bottom_text.setTextureWrap('REPEAT','REPEAT');
+        this.scene.bottom_text= new CGFappearance(this.scene);
+        this.scene.bottom_text.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.bottom_text.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.scene.bottom_text.setSpecular(0.1, 0.1, 0.1, 1);
+        this.scene.bottom_text.setShininess(10.0);
+        this.scene.bottom_text.loadTexture('images/mineTop.png');
+        this.scene.bottom_text.setTextureWrap('REPEAT','REPEAT');
 
-        this.right_text= new CGFappearance(this.scene);
-        this.right_text.setAmbient(0.1, 0.1, 0.1, 1);
-        this.right_text.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.right_text.setSpecular(0.1, 0.1, 0.1, 1);
-        this.right_text.setShininess(10.0);
-        this.right_text.loadTexture('images/mineTop.png');
-        this.right_text.setTextureWrap('REPEAT','REPEAT');
+        this.scene.right_text= new CGFappearance(this.scene);
+        this.scene.right_text.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.right_text.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.scene.right_text.setSpecular(0.1, 0.1, 0.1, 1);
+        this.scene.right_text.setShininess(10.0);
+        this.scene.right_text.loadTexture('images/mineTop.png');
+        this.scene.right_text.setTextureWrap('REPEAT','REPEAT');
 
-        this.left_text= new CGFappearance(this.scene);
-        this.left_text.setAmbient(0.1, 0.1, 0.1, 1);
-        this.left_text.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.left_text.setSpecular(0.1, 0.1, 0.1, 1);
-        this.left_text.setShininess(10.0);
-        this.left_text.loadTexture('images/mineTop.png');
-        this.left_text.setTextureWrap('REPEAT','REPEAT');
+        this.scene.left_text= new CGFappearance(this.scene);
+        this.scene.left_text.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.left_text.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.scene.left_text.setSpecular(0.1, 0.1, 0.1, 1);
+        this.scene.left_text.setShininess(10.0);
+        this.scene.left_text.loadTexture('images/mineTop.png');
+        this.scene.left_text.setTextureWrap('REPEAT','REPEAT');
 
-        this.back_text= new CGFappearance(this.scene);
-        this.back_text.setAmbient(0.1, 0.1, 0.1, 1);
-        this.back_text.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.back_text.setSpecular(0.1, 0.1, 0.1, 1);
-        this.back_text.setShininess(10.0);
-        this.back_text.loadTexture('images/mineTop.png');
-        this.back_text.setTextureWrap('REPEAT','REPEAT');
+        this.scene.back_text= new CGFappearance(this.scene);
+        this.scene.back_text.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.back_text.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.scene.back_text.setSpecular(0.1, 0.1, 0.1, 1);
+        this.scene.back_text.setShininess(10.0);
+        this.scene.back_text.loadTexture('images/mineTop.png');
+        this.scene.back_text.setTextureWrap('REPEAT','REPEAT');
 
-        this.front_text= new CGFappearance(this.scene);
-        this.front_text.setAmbient(0.1, 0.1, 0.1, 1);
-        this.front_text.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.front_text.setSpecular(0.1, 0.1, 0.1, 1);
-        this.front_text.setShininess(10.0);
-        this.front_text.loadTexture('images/mineTop.png');
-        this.front_text.setTextureWrap('REPEAT','REPEAT');
+        this.scene.front_text= new CGFappearance(this.scene);
+        this.scene.front_text.setAmbient(0.1, 0.1, 0.1, 1);
+        this.scene.front_text.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.scene.front_text.setSpecular(0.1, 0.1, 0.1, 1);
+        this.scene.front_text.setShininess(10.0);
+        this.scene.front_text.loadTexture('images/mineTop.png');
+        this.scene.front_text.setTextureWrap('REPEAT','REPEAT');
     }
 
     display(){
