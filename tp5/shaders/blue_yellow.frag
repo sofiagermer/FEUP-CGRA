@@ -5,6 +5,8 @@ precision highp float;
 varying vec4 coords;
 varying vec4 normal;
 
+varying vec2 vTextureCoord;
+
 struct lightProperties {
     vec4 position;                  
     vec4 ambient;                   
@@ -25,10 +27,7 @@ uniform lightProperties uLight[NUMBER_OF_LIGHTS];
 
 
 void main() {
-	if (coords.y > 0.5)
-		gl_FragColor = vec4(2.10,2.10,0.33, 1.0) * uLight[0].diffuse;
-	else
-	{
-		gl_FragColor = vec4(0.33,0.33,2.10, 1.0) * uLight[0].diffuse;
-	}
+    vec4 color = texture2D(uSampler, vTextureCoord);
+	
+	gl_FragColor = color;
 }
