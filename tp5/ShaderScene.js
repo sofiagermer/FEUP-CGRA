@@ -76,6 +76,17 @@ export class ShaderScene extends CGFscene {
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
+		this.appearance.setTexture(this.texture2);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+
+		this.texturewaterMap = new CGFtexture(this, "textures/waterMap.jpg")
+		this.appearance.setTexture(this.texturewaterMap);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+		this.texturewaterTex = new CGFtexture(this, "textures/waterTex.jpg")
+		this.appearance.setTexture(this.texturewaterTex);
+		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		// shaders initialization
 
@@ -90,7 +101,8 @@ export class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
 			new CGFshader(this.gl, "shaders/blue_yellow.vert", "shaders/blue_yellow.frag"),
-			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/gray.frag")
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/gray.frag"),
+			new CGFshader(this.gl, "shaders/water.vert", "shaders/water.frag")
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -99,6 +111,8 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
 		this.testShaders[9].setUniformsValues({ timeFactor: 0 });
+		this.testShaders[11].setUniformsValues({ uSampler2: 1 });
+		this.testShaders[11].setUniformsValues({ timeFactor: 0 });
 
 
 		// Shaders interface variables
@@ -114,7 +128,8 @@ export class ShaderScene extends CGFscene {
 			'Sepia': 7,
 			'Convolution': 8,
 			'Blue Yellow' : 9,
-			'Gray':10
+			'Gray':10,
+			'Water':11
 		};
 
 		// shader code panels references
