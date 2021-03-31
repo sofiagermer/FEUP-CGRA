@@ -19,8 +19,17 @@ struct lightProperties {
 
 varying vec4 coords;
 
+varying vec2 vTextureCoord;
+
+uniform sampler2D uSampler;
+uniform sampler2D uSampler2;
+uniform float timeFactor;
+
+
 #define NUMBER_OF_LIGHTS 8
 uniform lightProperties uLight[NUMBER_OF_LIGHTS];
+
+
 
 void main() {
     if (coords.y >= 0.5)
