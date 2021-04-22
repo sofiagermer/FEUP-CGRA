@@ -23,8 +23,8 @@ export class MyQuad extends CGFobject {
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
-			0, 1, 2,
-			1, 3, 2
+			2, 1, 0,
+			2, 3, 1
 		];
 
 		//Facing Z positive
@@ -45,12 +45,11 @@ export class MyQuad extends CGFobject {
         t
         */
 
-		// Redeuces the artifacts in the edges
 		this.texCoords = [
-			0.002, 0.998,
-			0.998, 0.998,
-			0.002, 0.002,
-			0.998, 0.002
+			0, 1,
+			1, 1,
+			0, 0,
+			1, 0
 		]
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
@@ -66,4 +65,6 @@ export class MyQuad extends CGFobject {
 		this.updateTexCoordsGLBuffers();
 	}
 }
+
+
 

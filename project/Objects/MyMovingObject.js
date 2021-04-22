@@ -1,4 +1,4 @@
-import {CGFobject,CGFappearance } from '../../lib/CGF.js';
+import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
 import { MyPyramid} from "./MyPyramid.js";
 
 /**
@@ -11,6 +11,9 @@ import { MyPyramid} from "./MyPyramid.js";
 export class MyMovingObject extends CGFobject {
     constructor(scene, slices, stacks) {
         super(scene);
+        this.scene = scene;
+        this.slices = slices;
+        this.stacks = stacks;
         this.initMaterials();
         //Movement variables
         this.orientationAngle = 0.0;

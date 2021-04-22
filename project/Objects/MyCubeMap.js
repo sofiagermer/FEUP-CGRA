@@ -1,104 +1,100 @@
-import { CGFobject, CGFappearance } from "../../lib/CGF.js";
+import { CGFappearance, CGFobject, CGFtexture } from "../../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 
-/**
- * MyCubeMap
- * @constructor
- * @param scene - Reference to MyScene object
- */
-export class MyCubeMap extends CGFobject{
-    constructor(scene, top, front, right, back, left, bot, sizeFactor) {
+export class MyCubeMap extends CGFobject {
+    constructor(scene, bottom, top, left, right, back, front){
         super(scene);
-        this.scene = scene;
-
-        this.initMaterials();
-
-        this.quad = new MyQuad(scene);
-
-        this.updateTextures(top, front, right, back, left, bot);
-        this.sizeFactor = sizeFactor;
+        this.textureBottom = new CGFtexture(this.scene, bottom);
+        this.textureTop = new CGFtexture(this.scene, top);
+        this.textureLeft = new CGFtexture(this.scene, left);
+        this.textureRight = new CGFtexture(this.scene, right);
+        this.textureBack = new CGFtexture(this.scene, back);
+        this.textureFront = new CGFtexture(this.scene, front);
+        this.enableLinearFiltering = false;
+        this.initBuffers();
     }
+    initBuffers() {
+        this.scene.face = new MyQuad(this.scene);
 
-    initMaterials() {
-        this.material = new CGFappearance(this.scene);
-        this.material.setAmbient(0, 0, 0, 0);
-        this.material.setDiffuse(0, 0, 0, 0);
-        this.material.setSpecular(0, 0, 0, 0);
-        this.material.setEmission(1, 1, 1, 1);    
+        //Material
+        this.materialCube = new CGFappearance(this.scene);
+        this.materialCube.setAmbient(0.0, 0.0, 0.0, 0.0);
+        this.materialCube.setDiffuse(0.0, 0.0, 0.0, 0.0);
+        this.materialCube.setSpecular(0.0, 0.0, 0.0, 0.0);
+        this.materialCube.setEmission(1.0, 1.0, 1.0, 1.0);
+        this.materialCube.setShininess(10.0);
     }
-    updateTextures(top, front, right, back, left, bot) {
-        this.top = top;
-        this.right = right;
-        this.left = left;
-        this.back = back;
-        this.front = front;
-        this.bot = bot;
+    changeFiltering() {
+        if (this.enableLinearFiltering)
+            this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+        else {
+            this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.LINEAR);
+        }
     }
-
-    display() {
-
-        this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2]);
-        this.scene.scale(this.sizeFactor,this.sizeFactor,this.sizeFactor);
-
-        // Top side
+    
+    display(){
+        this.scene.scale(50, 50, 50);
+        //bottom
         this.scene.pushMatrix();
-        this.scene.translate(0, 0.5, 0);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
-
-        this.material.setTexture(this.top);
-        this.material.apply();
-        this.quad.display();
+        this.scene.translate(0,0, -0.5);
+        this.scene.rotate(Math.PI,0,1,0);
+        this.changeFiltering();
+        this.materialCube.setTexture(this.textureBottom);
+        this.materialCube.apply();
+        this.scene.face.display();
         this.scene.popMatrix();
 
-        // Bot side
+        //top
         this.scene.pushMatrix();
-        this.scene.translate(0, -0.5, 0);
-        this.scene.rotate(-Math.PI/2, 1, 0, 0);
-
-        this.material.setTexture(this.bot);
-        this.material.apply();
-        this.quad.display();
+        this.scene.translate(0,0,0.5);
+        this.changeFiltering();
+        this.materialCube.setTexture(this.textureTop);
+        this.materialCube.apply();
+        this.scene.face.display();
         this.scene.popMatrix();
 
-        // Right side
+        //left
         this.scene.pushMatrix();
-        this.scene.translate(0.5, 0, 0);
-        this.scene.rotate(-Math.PI/2, 0, 1, 0);
-
-        this.material.setTexture(this.right);
-        this.material.apply();
-        this.quad.display();
+        this.scene.translate(0,-0.5,0);
+        this.scene.rotate(Math.PI/2,1,0,0);
+        this.changeFiltering();
+        this.materialCube.setTexture(this.textureLeft);
+        this.materialCube.apply();
+        this.scene.face.display();
         this.scene.popMatrix();
 
-        // Left side
+        //right
         this.scene.pushMatrix();
-        this.scene.translate(-0.5, 0, 0);
-        this.scene.rotate(Math.PI/2, 0, 1, 0);
-
-        this.material.setTexture(this.left);
-        this.material.apply();
-        this.quad.display();
+        this.scene.translate(0,0.5,0);
+        this.scene.rotate(-Math.PI/2,1,0,0);
+        this.scene.rotate(Math.PI,0,0,1);
+        this.changeFiltering();
+        this.materialCube.setTexture(this.textureRight);
+        this.materialCube.apply();
+        this.scene.face.display();
         this.scene.popMatrix();
 
-        // Front side
+        //back
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, -0.5);
-
-        this.material.setTexture(this.front);
-        this.material.apply();
-        this.quad.display();
+        this.scene.translate(-0.5,0,0);
+        this.scene.rotate(-Math.PI/2,0,1,0);
+        this.scene.rotate(-Math.PI/2,0,0,1)
+        this.changeFiltering();
+        this.materialCube.setTexture(this.textureBack);
+        this.materialCube.apply();
+        this.scene.face.display();
         this.scene.popMatrix();
 
-        // Back side
+        //front
         this.scene.pushMatrix();
-        this.scene.translate(0, 0, 0.5);
-        this.scene.rotate(Math.PI, 0, 1, 0);
-
-        this.material.setTexture(this.back);
-        this.material.apply();
-        this.quad.display();
+        this.scene.translate(0.5,0,0);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.scene.rotate(Math.PI/2,0,0,1);
+        this.changeFiltering();
+        this.materialCube.setTexture(this.textureFront);
+        this.materialCube.apply();
+        this.scene.face.display();
         this.scene.popMatrix();
 
-        //????
     }
 }
