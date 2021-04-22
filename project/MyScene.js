@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
 import { MySphere } from "./Objects/MySphere.js";
 import { MyMovingObject } from "./Objects/MyMovingObject.js";
+import { MyCubeMap } from "./Objects/MyCubeMap.js";
 
 /**
 * MyScene
@@ -31,6 +32,7 @@ export class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this, 4, 2);
+        this.cubeMap = new MyCubeMap(this, 'images/demo_cubemap/bottom.png', 'images/demo_cubemap/top.png', 'images/demo_cubemap/left.png', 'images/demo_cubemap/right.png', 'images/demo_cubemap/back.png', 'images/demo_cubemap/front.png');
 
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
@@ -49,6 +51,7 @@ export class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayMovingObject = false;
+        this.displayCubeMap = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -145,14 +148,18 @@ export class MyScene extends CGFscene {
         }
 
         if(this.displayMovingObject){
-            this.pushMatrix();
+           // this.pushMatrix();
             this.movingObject.display();
-            this.popMatrix();
+            //this.popMatrix();
         }
         
         if(this.displaySphere){
             this.sphereAppearance.apply();
             this.incompleteSphere.display();
+        }
+
+        if(this.displayCubeMap){
+            this.cubeMap.display();
         }
 
         // ---- END Primitive drawing section
