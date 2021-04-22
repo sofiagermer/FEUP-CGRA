@@ -1,8 +1,6 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance,CGFtexture } from "../lib/CGF.js";
-import { MySphere } from "./Objects/MySphere.js";
-import { MyMovingObject } from "./Objects/MyMovingObject.js";
-import { MyCubeMap} from "./Objects/MyCubeMap.js";
-import { MyCylinder } from "./Objects/MyCylinder.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
+import { MySphere } from "./MySphere.js";
+
 /**
 * MyScene
 * @constructor
@@ -31,10 +29,7 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
-        this.movingPyramid= new MyMovingObject(this,10);
-        this.cube = new MyCubeMap(this, 'images/demo_cubemap/bottom.png', 'images/demo_cubemap/top.png', 'images/demo_cubemap/left.png', 
-            'images/demo_cubemap/right.png', 'images/demo_cubemap/back.png', 'images/demo_cubemap/front.png');
-        this.cylinder = new MyCylinder(this,22)
+
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.defaultAppearance.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -51,44 +46,12 @@ export class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayMoving=false;
-        this.displaySphere=false;
-        this.displayCubeMap=true;
-        this.displayCylinder=false;
-    }
-    checkKeys(){
-        // Check for key codes e.g. in https://keycode.info/
-
-        if (this.gui.isKeyPressed("KeyW")) {
-            this.movingPyramid.accelerate(0.01);
-        }
-
-        if (this.gui.isKeyPressed("KeyS")){
-            this.movingPyramid.accelerate(-0.01);
-        }
-
-        if (this.gui.isKeyPressed("KeyA")){
-            this.movingPyramid.turn(Math.PI/16);
-        }
-        if (this.gui.isKeyPressed("KeyD")){
-            this.movingPyramid.turn(-Math.PI/16);
-        }
-        if (this.gui.isKeyPressed("KeyR")) {
-            this.movingPyramid.reset();
-        }
-
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();
         this.lights[0].update();
-
-        this.lights[1].setPosition(-15,-2, -5, -1);
-        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[1].enable();
-        this.lights[1].update();
-        
     }
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
@@ -104,7 +67,6 @@ export class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-        this.checkKeys();
         //To be done...
     }
 
@@ -125,23 +87,11 @@ export class MyScene extends CGFscene {
         if (this.displayAxis)
             this.axis.display();
 
-        
+        this.sphereAppearance.apply();
         // ---- BEGIN Primitive drawing section
 
         //This sphere does not have defined texture coordinates
-        if(this.displaySphere){
-            this.sphereAppearance.apply();
-            this.incompleteSphere.display();
-        }
-        if(this.displayMoving){
-            this.movingPyramid.display();
-        }
-        if(this.displayCubeMap){
-            this.cube.display();
-        }
-        if(this.displayCylinder){
-            this.cylinder.display();
-        }
+        this.incompleteSphere.display();
 
         // ---- END Primitive drawing section
     }
