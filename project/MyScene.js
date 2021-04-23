@@ -1,4 +1,4 @@
-import { CGFscene, CGFcamera, CGFaxis, CGFappearance } from "../lib/CGF.js";
+import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MySphere } from "./Objects/MySphere.js";
 import { MyMovingObject } from "./Objects/MyMovingObject.js";
 import { MyCubeMap } from "./Objects/MyCubeMap.js";
@@ -31,7 +31,7 @@ export class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.incompleteSphere = new MySphere(this, 16, 8);
+        this.sphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this, 4, 2);
         this.cubeMap = new MyCubeMap(this, 'images/demo_cubemap/bottom.png', 'images/demo_cubemap/top.png', 'images/demo_cubemap/left.png', 'images/demo_cubemap/right.png', 'images/demo_cubemap/back.png', 'images/demo_cubemap/front.png');
         this.cylinder = new MyCylinder(this, 19);
@@ -43,18 +43,20 @@ export class MyScene extends CGFscene {
         this.defaultAppearance.setEmission(0,0,0,1);
 		this.defaultAppearance.setShininess(120);
 
-		this.sphereAppearance = new CGFappearance(this);
-		this.sphereAppearance.setAmbient(0.3, 0.3, 0.3, 1);
-		this.sphereAppearance.setDiffuse(0.7, 0.7, 0.7, 1);
-		this.sphereAppearance.setSpecular(0.0, 0.0, 0.0, 1);
-		this.sphereAppearance.setShininess(120);
-
-
+            //Material
+        this.materialSphere = new CGFappearance(this);
+        this.materialSphere.setAmbient(0.0,0.0,0.0,0.0);
+        this.materialSphere.setDiffuse(0.0,0.0,0.0,0.0);
+        this.materialSphere.setSpecular(0.0,0.0,0.0,0.0);
+        this.materialSphere.setEmission(1.0,1.0,1.0,1.0);
+        this.materialSphere.loadTexture('images/earth.jpg'); 
+        
         //Objects connected to MyInterface
         this.displayAxis = true;
         this.displayMovingObject = false;
         this.displayCubeMap = true;
         this.displayCylinder = false;
+        this.displaySphere = false;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -151,14 +153,12 @@ export class MyScene extends CGFscene {
         }
 
         if(this.displayMovingObject){
-           // this.pushMatrix();
             this.movingObject.display();
-            //this.popMatrix();
         }
         
         if(this.displaySphere){
-            this.sphereAppearance.apply();
-            this.incompleteSphere.display();
+            this.materialSphere.apply();
+            this.sphere.display();
         }
 
         if(this.displayCylinder){

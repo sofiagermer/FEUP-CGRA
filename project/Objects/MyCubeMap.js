@@ -20,9 +20,9 @@ export class MyCubeMap extends CGFobject {
         this.materialCube = new CGFappearance(this.scene);
         this.materialCube.setAmbient(0.0, 0.0, 0.0, 0.0);
         this.materialCube.setDiffuse(0.0, 0.0, 0.0, 0.0);
-        this.materialCube.setSpecular(0.0, 0.0, 0.0, 0.0);
         this.materialCube.setEmission(1.0, 1.0, 1.0, 1.0);
         this.materialCube.setShininess(10.0);
+        
     }
     changeFiltering() {
         if (this.enableLinearFiltering)

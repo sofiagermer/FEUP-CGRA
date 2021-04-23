@@ -1,4 +1,4 @@
-import {CGFobject} from '../../lib/CGF.js';
+import {CGFobject, CGFtexture, CGFappearance} from '../../lib/CGF.js';
 
 export class MySphere extends CGFobject {
   /**
@@ -11,7 +11,6 @@ export class MySphere extends CGFobject {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
-
     this.initBuffers();
   }
 
@@ -21,6 +20,7 @@ export class MySphere extends CGFobject {
    * TODO: DEFINE TEXTURE COORDINATES
    */
   initBuffers() {
+
     this.vertices = [];
     this.indices = [];
     this.normals = [];
@@ -69,6 +69,7 @@ export class MySphere extends CGFobject {
         //--- Texture Coordinates
         // To be done... 
         // May need some additional code also in the beginning of the function.
+        this.texCoords.push(longitude/this.longDivs,latitude/this.latDivs);
         
       }
       phi += phiInc;
@@ -77,5 +78,7 @@ export class MySphere extends CGFobject {
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
+    
   }
 }
+
