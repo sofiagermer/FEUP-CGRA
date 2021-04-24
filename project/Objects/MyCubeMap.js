@@ -2,14 +2,8 @@ import { CGFappearance, CGFobject, CGFtexture } from "../../lib/CGF.js";
 import { MyQuad } from "./MyQuad.js";
 
 export class MyCubeMap extends CGFobject {
-    constructor(scene, bottom, top, left, right, back, front){
+    constructor(scene){
         super(scene);
-        this.textureBottom = new CGFtexture(this.scene, bottom);
-        this.textureTop = new CGFtexture(this.scene, top);
-        this.textureLeft = new CGFtexture(this.scene, left);
-        this.textureRight = new CGFtexture(this.scene, right);
-        this.textureBack = new CGFtexture(this.scene, back);
-        this.textureFront = new CGFtexture(this.scene, front);
         this.enableLinearFiltering = false;
         this.initBuffers();
     }
@@ -24,6 +18,7 @@ export class MyCubeMap extends CGFobject {
         this.materialCube.setShininess(10.0);
         
     }
+
     changeFiltering() {
         if (this.enableLinearFiltering)
             this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
@@ -39,7 +34,7 @@ export class MyCubeMap extends CGFobject {
         this.scene.translate(0,0, -0.5);
         this.scene.rotate(Math.PI,0,1,0);
         this.changeFiltering();
-        this.materialCube.setTexture(this.textureBottom);
+        this.materialCube.setTexture(this.scene.textureBottom);
         this.materialCube.apply();
         this.scene.face.display();
         this.scene.popMatrix();
@@ -48,7 +43,7 @@ export class MyCubeMap extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0,0,0.5);
         this.changeFiltering();
-        this.materialCube.setTexture(this.textureTop);
+        this.materialCube.setTexture(this.scene.textureTop);
         this.materialCube.apply();
         this.scene.face.display();
         this.scene.popMatrix();
@@ -58,7 +53,7 @@ export class MyCubeMap extends CGFobject {
         this.scene.translate(0,-0.5,0);
         this.scene.rotate(Math.PI/2,1,0,0);
         this.changeFiltering();
-        this.materialCube.setTexture(this.textureLeft);
+        this.materialCube.setTexture(this.scene.textureLeft);
         this.materialCube.apply();
         this.scene.face.display();
         this.scene.popMatrix();
@@ -69,7 +64,7 @@ export class MyCubeMap extends CGFobject {
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.scene.rotate(Math.PI,0,0,1);
         this.changeFiltering();
-        this.materialCube.setTexture(this.textureRight);
+        this.materialCube.setTexture(this.scene.textureRight);
         this.materialCube.apply();
         this.scene.face.display();
         this.scene.popMatrix();
@@ -80,7 +75,7 @@ export class MyCubeMap extends CGFobject {
         this.scene.rotate(-Math.PI/2,0,1,0);
         this.scene.rotate(-Math.PI/2,0,0,1)
         this.changeFiltering();
-        this.materialCube.setTexture(this.textureBack);
+        this.materialCube.setTexture(this.scene.textureBack);
         this.materialCube.apply();
         this.scene.face.display();
         this.scene.popMatrix();
@@ -91,7 +86,7 @@ export class MyCubeMap extends CGFobject {
         this.scene.rotate(Math.PI/2,0,1,0);
         this.scene.rotate(Math.PI/2,0,0,1);
         this.changeFiltering();
-        this.materialCube.setTexture(this.textureFront);
+        this.materialCube.setTexture(this.scene.textureFront);
         this.materialCube.apply();
         this.scene.face.display();
         this.scene.popMatrix();

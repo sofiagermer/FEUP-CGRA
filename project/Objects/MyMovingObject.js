@@ -11,14 +11,12 @@ import { MyPyramid} from "./MyPyramid.js";
 export class MyMovingObject extends CGFobject {
     constructor(scene, slices, stacks) {
         super(scene);
-        this.scene = scene;
         this.slices = slices;
         this.stacks = stacks;
         this.initMaterials();
-        //Movement variables
-        this.orientationAngle = 0.0;
-        this.speed = 0.0;
-        this.coordinates = [0.0, 0.0, 0.0];
+
+        //Initial variables
+        this.reset();
 
         this.pyramid = new MyPyramid(this.scene, 4 , 4);
 
@@ -39,6 +37,7 @@ export class MyMovingObject extends CGFobject {
         this.scene.translate(this.coordinates[0], this.coordinates[1], this.coordinates[2]);
         this.scene.rotate(this.orientationAngle, 0, 1, 0);
         this.scene.rotate(Math.PI/2, 1, 0, 0);
+        this.scene.scale(this.scene.scaleFactor, this.scene.scaleFactor, this.scene.scaleFactor);
         this.scene.material_pyramid.apply();
         this.pyramid.display();
         this.scene.popMatrix();
@@ -63,8 +62,8 @@ export class MyMovingObject extends CGFobject {
     }
     
     update(){
-        this.coordinates[0] += this.speed*Math.sin(this.orientationAngle);
-        this.coordinates[2] += this.speed*Math.cos(this.orientationAngle);
+        this.coordinates[0] += this.speed* this.scene.speedFactor * Math.sin(this.orientationAngle);
+        this.coordinates[2] += this.speed* this.scene.speedFactorr * Math.cos(this.orientationAngle);
     }
 
     reset() {

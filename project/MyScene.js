@@ -29,13 +29,34 @@ export class MyScene extends CGFscene {
         
         this.enableTextures(true);
 
+        //Cube Map 
+        this.initTextures();
+        this.setDefaultTextures();
+
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.sphere = new MySphere(this, 16, 8);
         this.movingObject = new MyMovingObject(this, 4, 2);
-        this.cubeMap = new MyCubeMap(this, 'images/demo_cubemap/bottom.png', 'images/demo_cubemap/top.png', 'images/demo_cubemap/left.png', 'images/demo_cubemap/right.png', 'images/demo_cubemap/back.png', 'images/demo_cubemap/front.png');
+        this.cubeMap = new MyCubeMap(this);
         this.cylinder = new MyCylinder(this, 19);
 
+        this.initAppearence();
+
+        //Objects connected to MyInterface
+        this.displayAxis = true;
+        this.displayMovingObject = false;
+        this.displayCubeMap = true;
+        this.displayCylinder = false;
+        this.displaySphere = false;
+
+        this.selectedTexture = 0;
+        this.texturesID = { 'Demo': 0, 'Test': 1 };
+
+        this.scaleFactor = 1;
+        this.speedFactor = 1;
+    }
+
+    initAppearence(){
         this.defaultAppearance = new CGFappearance(this);
 		this.defaultAppearance.setAmbient(0.2, 0.4, 0.8, 1.0);
         this.defaultAppearance.setDiffuse(0.2, 0.4, 0.8, 1.0);
@@ -43,20 +64,51 @@ export class MyScene extends CGFscene {
         this.defaultAppearance.setEmission(0,0,0,1);
 		this.defaultAppearance.setShininess(120);
 
-            //Material
         this.materialSphere = new CGFappearance(this);
         this.materialSphere.setAmbient(0.0,0.0,0.0,0.0);
         this.materialSphere.setDiffuse(0.0,0.0,0.0,0.0);
         this.materialSphere.setSpecular(0.0,0.0,0.0,0.0);
         this.materialSphere.setEmission(1.0,1.0,1.0,1.0);
         this.materialSphere.loadTexture('images/earth.jpg'); 
-        
-        //Objects connected to MyInterface
-        this.displayAxis = true;
-        this.displayMovingObject = false;
-        this.displayCubeMap = true;
-        this.displayCylinder = false;
-        this.displaySphere = false;
+    }
+
+    initTextures(){
+        this.textureBottom_demo = new CGFtexture(this, 'images/demo_cubemap/bottom.png');
+        this.textureTop_demo = new CGFtexture(this, 'images/demo_cubemap/top.png');
+        this.textureLeft_demo = new CGFtexture(this, 'images/demo_cubemap/left.png');
+        this.textureRight_demo = new CGFtexture(this, 'images/demo_cubemap/right.png');
+        this.textureFront_demo = new CGFtexture(this, 'images/demo_cubemap/front.png');
+        this.textureBack_demo = new CGFtexture(this, 'images/demo_cubemap/back.png');
+
+        this.textureBottom_test = new CGFtexture(this, 'images/test_cubemap/ny.png');
+        this.textureTop_test = new CGFtexture(this, 'images/test_cubemap/py.png');
+        this.textureLeft_test = new CGFtexture(this, 'images/test_cubemap/nx.png');
+        this.textureRight_test = new CGFtexture(this, 'images/test_cubemap/px.png');
+        this.textureFront_test = new CGFtexture(this, 'images/test_cubemap/nz.png');
+        this.textureBack_test = new CGFtexture(this, 'images/test_cubemap/pz.png');
+    }
+
+    setDefaultTextures(){
+        this.textureBottom = this.textureBottom_demo;
+        this.textureTop = this.textureTop_demo;
+        this.textureLeft = this.textureLeft_demo;
+        this.textureRight = this.textureRight_demo;
+        this.textureFront = this.textureFront_demo;
+        this.textureBack = this.textureBack_demo;
+    }
+
+    updateTextures(){
+        if(this.selectedTexture == 1){
+            this.textureBottom = this.textureBottom_test;
+            this.textureTop = this.textureTop_test;
+            this.textureLeft = this.textureLeft_test;
+            this.textureRight = this.textureRight_test;
+            this.textureFront = this.textureFront_test;
+            this.textureBack = this.textureBack_test;
+        }
+        else{
+            this.setDefaultTextures();
+        }
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -64,6 +116,7 @@ export class MyScene extends CGFscene {
         this.lights[0].enable();
         this.lights[0].update();
     }
+
     initCameras() {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
@@ -75,6 +128,14 @@ export class MyScene extends CGFscene {
         this.setEmission(0,0,0,1);
         this.setShininess(10.0);
     }
+    
+    getSpeedFactor() {
+        return this.speedFactor;
+    }
+    getScaleFactor() {
+        return this.scaleFactor;
+    }
+
     checkKeys()  {
         var text="Keys pressed: ";
 
@@ -85,7 +146,7 @@ export class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")) {
 
                 text+=" W ";
-                this.movingObject.accelerate(0.01);
+                this.movingObject.accelerate(0.01 );
                 keysPressed=true;
 
         }

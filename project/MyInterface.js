@@ -16,14 +16,22 @@ export class MyInterface extends CGFinterface {
         // http://workshop.chromeexperiments.com/examples/gui
         this.gui = new dat.GUI();
         
-        var obj = this;
-
+        var objects = this.gui.addFolder('Objects')
         //Checkbox element in GUI
-        this.gui.add(this.scene, 'displayAxis').name('Display Axis');
-        this.gui.add(this.scene, 'displayMovingObject').name('Display Mov Object');
-        this.gui.add(this.scene, 'displayCubeMap').name('Display Cube');
-        this.gui.add(this.scene, 'displayCylinder').name('Display Cylinder');
-        this.gui.add(this.scene, 'displaySphere').name('Display Sphere');
+        objects.add(this.scene, 'displayAxis').name('Display Axis');
+        objects.add(this.scene, 'displayMovingObject').name('Display Mov Object');
+        objects.add(this.scene, 'displayCubeMap').name('Display Cube');
+        objects.add(this.scene, 'displayCylinder').name('Display Cylinder');
+        objects.add(this.scene, 'displaySphere').name('Display Sphere');
+
+        //Slider element in GUI
+        var movement = this.gui.addFolder('Movement');
+        movement.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
+        movement.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
+
+        //Dropdown for textures
+        this.gui.add(this.scene, 'selectedTexture', this.scene.texturesID).name('Cube Texture').onChange(this.scene.updateTextures.bind(this.scene));
+
         this.initKeys();
         return true;
     }
