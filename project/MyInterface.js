@@ -23,6 +23,7 @@ export class MyInterface extends CGFinterface {
         objects.add(this.scene, 'displayCubeMap').name('Display Cube');
         objects.add(this.scene, 'displayCylinder').name('Display Cylinder');
         objects.add(this.scene, 'displaySphere').name('Display Sphere');
+        objects.add(this.scene, 'displayFish').name('Display Fish');
 
         //Slider element in GUI
         var movement = this.gui.addFolder('Movement');

@@ -1,10 +1,9 @@
 # CGRA 2020/2021
 
-## Group T0xG0y
+## Group T03G07
 
 ## Project Notes
 
-(add your main observations/remarks about your experiments here, in a bulleted list, and remove this line. Some examples below)
+### 1 - MyFish
 
-- In exercise 1 we observed X
-- In exercise 2 we had difficulties in Y
+### 2 - Sea Floor
