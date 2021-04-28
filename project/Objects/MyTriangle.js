@@ -13,21 +13,29 @@ export class MyTriangle extends CGFobject {
 	
 	initBuffers() {
 		this.vertices = [
-            -Math.sqrt(8)/2, 0, 0,    //0
-            Math.sqrt(8)/2, 0, 0,    //1
-            0, Math.sqrt(8)/2, 0,    //2
+            -1, -1, 0,    //0
+            -1, 1, 0,    //1
+            1, -1, 0,    //2
+
+			-1, -1, 0,    //3
+            -1, 1, 0,    //4
+            1, -1, 0,    //5
         ];
 
 		//Counter-clockwise reference of vertices
 		this.indices = [
 			0, 2, 1,
-			1, 2, 0
+			4,5,3
 		];
 
 		this.normals = [
 			0,0,1,
 			0,0,1,
 			0,0,1,
+
+			0,0,-1,
+			0,0,-1,
+			0,0,-1,
 		];
 
 		this.texCoords =[

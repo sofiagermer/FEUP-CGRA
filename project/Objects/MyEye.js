@@ -10,6 +10,23 @@ export class MyEye extends CGFobject {
         super(scene);
         this.sphere1 = new MySphere(this.scene, 16, 16);
         this.sphere2 = new MySphere(this.scene, 16, 16);
+        this.initMaterials();
+    }
+
+    initMaterials() {
+        this.scene.materialBlack = new CGFappearance(this.scene);
+        this.scene.materialBlack.setAmbient(0.0, 0.0, 0.0, 0.0);
+        this.scene.materialBlack.setDiffuse(0.0, 0.0, 0.0, 0.0);
+        this.scene.materialBlack.setSpecular(1.0,1.0,1.0,1.0);
+        this.scene.materialBlack.setEmission(0.0, 0.0, 0.0, 1.0);
+        this.scene.materialBlack.setShininess(10.0);  
+
+        this.scene.materialWhite = new CGFappearance(this.scene);
+        this.scene.materialWhite.setAmbient(2.55, 2.55, 2.55, 1.0);
+        this.scene.materialWhite.setDiffuse(0.0, 0.0, 0.0, 0.0);
+        this.scene.materialWhite.setSpecular(1.0,1.0,1.0,1.0);
+        this.scene.materialWhite.setEmission(0.0, 0.0, 0.0, 1.0);
+        this.scene.materialWhite.setShininess(10.0);  
     }
 
     setAngle(angle){
@@ -20,14 +37,14 @@ export class MyEye extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(0.5,0.5,0.5);
         this.scene.translate(0,0,0);
-        this.scene.white.apply();
+        this.scene.materialWhite.apply();
         this.sphere1.display(); 
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.scale(0.25,0.25,0.25);
         this.scene.translate(1.5,0,0);
-        this.scene.black.apply();
+        this.scene.materialBlack.apply();
         this.sphere1.display(); 
         this.scene.popMatrix();
     }

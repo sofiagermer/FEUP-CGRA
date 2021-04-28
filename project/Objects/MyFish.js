@@ -1,6 +1,6 @@
 //o peixe deverá ser criado a partir de um corpo, desenvolvido através de uma esfera distorcida, c shader bipartido
-import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
-import {MyFishBody} from '../Objects/MyFishBody.js';
+import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../lib/CGF.js';
+import {MySphere} from '../Objects/MySphere.js';
 import {MyFin} from '../Objects/MyFin.js';
 import {MyEye} from '../Objects/MyEye.js';
 
@@ -12,92 +12,102 @@ import {MyEye} from '../Objects/MyEye.js';
 export class MyFish extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.fishBody = new MyFishBody(scene);
+        this.fishBody = new MySphere(this.scene, 16, 8);
+        this.fin = new MyFin(scene);
+        this.eye = new MyEye(scene);
 
-        this.lateralFinRight = new MyFin(scene);
-        this.lateralFinLeft = new MyFin(scene);
-        this.dorsalFin = new MyFin(scene);
-        this.tail = new MyFin(scene);
-
-        this.rightEye = new MyEye(scene);
-        this.leftEye = new MyEye(scene);
-
+        this.initShaders();
         this.initMaterials();
     }
 
     initMaterials() {
-        
+        this.scene.materialRed = new CGFappearance(this.scene);
+        this.scene.materialRed.setAmbient(1.0, 0.0, 0.0, 0.0);
+        this.scene.materialRed.setDiffuse(1.0, 0.0, 0.0, 0.0);
+        this.scene.materialRed.setSpecular(1.0,1.0,1.0,1.0);
+        this.scene.materialRed.setEmission(0.0, 0.0, 0.0, 1.0);
+        this.scene.materialRed.setShininess(10.0);  
+
+        this.scene.materialFish = new CGFappearance(this.scene);
+        this.scene.materialFish.setAmbient(0.0, 0.0, 0.0, 0.0);
+        this.scene.materialFish.setDiffuse(0.0, 0.0, 0.0, 0.0);
+        this.scene.materialFish.setEmission(1.0, 1.0, 1.0, 1.0);
+        this.scene.materialFish.setShininess(10.0);
+        this.scene.materialFish.loadTexture('images/fish/fishBody.png'); 
+    }
+
+    initShaders(){
+        this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
+
+    }
+
+    changeFiltering() {
+        if (this.enableLinearFiltering)
+            this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
+        else {
+            this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.LINEAR);
+        }
     }
 
     display(){
-        //body
+        //BODY
         this.scene.pushMatrix();
-        this.scene.scale(1.5,1.5,1.5);
+        this.changeFiltering();
+        this.scene.scale(0.8,0.6,0.5);
+        this.scene.materialFish.apply();
+        this.scene.setActiveShader(this.scene.fishShader);
         this.fishBody.display();
-        this.scene.popMatrix();  
-        
-        //righ fin
-        this.scene.pushMatrix();
-        this.scene.scale(1.5,1.5,1.5);
-        this.scene.translate(-0.5,-0.3,0.6);
-        this.scene.rotate(Math.PI,0,1,0);
-        this.scene.rotate(Math.PI+Math.PI/4,1,0,0);
-        this.scene.rotate(Math.PI/2,0,1,0);
-        //this.scene.rotate(Math.PI/3,0,0,1);
-        this.scene.scale(0.3,0.3,0.3);
-        this.scene.red.apply();
-        this.lateralFinRight.display(); 
-        this.scene.popMatrix(); 
-
-
-        //left fin
-        this.scene.pushMatrix();
-        this.scene.scale(1.5,1.5,1.5);
-        this.scene.translate(0.5,-0.3,0.6);
-        this.scene.rotate(Math.PI,0,1,0);
-        this.scene.rotate(Math.PI+Math.PI/4,1,0,0);
-        this.scene.rotate(Math.PI/2,0,1,0);
-        this.scene.scale(0.3,0.3,0.3);
-        this.scene.red.apply();
-        this.lateralFinRight.display(); 
-        this.scene.popMatrix(); 
-
-
-        //dorsal fin
-        this.scene.pushMatrix();
-        this.scene.scale(0.5,0.5,0.5);
-        this.scene.translate(0,3,0);
-        this.scene.rotate(5*Math.PI/4,1,0,0);
-        this.scene.rotate(Math.PI/2,0,1,0);
-        this.scene.red.apply();
-        this.dorsalFin.display(); 
-        this.scene.popMatrix();
-
-
-        //tail
-        this.scene.pushMatrix();
-        this.scene.scale(0.5,0.5,0.5);
-        this.scene.translate(0,0,-5);
-        this.scene.rotate(Math.PI/2,1,0,0);
-        this.scene.rotate(Math.PI/2,0,1,0);
-        this.scene.red.apply();
-        this.tail.display(); 
-        this.scene.popMatrix(); 
-
-        //right eye
-        this.scene.pushMatrix();
-        this.scene.scale(0.25,0.25,0.25);
-        this.scene.translate(2.7,2.5,4);
-        this.rightEye.display(); 
+        this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
         
-
-        //left eye
+        //TAIL
         this.scene.pushMatrix();
+        this.scene.translate(1.3,0,0);
+        this.scene.rotate(-Math.PI/4,0,0,1);
+        this.scene.scale(0.4,0.4,0.4);
+        this.scene.materialRed.apply();
+        this.fin.display(); 
+        this.scene.popMatrix();
+
+        //RIGHT FIN
+        this.scene.pushMatrix();
+        this.scene.translate(0.2,-0.2,-0.5);
+        this.scene.scale(0.2,0.2,0.2);
+        this.scene.materialRed.apply();
+        this.fin.display(); 
+        this.scene.popMatrix(); 
+
+        //LEFT FIN
+        this.scene.pushMatrix();
+        this.scene.translate(0.2,-0.2,0.5);
+        this.scene.scale(0.2,0.2,0.2);
+        this.scene.materialRed.apply();
+        this.fin.display(); 
+        this.scene.popMatrix(); 
+
+        //TOP FIN
+        this.scene.pushMatrix();
+        this.scene.translate(-0.2,0.6,0);
+        this.scene.rotate(-Math.PI,0,1,0);
+        this.scene.scale(0.3,0.3,0.3);
+        this.scene.materialRed.apply();
+        this.fin.display(); 
+        this.scene.popMatrix(); 
+
+        //Right Eye
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5,0,0.35);
+        this.scene.rotate(-Math.PI/2,0,1,0);
         this.scene.scale(0.25,0.25,0.25);
-        this.scene.translate(-2.7,2.5,4);
-        this.scene.rotate(Math.PI,0,0,1);
-        this.leftEye.display(); 
+        this.eye.display(); 
+        this.scene.popMatrix();
+        
+        //Left Eye
+        this.scene.pushMatrix();
+        this.scene.translate(-0.5,0,-0.35);
+        this.scene.rotate(Math.PI/2,0,1,0);
+        this.scene.scale(0.25,0.25,0.25);
+        this.eye.display(); 
         this.scene.popMatrix();
     }
 
