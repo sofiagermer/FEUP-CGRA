@@ -2,6 +2,7 @@
 import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../lib/CGF.js';
 import {MySphere} from '../Objects/MySphere.js';
 import {MyFin} from '../Objects/MyFin.js';
+import {MyTail} from '../Objects/MyTail.js';
 import {MyEye} from '../Objects/MyEye.js';
 
 /**
@@ -13,9 +14,9 @@ export class MyFish extends CGFobject {
     constructor(scene) {
         super(scene);
         this.fishBody = new MySphere(this.scene, 16, 8);
+        this.tail = new MyTail(scene);
         this.fin = new MyFin(scene);
         this.eye = new MyEye(scene);
-
         this.initShaders();
         this.initMaterials();
     }
@@ -38,21 +39,16 @@ export class MyFish extends CGFobject {
 
     initShaders(){
         this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
-
     }
 
-    changeFiltering() {
-        if (this.enableLinearFiltering)
-            this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
-        else {
-            this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.LINEAR);
-        }
+    update(t){
+        this.tail.angle = Math.sin(t) * Math.PI/8;
+        this.fin.angle =  Math.sin(0.4* t) * 0.2;
     }
 
     display(){
         //BODY
         this.scene.pushMatrix();
-        this.changeFiltering();
         this.scene.scale(0.8,0.6,0.5);
         this.scene.materialFish.apply();
         this.scene.setActiveShader(this.scene.fishShader);
@@ -62,16 +58,17 @@ export class MyFish extends CGFobject {
         
         //TAIL
         this.scene.pushMatrix();
-        this.scene.translate(1.3,0,0);
-        this.scene.rotate(-Math.PI/4,0,0,1);
+        this.scene.translate(0.75,0,0);
+        this.scene.rotate(this.tail.angle,0,1,0);
         this.scene.scale(0.4,0.4,0.4);
         this.scene.materialRed.apply();
-        this.fin.display(); 
+        this.tail.display(); 
         this.scene.popMatrix();
 
         //RIGHT FIN
         this.scene.pushMatrix();
-        this.scene.translate(0.2,-0.2,-0.5);
+        this.scene.translate(0.4,-0.2,-0.5);
+        this.scene.rotate(-this.fin.angle,1,0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialRed.apply();
         this.fin.display(); 
@@ -79,7 +76,8 @@ export class MyFish extends CGFobject {
 
         //LEFT FIN
         this.scene.pushMatrix();
-        this.scene.translate(0.2,-0.2,0.5);
+        this.scene.translate(0.4,-0.2,0.5);
+        this.scene.rotate(this.fin.angle,1,0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialRed.apply();
         this.fin.display(); 
@@ -113,22 +111,16 @@ export class MyFish extends CGFobject {
 
     enableNormalViz(){
         this.fishBody.enableNormalViz();
-        this.lateralFinRight.enableNormalViz();
-        this.lateralFinLeft.enableNormalViz();
+        this.fin.enableNormalViz();
         this.tail.enableNormalViz();
-        this.dorsalFin.enableNormalViz();
-        this.rightEye.enableNormalViz();
-        this.leftEye.enableNormalViz();
+        this.eye.enableNormalViz();
     }
     
     disableNormalViz(){
         this.fishBody.disableNormalViz();
-        this.lateralFinRight.disableNormalViz();
-        this.lateralFinLeft.disableNormalViz();
-        this.dorsalFin.disableNormalViz();
+        this.fin.disableNormalViz();
         this.tail.disableNormalViz();
-        this.rightEye.disableNormalViz();
-        this.leftEye.disableNormalViz();
+        this.eye.disableNormalViz();
     }
  
    

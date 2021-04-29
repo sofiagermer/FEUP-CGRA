@@ -200,6 +200,7 @@ export class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
+        this.fish.update(t/100 % 1000);
     }
    
     display() {

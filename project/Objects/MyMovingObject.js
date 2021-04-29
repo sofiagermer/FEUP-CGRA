@@ -63,7 +63,7 @@ export class MyMovingObject extends CGFobject {
     
     update(){
         this.coordinates[0] += this.speed* this.scene.speedFactor * Math.sin(this.orientationAngle);
-        this.coordinates[2] += this.speed* this.scene.speedFactorr * Math.cos(this.orientationAngle);
+        this.coordinates[2] += this.speed* this.scene.speedFactor * Math.cos(this.orientationAngle);
     }
 
     reset() {

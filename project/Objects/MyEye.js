@@ -8,8 +8,7 @@ import { MySphere} from "./MySphere.js";
 export class MyEye extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.sphere1 = new MySphere(this.scene, 16, 16);
-        this.sphere2 = new MySphere(this.scene, 16, 16);
+        this.sphere = new MySphere(this.scene, 16, 16);
         this.initMaterials();
     }
 
@@ -29,23 +28,19 @@ export class MyEye extends CGFobject {
         this.scene.materialWhite.setShininess(10.0);  
     }
 
-    setAngle(angle){
-        this.angle= angle*Math.PI/180;
-    }
-
     display(){
         this.scene.pushMatrix();
         this.scene.scale(0.5,0.5,0.5);
         this.scene.translate(0,0,0);
         this.scene.materialWhite.apply();
-        this.sphere1.display(); 
+        this.sphere.display(); 
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.scale(0.25,0.25,0.25);
         this.scene.translate(1.5,0,0);
         this.scene.materialBlack.apply();
-        this.sphere1.display(); 
+        this.sphere.display(); 
         this.scene.popMatrix();
     }
 
