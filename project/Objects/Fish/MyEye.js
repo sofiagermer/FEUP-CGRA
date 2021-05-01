@@ -1,5 +1,5 @@
-import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
-import { MySphere} from "./MySphere.js";
+import {CGFobject,CGFappearance, CGFscene } from '../../../lib/CGF.js';
+import { MySphere} from "../BasicShapes/MySphere.js";
 
 /**
 * MyFin

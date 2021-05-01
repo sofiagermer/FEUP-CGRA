@@ -1,5 +1,5 @@
-import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
-import { MyPyramid} from "./MyPyramid.js";
+import {CGFobject,CGFappearance, CGFscene } from '../../../lib/CGF.js';
+import { MyPyramid} from "../BasicShapes/MyPyramid.js";
 
 /**
 * MyMovingObject

@@ -1,9 +1,9 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
-import { MySphere } from "./Objects/MySphere.js";
-import { MyMovingObject } from "./Objects/MyMovingObject.js";
-import { MyCubeMap } from "./Objects/MyCubeMap.js";
-import { MyCylinder } from "./Objects/MyCylinder.js";
-import { MyFish } from "./Objects/MyFish.js";
+import { MySphere } from "./Objects/BasicShapes/MySphere.js";
+import { MyMovingObject } from "./Objects/Landscape/MyMovingObject.js";
+import { MyCubeMap } from "./Objects/Landscape/MyCubeMap.js";
+import { MyCylinder } from "./Objects/BasicShapes/MyCylinder.js";
+import { MyFish } from "./Objects/Fish/MyFish.js";
 
 /**
 * MyScene
@@ -12,11 +12,15 @@ import { MyFish } from "./Objects/MyFish.js";
 export class MyScene extends CGFscene {
     constructor() {
         super();
+        this.selectedExampleShader = 0;
+		this.showShaderCode = false;
     }
     init(application) {
         super.init(application);
         this.initCameras();
         this.initLights();
+
+    
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -93,6 +97,7 @@ export class MyScene extends CGFscene {
 
 
         this.textureBody = new CGFtexture(this, 'images/fish/fishBody.png');
+        this.textureSand = new CGFtexture(this, 'images/sand.png');
     }
 
     setDefaultTextures(){
@@ -245,7 +250,8 @@ export class MyScene extends CGFscene {
         if(this.displayCubeMap){
             this.cubeMap.display();
         }
-         
+
+        this.setActiveShader(this.defaultShader);
         // ---- END Primitive drawing section
     }
 }
