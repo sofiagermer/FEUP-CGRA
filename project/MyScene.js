@@ -1,9 +1,10 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
-import { MySphere } from "./Objects/BasicShapes/MySphere.js";
-import { MyMovingObject } from "./Objects/Landscape/MyMovingObject.js";
-import { MyCubeMap } from "./Objects/Landscape/MyCubeMap.js";
-import { MyCylinder } from "./Objects/BasicShapes/MyCylinder.js";
-import { MyFish } from "./Objects/Fish/MyFish.js";
+import { MySphere } from "./Objects/MySphere.js";
+import { MyMovingObject } from "./Objects/MyMovingObject.js";
+import { MyCubeMap } from "./Objects/MyCubeMap.js";
+import { MyCylinder } from "./Objects/MyCylinder.js";
+import { MyFish } from "./Objects/MyFish.js";
+import { MySeaFloor } from "./Objects/MySeaFloor.js";
 
 /**
 * MyScene
@@ -12,15 +13,11 @@ import { MyFish } from "./Objects/Fish/MyFish.js";
 export class MyScene extends CGFscene {
     constructor() {
         super();
-        this.selectedExampleShader = 0;
-		this.showShaderCode = false;
     }
     init(application) {
         super.init(application);
         this.initCameras();
         this.initLights();
-
-    
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -45,6 +42,7 @@ export class MyScene extends CGFscene {
         this.cubeMap = new MyCubeMap(this);
         this.cylinder = new MyCylinder(this, 19);
         this.fish = new MyFish(this);
+        this.seaFloor = new MySeaFloor(this);
 
         this.initAppearence();
 
@@ -55,6 +53,7 @@ export class MyScene extends CGFscene {
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayFish = true;
+        this.displaySeaFloor = false;
 
         this.selectedTexture = 0;
         this.texturesID = { 'Demo': 0, 'Test': 1 };
@@ -97,7 +96,6 @@ export class MyScene extends CGFscene {
 
 
         this.textureBody = new CGFtexture(this, 'images/fish/fishBody.png');
-        this.textureSand = new CGFtexture(this, 'images/sand.png');
     }
 
     setDefaultTextures(){
@@ -251,7 +249,10 @@ export class MyScene extends CGFscene {
             this.cubeMap.display();
         }
 
-        this.setActiveShader(this.defaultShader);
+        if(this.displaySeaFloor){
+            this.seaFloor.display();
+        }
+         
         // ---- END Primitive drawing section
     }
 }

@@ -1,11 +1,9 @@
 //o peixe deverá ser criado a partir de um corpo, desenvolvido através de uma esfera distorcida, c shader bipartido
-import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../../lib/CGF.js';
-import {MySphere} from '../BasicShapes/MySphere.js';
-import {MyFin} from './MyFin.js';
-import {MyTail} from './MyTail.js';
-import {MyEye} from './MyEye.js';
-import { MyPlane } from '../BasicShapes/MyPlane.js';
-import { MySeaFloor } from './MySeaFloor.js';
+import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../lib/CGF.js';
+import {MySphere} from '../Objects/MySphere.js';
+import {MyFin} from '../Objects/MyFin.js';
+import {MyTail} from '../Objects/MyTail.js';
+import {MyEye} from '../Objects/MyEye.js';
 
 /**
 * MyFish
@@ -19,7 +17,6 @@ export class MyFish extends CGFobject {
         this.tail = new MyTail(scene);
         this.fin = new MyFin(scene);
         this.eye = new MyEye(scene);
-        //this.sand = new MySeaFloor(scene);
         this.initShaders();
         this.initMaterials();
     }
@@ -41,7 +38,7 @@ export class MyFish extends CGFobject {
     }
 
     initShaders(){
-       
+        this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
     }
 
     update(t){
@@ -110,9 +107,6 @@ export class MyFish extends CGFobject {
         this.scene.scale(0.25,0.25,0.25);
         this.eye.display(); 
         this.scene.popMatrix();
-
-        //Sand
-        //this.sand.display();
     }
 
     enableNormalViz(){
@@ -120,7 +114,6 @@ export class MyFish extends CGFobject {
         this.fin.enableNormalViz();
         this.tail.enableNormalViz();
         this.eye.enableNormalViz();
-        this.sand.enableNormalViz();
     }
     
     disableNormalViz(){
@@ -128,7 +121,6 @@ export class MyFish extends CGFobject {
         this.fin.disableNormalViz();
         this.tail.disableNormalViz();
         this.eye.disableNormalViz();
-        this.sand.disableNormalViz();
     }
  
    
