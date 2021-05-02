@@ -1,10 +1,13 @@
 import {CGFobject,CGFappearance, CGFscene, CGFshader , CGFtexture} from '../../lib/CGF.js';
 import {MyPlane} from '../Objects/MyPlane.js';
+import {MyRockSet} from '../Objects/MyRockSet.js';
 
 export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
+        this.rock = new MyRockSet(this.scene);
+  
         this.initShaders();
     }
 
@@ -27,6 +30,10 @@ export class MySeaFloor extends CGFobject {
         this.sand.display();
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
+
+        this.dimensions();
+        
+
         /*
         this.scene.pushMatrix();
         this.scene.setActiveShader(this.scene.shaderSeaFloor));
@@ -35,5 +42,18 @@ export class MySeaFloor extends CGFobject {
         this.sand.display();
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();*/
+    }
+    dimensions(){
+        for (var i = 0; i < 5; i++){
+            var scale = Math.random() * 0.2;
+            var trans = Math.random() * 5;
+            this.scene.pushMatrix();
+            this.scene.translate(trans,0,trans);
+            this.scene.rotate(Math.PI/2,0,1,0);
+            this.scene.scale(scale,scale,scale); 
+            this.scene.materialBlack.apply();
+            this.rock.rockSet[i].display();
+            this.scene.popMatrix();
+        }
     }
 }
