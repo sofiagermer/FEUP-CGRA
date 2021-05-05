@@ -10,7 +10,7 @@ uniform sampler2D sandMap;
 void main() {
     vec4 color = texture2D(sandTex, vTextureCoord);
 
-    vec4 map = texture2D(sandMap, vec2(0.0,0.1)+vTextureCoord);
+    vec4 map = texture2D(sandMap, vTextureCoord);
 
-    gl_FragColor = color * 0.8 + map * 0.2;
+    gl_FragColor = color * map;
 }
