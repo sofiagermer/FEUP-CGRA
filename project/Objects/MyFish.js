@@ -35,6 +35,8 @@ export class MyFish extends CGFobject {
         this.scene.materialFish.setEmission(1.0, 1.0, 1.0, 1.0);
         this.scene.materialFish.setShininess(10.0);
         this.scene.materialFish.loadTexture('images/fish/fishBody.png'); 
+
+
     }
 
     initShaders(){
