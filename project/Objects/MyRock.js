@@ -7,11 +7,15 @@ export class MyRock  extends CGFobject {
    * @param  {integer} slices - number of slices around Y axis
    * @param  {integer} stacks - number of stacks along Y axis, from the center to the poles (half of sphere)
    */
-  constructor(scene, slices, stacks) {
+  constructor(scene, slices, stacks, scale, transX, transZ, rot) {
     super(scene);
     this.latDivs = stacks * 2;
     this.longDivs = slices;
-    this.initBuffers();
+    this.initBuffers(); 
+    this.scale = scale;
+    this.transX = transX;
+    this.transZ = transZ;
+    this.rot = rot;
   }
 
   /**
@@ -34,7 +38,8 @@ export class MyRock  extends CGFobject {
 
     // build an all-around stack at a time, starting on "north pole" and proceeding "south"
     for (let latitude = 0; latitude <= this.latDivs; latitude++) {
-      var sinPhi = Math.sin(phi);
+  
+    var sinPhi = Math.sin(phi);
       var cosPhi = Math.cos(phi);
 
       // in each stack, build all the slices around, starting on longitude 0

@@ -56,7 +56,7 @@ export class MyScene extends CGFscene {
         this.displaySeaFloor = false;
 
         this.selectedTexture = 0;
-        this.texturesID = { 'Demo': 0, 'Test': 1 };
+        this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
@@ -94,6 +94,13 @@ export class MyScene extends CGFscene {
         this.textureFront_test = new CGFtexture(this, 'images/test_cubemap/nz.png');
         this.textureBack_test = new CGFtexture(this, 'images/test_cubemap/pz.png');
 
+        this.textureBottom_water = new CGFtexture(this, 'images/underwater_cubemap/bottom.jpg');
+        this.textureTop_water = new CGFtexture(this, 'images/underwater_cubemap/top.jpg');
+        this.textureLeft_water = new CGFtexture(this, 'images/underwater_cubemap/left.jpg');
+        this.textureRight_water = new CGFtexture(this, 'images/underwater_cubemap/right.jpg');
+        this.textureFront_water = new CGFtexture(this, 'images/underwater_cubemap/front.jpg');
+        this.textureBack_water = new CGFtexture(this, 'images/underwater_cubemap/back.jpg');
+
 
         this.textureBody = new CGFtexture(this, 'images/fish/fishBody.png');
     }
@@ -109,6 +116,14 @@ export class MyScene extends CGFscene {
 
     updateTextures(){
         if(this.selectedTexture == 1){
+            this.textureBottom = this.textureBottom_water;
+            this.textureTop = this.textureTop_water;
+            this.textureLeft = this.textureLeft_water;
+            this.textureRight = this.textureRight_water;
+            this.textureFront = this.textureFront_water;
+            this.textureBack = this.textureBack_water;
+        }
+        else if(this.selectedTexture == 2){
             this.textureBottom = this.textureBottom_test;
             this.textureTop = this.textureTop_test;
             this.textureLeft = this.textureLeft_test;
@@ -120,6 +135,7 @@ export class MyScene extends CGFscene {
             this.setDefaultTextures();
         }
     }
+    
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -128,7 +144,7 @@ export class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.6, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0 , 0));
     }
 
     setDefaultAppearance() {
@@ -249,9 +265,9 @@ export class MyScene extends CGFscene {
             this.cubeMap.display();
         }
 
-        if(this.displaySeaFloor){
+        //if(this.displaySeaFloor){
             this.seaFloor.display();
-        }
+        //}
          
         // ---- END Primitive drawing section
     }

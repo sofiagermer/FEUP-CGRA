@@ -6,7 +6,7 @@ export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
-        this.rock = new MyRockSet(this.scene);
+        this.rockSet = new MyRockSet(this.scene, 7);
   
         this.initShaders();
     }
@@ -24,35 +24,20 @@ export class MySeaFloor extends CGFobject {
         this.scene.textureSand.bind(0);
         this.scene.textureSandMap.bind(1);
         this.scene.pushMatrix();
-        this.scene.translate(25,-2.5,25);
-        this.scene.rotate(-Math.PI/2,1,0,0);
-        this.scene.scale(50,50,50);
-        this.sand.display();
-        this.scene.setActiveShader(this.scene.defaultShader);
+            this.scene.translate(25,-2.5,25);
+            this.scene.rotate(-Math.PI/2,1,0,0);
+            this.scene.scale(50,50,50);
+            this.sand.display();
+            this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
 
-        this.dimensions();
-        
-
-        /*
-        this.scene.pushMatrix();
-        this.scene.setActiveShader(this.scene.shaderSeaFloor));
-        this.scene.materialSandTex.bind(1);
-        this.scene.materialSandMap.bind(2);
-        this.sand.display();
-        this.scene.setActiveShader(this.scene.defaultShader);
-        this.scene.popMatrix();*/
-    }
-    dimensions(){
-        for (var i = 0; i < 5; i++){
-            var scale = Math.random() * 0.2;
-            var trans = Math.random() * 5;
+        for(var i=0;i<this.rockSet.no_rocks;i++){
             this.scene.pushMatrix();
-            this.scene.translate(trans,0,trans);
-            this.scene.rotate(Math.PI/2,0,1,0);
-            this.scene.scale(scale,scale,scale); 
-            this.scene.materialBlack.apply();
-            this.rock.rockSet[i].display();
+                this.scene.translate(this.rockSet.rockSet[i].transX,0,this.rockSet.rockSet[i].transZ);
+                this.scene.rotate(Math.PI/2,0,1,0);
+                this.scene.scale(this.rockSet.rockSet[i].scale,this.rockSet.rockSet[i].scale,this.rockSet.rockSet[i].scale); 
+                this.scene.materialRock.apply();
+                this.rockSet.rockSet[i].display();
             this.scene.popMatrix();
         }
     }
