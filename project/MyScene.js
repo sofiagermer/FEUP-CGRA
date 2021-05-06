@@ -237,21 +237,29 @@ export class MyScene extends CGFscene {
         this.defaultAppearance.apply();
         // Draw axis
         if (this.displayAxis){
+            this.pushMatrix();
             this.axis.display();
+            this.popMatrix();
         }
 
         if(this.displayMovingObject){
+            this.pushMatrix();
             this.movingObject.display();
+            this.popMatrix();
         }
         
         if(this.displaySphere){
+            this.pushMatrix();
             this.materialSphere.apply();
             this.sphere.display();
+            this.popMatrix();
         }
 
         if(this.displayCylinder){
+            this.pushMatrix();
             this.defaultAppearance.apply();
             this.cylinder.display();
+            this.popMatrix();
         }
 
         if(this.displayFish){
@@ -262,12 +270,16 @@ export class MyScene extends CGFscene {
         } 
         
         if(this.displayCubeMap){
+            this.pushMatrix();
             this.cubeMap.display();
+            this.popMatrix();
         }
 
-        //if(this.displaySeaFloor){
+        if(this.displaySeaFloor){
+            this.pushMatrix();
             this.seaFloor.display();
-        //}
+            this.popMatrix();
+        }
          
         // ---- END Primitive drawing section
     }

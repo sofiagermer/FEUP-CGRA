@@ -18,11 +18,9 @@ uniform sampler2D sandMap;
 uniform float normScale;
 
 void main() {
-
-    vec2 newATextureCoord  = aTextureCoord;
     
-    vec4 color = texture2D(sandMap, newATextureCoord);
+    vec4 color = texture2D(sandMap, aTextureCoord);
 
-    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + vec3(0.0 ,0.0, (color.r) * .1) , 1.0);
-    vTextureCoord = newATextureCoord;
+    gl_Position = uPMatrix * (uMVMatrix * vec4(aVertexPosition , 1.0) + vec4(0.0,color.r, 0.0,1.0));
+    vTextureCoord = aTextureCoord;
 }
