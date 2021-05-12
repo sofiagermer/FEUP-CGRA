@@ -5,6 +5,7 @@ import { MyCubeMap } from "./Objects/MyCubeMap.js";
 import { MyCylinder } from "./Objects/MyCylinder.js";
 import { MyFish } from "./Objects/MyFish.js";
 import { MySeaFloor } from "./Objects/MySeaFloor.js";
+import { MyWater } from "./Objects/MyWater.js";
 
 /**
 * MyScene
@@ -43,6 +44,7 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 19);
         this.fish = new MyFish(this);
         this.seaFloor = new MySeaFloor(this);
+        this.water = new MyWater(this);
 
         this.initAppearence();
 
@@ -261,13 +263,6 @@ export class MyScene extends CGFscene {
             this.cylinder.display();
             this.popMatrix();
         }
-
-        if(this.displayFish){
-            this.pushMatrix();
-            this.translate(0.0,3,0.0);
-            this.fish.display();
-            this.popMatrix();
-        } 
         
         if(this.displayCubeMap){
             this.pushMatrix();
@@ -280,6 +275,18 @@ export class MyScene extends CGFscene {
             this.seaFloor.display();
             this.popMatrix();
         }
+
+        this.pushMatrix();
+        this.water.display();
+        this.popMatrix();
+
+        if(this.displayFish){
+            this.pushMatrix();
+            this.translate(0.0,3,0.0);
+            this.fish.display();
+            this.popMatrix();
+        } 
+    
          
         // ---- END Primitive drawing section
     }

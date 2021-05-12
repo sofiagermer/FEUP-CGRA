@@ -6,7 +6,7 @@ export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
-        this.rock = new MyRockSet(this.scene);
+        this.rock = new MyRockSet(this.scene, 5);
   
         this.initShaders();
     }
@@ -44,13 +44,11 @@ export class MySeaFloor extends CGFobject {
     }
     dimensions(){
         for (var i = 0; i < 5; i++){
-            var scale = Math.random() * 0.2;
-            var trans = Math.random() * 5;
-            this.scene.pushMatrix();
-            this.scene.translate(trans,0,trans);
+            this.scene.pushMatrix();    
+            this.scene.translate(this.rock.rockSet[i].transX, 1, this.rock.rockSet[i].transZ);
             this.scene.rotate(Math.PI/2,0,1,0);
-            this.scene.scale(scale,scale,scale); 
-            this.scene.materialBlack.apply();
+            this.scene.scale( this.rock.rockSet[i].scale,  this.rock.rockSet[i].scale,  this.rock.rockSet[i].scale); 
+            this.scene.materialRock.apply();
             this.rock.rockSet[i].display();
             this.scene.popMatrix();
         }
