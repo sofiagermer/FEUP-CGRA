@@ -21,6 +21,6 @@ void main() {
     
     vec4 color = texture2D(sandMap, aTextureCoord);
 
-    gl_Position = uPMatrix * (uMVMatrix * vec4(aVertexPosition , 1.0) + vec4(0.0,color.r, 0.0,1.0));
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition  + vec3(0.0,0.0, (color.r) * 5.0), 1.0) ;
     vTextureCoord = aTextureCoord;
 }

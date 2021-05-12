@@ -20,12 +20,13 @@ export class MySeaFloor extends CGFobject {
     }
 
     display(){
-        this.scene.setActiveShader(this.scene.shaderSeaFloor);
+       this.scene.setActiveShader(this.scene.shaderSeaFloor);
         this.scene.textureSand.bind(0);
         this.scene.textureSandMap.bind(1);
         this.scene.pushMatrix();
+        this.scene.translate(0,-2,0);
         this.scene.rotate(-Math.PI/2,1,0,0);
-        this.scene.scale(50,50,50);
+        this.scene.scale(50,50,1);
         this.sand.display();
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
@@ -52,5 +53,6 @@ export class MySeaFloor extends CGFobject {
             this.rock.rockSet[i].display();
             this.scene.popMatrix();
         }
+
     }
 }
