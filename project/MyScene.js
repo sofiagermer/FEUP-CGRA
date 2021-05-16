@@ -222,6 +222,8 @@ export class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.fish.update(t/100 % 1000);
+        this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
+        this.shaderSeaWeed.setUniformsValues({ timeFactor: t / 100 % 100 });
     }
    
     display() {

@@ -26,8 +26,8 @@ void main() {
     float sdifferent = mix(-0.5,0.5,filter.r);
     float tdifferent = mix(-0.5,0.5,filter.g);
 
-    textCoords.s += sdifferent*0.3;
-    textCoords.t += tdifferent*0.3;
+    textCoords.s += sdifferent*0.1;
+    textCoords.t += tdifferent*0.1;
 
     textCoords.s = clamp(textCoords.s,0.01,0.99);
     textCoords.t = clamp(textCoords.t,0.01,0.99);

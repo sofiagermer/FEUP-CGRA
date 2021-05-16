@@ -1,12 +1,19 @@
 import {CGFobject,CGFappearance, CGFscene, CGFshader , CGFtexture} from '../../lib/CGF.js';
 import {MyPlane} from '../Objects/MyPlane.js';
 import {MyRockSet} from '../Objects/MyRockSet.js';
+import {MyPillar} from '../Objects/MyPillar.js';
+import { MyWeedSet } from './MyWeedSet.js';
 
 export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
         this.rock = new MyRockSet(this.scene, 5);
+        this.pillars_list = [];
+        for(var i = 0; i < 4 ; i++){
+            this.pillars_list.push(new MyPillar(this.scene))
+        }
+        this.weed = new MyWeedSet(this.scene,20);
   
         this.initShaders();
     }
@@ -17,6 +24,7 @@ export class MySeaFloor extends CGFobject {
         this.scene.shaderSeaFloor = new CGFshader(this.scene.gl, "shaders/seafloor.vert", "shaders/seafloor.frag");
         this.scene.shaderSeaFloor.setUniformsValues({sandTex: 0});
         this.scene.shaderSeaFloor.setUniformsValues({sandMap: 1});
+        this.scene.shaderSeaWeed = new CGFshader(this.scene.gl, "shaders/seaweed.vert", "shaders/seaweed.frag"); 
     }
 
     display(){
@@ -32,6 +40,8 @@ export class MySeaFloor extends CGFobject {
         this.scene.popMatrix();
 
         this.dimensions();
+        this.displayPillars();
+        this.displayWeed();
         
 
         /*
@@ -54,5 +64,40 @@ export class MySeaFloor extends CGFobject {
             this.scene.popMatrix();
         }
 
+    }
+
+    displayPillars(){
+        this.scene.pushMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(3,0,0);
+        this.pillars_list[0].display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(3,0,-4);
+        this.pillars_list[1].display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(10,0,0);
+        this.pillars_list[2].display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(10,0,-4);
+        this.pillars_list[3].display();
+        this.scene.popMatrix();
+
+    }
+
+    displayWeed(){
+        this.scene.pushMatrix();
+        for(var i = 0; i < 20; i++){
+            this.scene.setActiveShader(this.scene.shaderSeaWeed);
+            this.weed.weedSet[i].display();
+            this.scene.setActiveShader(this.scene.defaultShader);
+        }
+        this.scene.popMatrix();
     }
 }
