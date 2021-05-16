@@ -18,9 +18,12 @@ uniform sampler2D waterMap;
 uniform float normScale;
 
 void main() {
+
+    vec2 newATextureCoord = aTextureCoord;
     
     vec4 color = texture2D(waterMap, aTextureCoord);
 
-    gl_Position = uPMatrix * (uMVMatrix * vec4(aVertexPosition , 1.0) + vec4(0.0,color.r, 0.0,1.0));
-    vTextureCoord = aTextureCoord;
+    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+
+    vTextureCoord = newATextureCoord;
 }
