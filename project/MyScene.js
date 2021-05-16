@@ -1,12 +1,11 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
 import { MySphere } from "./Objects/MySphere.js";
-import { MyMovingObject } from "./Objects/MyMovingObject.js";
 import { MyCubeMap } from "./Objects/MyCubeMap.js";
 import { MyCylinder } from "./Objects/MyCylinder.js";
-import { MyFish } from "./Objects/MyFish.js";
 import { MySeaFloor } from "./Objects/MySeaFloor.js";
 import { MyWater } from "./Objects/MyWater.js";
-
+import { MyMovingFish } from "./Objects/MyMovingFish.js";
+import { MyFish } from "./Objects/MyFish.js";
 /**
 * MyScene
 * @constructor
@@ -39,10 +38,9 @@ export class MyScene extends CGFscene {
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         this.sphere = new MySphere(this, 16, 8);
-        this.movingObject = new MyMovingObject(this, 4, 2);
         this.cubeMap = new MyCubeMap(this);
         this.cylinder = new MyCylinder(this, 19);
-        this.fish = new MyFish(this);
+        this.movingFish = new MyMovingFish(this, new MyFish(this));
         this.seaFloor = new MySeaFloor(this);
         this.water = new MyWater(this);
 
@@ -50,7 +48,6 @@ export class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayMovingObject = false;
         this.displayCubeMap = false;
         this.displayCylinder = false;
         this.displaySphere = false;
@@ -102,9 +99,6 @@ export class MyScene extends CGFscene {
         this.textureRight_water = new CGFtexture(this, 'images/underwater_cubemap/right.jpg');
         this.textureFront_water = new CGFtexture(this, 'images/underwater_cubemap/front.jpg');
         this.textureBack_water = new CGFtexture(this, 'images/underwater_cubemap/back.jpg');
-
-
-        this.textureBody = new CGFtexture(this, 'images/fish/fishBody.png');
     }
 
     setDefaultTextures(){
@@ -165,57 +159,44 @@ export class MyScene extends CGFscene {
     }
 
     checkKeys()  {
-        var text="Keys pressed: ";
-
         var keysPressed=false;
 
         // Check for key codes e.g. in https://keycode.info/
 
         if (this.gui.isKeyPressed("KeyW")) {
-
-                text+=" W ";
-                this.movingObject.accelerate(0.01 );
-                keysPressed=true;
-
+            this.movingFish.accelerate(0.01 );
+            keysPressed=true;
         }
 
         if (this.gui.isKeyPressed("KeyS"))        {
-
-                text += " S ";
-                this.movingObject.accelerate(-0.01);
-                keysPressed = true;
-
+            this.movingFish.accelerate(-0.01);
+            keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyA"))        {
-
-            text += " A ";
-            this.movingObject.turn(-0.01);
+            this.movingFish.turn(-0.1);
             keysPressed = true;
-
         }
         
         if (this.gui.isKeyPressed("KeyD"))        {
-
-            text += " D ";
-            this.movingObject.turn(0.01);
+            this.movingFish.turn(0.1);
             keysPressed = true;
-
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
-
-            text += " R ";
-            this.movingObject.reset();
+            this.movingFish.reset();
             keysPressed = true;
-
         }
-        
-        if (keysPressed)
-            console.log(text);
 
-        this.movingObject.update();
+        if (this.gui.isKeyPressed("KeyP"))        {
+            this.movingFish.up();
+            keysPressed = true;
+        }
 
+        if (this.gui.isKeyPressed("KeyL")) {
+            this.movingFish.down();
+            keysPressed = true;
+        }
     }
 
     // called periodically (as per setUpdatePeriod() in init())
@@ -224,6 +205,7 @@ export class MyScene extends CGFscene {
         this.fish.update(t/100 % 1000);
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.shaderSeaWeed.setUniformsValues({ timeFactor: t / 100 % 100 });
+        this.movingFish.update(t/100 % 10000);
     }
    
     display() {
@@ -238,17 +220,11 @@ export class MyScene extends CGFscene {
         this.applyViewMatrix();
         
         
-        this.defaultAppearance.apply();
+        this.defaultAppearance.apply();AA
         // Draw axis
         if (this.displayAxis){
             this.pushMatrix();
             this.axis.display();
-            this.popMatrix();
-        }
-
-        if(this.displayMovingObject){
-            this.pushMatrix();
-            this.movingObject.display();
             this.popMatrix();
         }
         
@@ -285,7 +261,7 @@ export class MyScene extends CGFscene {
         if(this.displayFish){
             this.pushMatrix();
             this.translate(0.0,3,0.0);
-            this.fish.display();
+            this.movingFish.display();
             this.popMatrix();
         } 
     
