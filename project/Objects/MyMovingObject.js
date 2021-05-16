@@ -47,7 +47,7 @@ export class MyMovingObject extends CGFobject {
     }
 
     down(){
-        if(this.coordinates[1] > 0) this.coordinates[1] -= 0.1;
+        if(this.coordinates[1] > 1.3) this.coordinates[1] -= 0.1;
     }
     
     update(){

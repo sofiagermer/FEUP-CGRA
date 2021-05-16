@@ -159,50 +159,39 @@ export class MyScene extends CGFscene {
     }
 
     checkKeys()  {
-        var keysPressed=false;
-
-        // Check for key codes e.g. in https://keycode.info/
 
         if (this.gui.isKeyPressed("KeyW")) {
             this.movingFish.accelerate(0.01 );
-            keysPressed=true;
         }
 
         if (this.gui.isKeyPressed("KeyS"))        {
             this.movingFish.accelerate(-0.01);
-            keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyA"))        {
             this.movingFish.turn(-0.1);
-            keysPressed = true;
         }
         
         if (this.gui.isKeyPressed("KeyD"))        {
             this.movingFish.turn(0.1);
-            keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.movingFish.reset();
-            keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyP"))        {
             this.movingFish.up();
-            keysPressed = true;
         }
 
         if (this.gui.isKeyPressed("KeyL")) {
             this.movingFish.down();
-            keysPressed = true;
         }
     }
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
-        this.fish.update(t/100 % 1000);
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.shaderSeaWeed.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.movingFish.update(t/100 % 10000);
@@ -220,7 +209,7 @@ export class MyScene extends CGFscene {
         this.applyViewMatrix();
         
         
-        this.defaultAppearance.apply();AA
+        this.defaultAppearance.apply();
         // Draw axis
         if (this.displayAxis){
             this.pushMatrix();
@@ -260,7 +249,6 @@ export class MyScene extends CGFscene {
 
         if(this.displayFish){
             this.pushMatrix();
-            this.translate(0.0,3,0.0);
             this.movingFish.display();
             this.popMatrix();
         } 
