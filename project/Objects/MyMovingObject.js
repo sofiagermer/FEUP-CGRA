@@ -1,5 +1,4 @@
 import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
-import { MyPyramid} from "./MyPyramid.js";
 
 /**
 * MyMovingObject
@@ -9,46 +8,28 @@ import { MyPyramid} from "./MyPyramid.js";
  * @param stacks - number of divisions along the Y axis
 */
 export class MyMovingObject extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, fish) {
         super(scene);
-        this.slices = slices;
-        this.stacks = stacks;
-        this.initMaterials();
+        this.fish = fish;
 
         //Initial variables
         this.reset();
-
-        this.pyramid = new MyPyramid(this.scene, 4 , 4);
-
-    }
-
-    initMaterials() {
-        this.scene.material_pyramid = new CGFappearance(this.scene);
-
-        this.scene.material_pyramid.setAmbient(0.2, 0.4, 0.8, 1.0);
-        this.scene.material_pyramid.setDiffuse(0.2, 0.4, 0.8, 1.0);
-        this.scene.material_pyramid.setSpecular(0.2, 0.4, 0.8, 1.0);
-        this.scene.material_pyramid.setEmission(0,0,0,1);
-        this.scene.material_pyramid.setShininess(10.0);
     }
 
     display(){
         this.scene.pushMatrix();
         this.scene.translate(this.coordinates[0], this.coordinates[1], this.coordinates[2]);
         this.scene.rotate(this.orientationAngle, 0, 1, 0);
-        this.scene.rotate(Math.PI/2, 1, 0, 0);
-        this.scene.scale(this.scene.scaleFactor, this.scene.scaleFactor, this.scene.scaleFactor);
-        this.scene.material_pyramid.apply();
-        this.pyramid.display();
+        this.fish.display();
         this.scene.popMatrix();
     }
 
     enableNormalViz(){
-        this.pyramid.enableNormalViz();
+        this.fish.enableNormalViz();
     }
     
     disableNormalViz(){
-        this.pyramid.disableNormalViz();
+        this.fish.disableNormalViz();
     }
 
     turn(val) {
@@ -60,17 +41,26 @@ export class MyMovingObject extends CGFobject {
         //Increases speed
         this.speed += val;
     }
+
+    up(){
+        if(this.coordinates[1] < 5) this.coordinates[1] += 0.1;
+    }
+
+    down(){
+        if(this.coordinates[1] > 0) this.coordinates[1] -= 0.1;
+    }
     
     update(){
         this.coordinates[0] += this.speed* this.scene.speedFactor * Math.sin(this.orientationAngle);
         this.coordinates[2] += this.speed* this.scene.speedFactor * Math.cos(this.orientationAngle);
+
     }
 
     reset() {
         //Resets initial position
         this.speed = 0.0;
         this.orientationAngle = 0.0;
-        this.coordinates = [0.0, 0.0, 0.0];
+        this.coordinates = [0.0, 5.0, 0.0];
     }
    
 }
