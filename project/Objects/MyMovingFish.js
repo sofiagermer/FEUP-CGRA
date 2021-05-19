@@ -27,7 +27,7 @@ export class MyMovingFish extends MyMovingObject {
     updateRockPos() {
         if (this.catchedRock) {
             var newPosition = [];
-            newPosition.push(this.coordinates[0] + 0.75 * Math.sin(this.orientationAngle), this.coordinates[1], this.coordinates[2] + 0.75 * Math.cos(this.orientationAngle));
+            newPosition.push(this.coordinates[0] + Math.sin(this.orientationAngle - Math.PI/2), this.coordinates[1], this.coordinates[2] + Math.cos(this.orientationAngle - Math.PI/2));
             this.rock.setPosition(newPosition[0], newPosition[1], newPosition[2]);
         }
     }
