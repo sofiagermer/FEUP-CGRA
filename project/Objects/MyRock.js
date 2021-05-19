@@ -14,7 +14,11 @@ export class MyRock  extends CGFobject {
     this.initBuffers(); 
     this.scale = scale;
     this.transX = transX;
+    this.transY = 1;
     this.transZ = transZ;
+    this.initialX = transX;
+    this.initialY = this.transY;
+    this.initialZ = transZ;
     this.rot = rot;
   }
 
@@ -98,6 +102,18 @@ export class MyRock  extends CGFobject {
     this.scene.materialBlack.setSpecular(1.0,1.0,1.0,1.0);
     this.scene.materialBlack.setEmission(0.0, 0.0, 0.0, 1.0);
     this.scene.materialBlack.setShininess(10.0);  
+  }
+
+  getInitialPosition(){
+    var initialPosition = [];
+    initialPosition.push(this.initialX, this.initialY, this.initialZ);
+    return initialPosition;
+  }
+  
+  setPosition(transX, transY, transZ){
+    this.transX = transX;
+    this.transY = transY;
+    this.transZ = transZ;
   }
 }
 

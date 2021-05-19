@@ -44,7 +44,7 @@ export class MyFish extends CGFobject {
     }
 
     update(t){
-        this.tail.angle = Math.sin(t) * Math.PI/8;
+        this.tail.angle = (Math.sin(t) * Math.PI/8);
         this.fin.angle =  Math.sin(0.4* t) * 0.2;
     }
 

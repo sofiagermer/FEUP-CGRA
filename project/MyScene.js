@@ -6,6 +6,7 @@ import { MySeaFloor } from "./Objects/MySeaFloor.js";
 import { MyWater } from "./Objects/MyWater.js";
 import { MyMovingFish } from "./Objects/MyMovingFish.js";
 import { MyFish } from "./Objects/MyFish.js";
+import { MyRockSet } from "./Objects/MyRockSet.js";
 /**
 * MyScene
 * @constructor
@@ -42,21 +43,23 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 19);
         this.movingFish = new MyMovingFish(this, new MyFish(this));
         this.seaFloor = new MySeaFloor(this);
+        this.rockSet = new MyRockSet(this, 5);
         this.water = new MyWater(this);
 
         this.initAppearence();
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayCubeMap = false;
+        this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayFish = true;
-        this.displaySeaFloor = false;
+        this.displaySeaFloor = true;
 
-        this.selectedTexture = 0;
         this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
-
+        this.selectedTexture = 1;
+        this.updateTextures();
+        
         this.scaleFactor = 1;
         this.speedFactor = 1;
     }
@@ -187,6 +190,10 @@ export class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyL")) {
             this.movingFish.down();
         }
+
+        if (this.gui.isKeyPressed("KeyC")){ 
+            this.movingFish.catchRock();
+        }
     }
 
     // called periodically (as per setUpdatePeriod() in init())
@@ -240,6 +247,7 @@ export class MyScene extends CGFscene {
         if(this.displaySeaFloor){
             this.pushMatrix();
             this.seaFloor.display();
+            this.rockSet.display();
             this.popMatrix();
         }
 
