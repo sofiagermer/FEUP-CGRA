@@ -69,8 +69,9 @@ export class MyFish extends CGFobject {
 
         //RIGHT FIN
         this.scene.pushMatrix();
-        this.scene.translate(0.4,-0.2,-0.5);
+        this.scene.translate(1.4,-0.2,-0.51);
         this.scene.rotate(-this.fin.angle,1,0,0);
+        this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialRed.apply();
         this.fin.display(); 
@@ -78,8 +79,9 @@ export class MyFish extends CGFobject {
 
         //LEFT FIN
         this.scene.pushMatrix();
-        this.scene.translate(0.4,-0.2,0.5);
+        this.scene.translate(1.4,-0.2,0.51);
         this.scene.rotate(this.fin.angle,1,0,0);
+        this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialRed.apply();
         this.fin.display(); 
