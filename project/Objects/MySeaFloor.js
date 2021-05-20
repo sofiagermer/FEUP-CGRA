@@ -3,17 +3,19 @@ import {MyPlane} from '../Objects/MyPlane.js';
 import {MyRockSet} from '../Objects/MyRockSet.js';
 import {MyPillar} from '../Objects/MyPillar.js';
 import { MyWeedSet } from './MyWeedSet.js';
+import { MyNeast } from './MyNeast.js';
 
 export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
+        this.pineapple = new MyNeast(this.scene);
         this.pillars_list = [];
         for(var i = 0; i < 4 ; i++){
             this.pillars_list.push(new MyPillar(this.scene))
         }
         this.weed = new MyWeedSet(this.scene,20);
-  
+        
         this.initShaders();
     }
 
@@ -40,6 +42,14 @@ export class MySeaFloor extends CGFobject {
         
         this.displayPillars();
         this.displayWeed();   
+
+        
+        this.scene.pushMatrix();
+        this.scene.scale(5,5,5);
+        this.scene.scale(0.6,0.8,0.6);
+        this.scene.translate(0,0.5,0);
+        this.pineapple.display();
+        this.scene.popMatrix();
     }
 
     displayPillars(){
@@ -64,7 +74,6 @@ export class MySeaFloor extends CGFobject {
         this.scene.translate(10,0,-4);
         this.pillars_list[3].display();
         this.scene.popMatrix();
-
     }
 
     displayWeed(){
