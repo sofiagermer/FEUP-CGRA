@@ -110,6 +110,18 @@ export class MyRock  extends CGFobject {
     return initialPosition;
   }
   
+  getX(){
+    return this.transX;
+  }
+
+  getY(){
+    return this.transY;
+  }
+
+  getZ(){
+    return this.transZ;
+  }
+  
   setPosition(transX, transY, transZ){
     this.transX = transX;
     this.transY = transY;

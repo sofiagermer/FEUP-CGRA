@@ -17,6 +17,7 @@ export class MyFish extends CGFobject {
         this.tail = new MyTail(scene);
         this.fin = new MyFin(scene);
         this.eye = new MyEye(scene);
+        this.currentSpeed = 0;
         this.initShaders();
         this.initMaterials();
     }
@@ -35,8 +36,6 @@ export class MyFish extends CGFobject {
         this.scene.materialFish.setEmission(1.0, 1.0, 1.0, 1.0);
         this.scene.materialFish.setShininess(10.0);
         this.scene.materialFish.loadTexture('images/fish/fishBody.png'); 
-
-
     }
 
     initShaders(){
@@ -44,8 +43,12 @@ export class MyFish extends CGFobject {
     }
 
     update(t){
-        this.tail.angle = (Math.sin(t) * Math.PI/8);
         this.fin.angle =  Math.sin(0.4* t) * 0.2;
+        this.tail.angle = (Math.sin(t *this.currentSpeed ) * (Math.PI/8));
+    }
+
+    updateSpeed(speed){
+        this.currentSpeed = speed;
     }
 
     display(){
@@ -69,8 +72,9 @@ export class MyFish extends CGFobject {
 
         //RIGHT FIN
         this.scene.pushMatrix();
-        this.scene.translate(0.4,-0.2,-0.5);
+        this.scene.translate(1.4,-0.2,-0.51);
         this.scene.rotate(-this.fin.angle,1,0,0);
+        this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialRed.apply();
         this.fin.display(); 
@@ -78,8 +82,9 @@ export class MyFish extends CGFobject {
 
         //LEFT FIN
         this.scene.pushMatrix();
-        this.scene.translate(0.4,-0.2,0.5);
+        this.scene.translate(1.4,-0.2,0.51);
         this.scene.rotate(this.fin.angle,1,0,0);
+        this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialRed.apply();
         this.fin.display(); 

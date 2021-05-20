@@ -7,16 +7,27 @@ export class MyMovingFish extends MyMovingObject {
         super(scene, fish);
         this.fish = fish;
         this.catchedRock = false;
+        this.fallingRock = false;
         this.rock = null;
+        this.turning = 0;
     }
+    
     update(t){
         super.update();
-        this.fish.update(t, super.speed);
+        this.fish.update(t);
         this.updateRockPos();
     }
 
+    controlRock(){
+        if(this.catchedRock) {
+            this.fallingRock = true;
+            this.catchedRock = false;
+        }
+        else this.catchRock();
+    }
+
     catchRock() {
-        if (this.coordinates[1] <= 1.5 && !this.catchedRock){
+        if (this.coordinates[1] <= 1.5){
             this.rock = this.scene.rockSet.rockNearby(this.coordinates);
             if (this.rock != null) {
                 this.catchedRock = true;
@@ -25,11 +36,17 @@ export class MyMovingFish extends MyMovingObject {
     }
 
     updateRockPos() {
-        if (this.catchedRock) {
+        if (this.catchedRock && !this.fallingRock) {
             var newPosition = [];
-            newPosition.push(this.coordinates[0] + 0.75 * Math.sin(this.orientationAngle), this.coordinates[1], this.coordinates[2] + 0.75 * Math.cos(this.orientationAngle));
+            newPosition.push(this.coordinates[0] + Math.sin(this.orientationAngle - Math.PI/2), this.coordinates[1], this.coordinates[2] + Math.cos(this.orientationAngle - Math.PI/2));
             this.rock.setPosition(newPosition[0], newPosition[1], newPosition[2]);
         }
+        else if(this.catchedRock && this.fallingRock){
+            this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
+            this.fallingRock = false;
+            this.rock = null;
+        }
+
     }
     
     reset() {

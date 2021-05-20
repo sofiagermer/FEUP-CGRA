@@ -192,7 +192,7 @@ export class MyScene extends CGFscene {
         }
 
         if (this.gui.isKeyPressed("KeyC")){ 
-            this.movingFish.catchRock();
+            this.movingFish.controlRock();
         }
     }
 

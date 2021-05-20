@@ -37,10 +37,12 @@ export class MyMovingObject extends CGFobject {
         this.orientationAngle += val;
         this.orientationAngle %= 2*Math.PI;
     }
+    
     accelerate(val) {
         //Increases speed
         this.speed += val;
         if(this.speed < 0 ) this.speed = 0;
+        this.fish.updateSpeed(this.speed);
     }
 
     up(){
