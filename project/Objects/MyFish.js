@@ -17,7 +17,6 @@ export class MyFish extends CGFobject {
         this.tail = new MyTail(scene);
         this.fin = new MyFin(scene);
         this.eye = new MyEye(scene);
-        this.currentSpeed = 0;
         this.initShaders();
         this.initMaterials();
     }
@@ -42,13 +41,11 @@ export class MyFish extends CGFobject {
         this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
     }
 
-    update(t){
-        this.fin.angle =  Math.sin(0.4* t) * 0.2;
-        this.tail.angle = (Math.sin(t *this.currentSpeed ) * (Math.PI/8));
-    }
-
-    updateSpeed(speed){
-        this.currentSpeed = speed;
+    update(){
+        this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
+        //this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed + 0.4) / 300 % 300);
+        //this.tail.angle =  Math.sin(0.4* (this.scene.t/ 300 % 300));
+        //this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed + 0.4) / 300 % 300);
     }
 
     display(){
@@ -63,9 +60,9 @@ export class MyFish extends CGFobject {
         
         //TAIL
         this.scene.pushMatrix();
-        this.scene.translate(0.75,0,0);
-        this.scene.rotate(this.tail.angle,0,1,0);
         this.scene.scale(0.4,0.4,0.4);
+        this.scene.translate(1.63, 0.5, 0.0);
+        this.scene.rotate( Math.sin(this.scene.t * (this.scene.fishSpeed + 0.4) / 100 % 100) * 0.4,0,1,0);
         this.scene.materialRed.apply();
         this.tail.display(); 
         this.scene.popMatrix();

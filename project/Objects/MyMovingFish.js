@@ -12,9 +12,9 @@ export class MyMovingFish extends MyMovingObject {
         this.turning = 0;
     }
     
-    update(t){
+    update(){
         super.update();
-        this.fish.update(t);
+        this.fish.update();
         this.updateRockPos();
     }
 

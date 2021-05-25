@@ -42,7 +42,7 @@ export class MyMovingObject extends CGFobject {
         //Increases speed
         this.speed += val;
         if(this.speed < 0 ) this.speed = 0;
-        this.fish.updateSpeed(this.speed);
+        this.scene.fishSpeed = this.speed;
     }
 
     up(){
@@ -64,7 +64,6 @@ export class MyMovingObject extends CGFobject {
         this.orientationAngle = 0.0;
         this.coordinates = [0.0, 5.0, 0.0];
     }
-   
 }
 
 
