@@ -1,20 +1,24 @@
-import {CGFobject,CGFappearance, CGFscene, CGFshader , CGFtexture} from '../../lib/CGF.js';
-import {MyPlane} from '../Objects/MyPlane.js';
-import {MyRockSet} from '../Objects/MyRockSet.js';
-import {MyPillar} from '../Objects/MyPillar.js';
-import { MyWeedSet } from './MyWeedSet.js';
+import {CGFobject,CGFappearance, CGFscene, CGFshader , CGFtexture} from '../../../lib/CGF.js';
+import {MyPlane} from '../basic_shapes/MyPlane.js';
+import {MyRockSet} from './rock//MyRockSet.js';
+import {MyPillar} from './pillar/MyPillar.js';
+import { MyWeedSet } from './sea_weed/MyWeedSet.js';
+import { MySeaWeed } from './sea_weed/MySeaWeed.js';
 import { MyNeast } from './MyNeast.js';
 
 export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
+        
         this.pineapple = new MyNeast(this.scene);
+        
         this.pillars_list = [];
         for(var i = 0; i < 4 ; i++){
-            this.pillars_list.push(new MyPillar(this.scene))
+            this.pillars_list.push(new MyPillar(this.scene));
         }
-        this.weed = new MyWeedSet(this.scene,20);
+
+        this.weed = new MyWeedSet(this.scene, 20, 6, 3);
         
         this.initShaders();
     }
@@ -25,7 +29,7 @@ export class MySeaFloor extends CGFobject {
         this.scene.shaderSeaFloor = new CGFshader(this.scene.gl, "shaders/seafloor.vert", "shaders/seafloor.frag");
         this.scene.shaderSeaFloor.setUniformsValues({sandTex: 0});
         this.scene.shaderSeaFloor.setUniformsValues({sandMap: 1});
-        this.scene.shaderSeaWeed = new CGFshader(this.scene.gl, "shaders/seaweed.vert", "shaders/seaweed.frag"); 
+        //this.scene.shaderSeaWeed = new CGFshader(this.scene.gl, "shaders/seaweed.vert", "shaders/seaweed.frag"); 
     }
 
     display(){
@@ -42,14 +46,12 @@ export class MySeaFloor extends CGFobject {
         
         this.displayPillars();
         this.displayWeed();   
+        this.displayPineapple();
 
-        
         this.scene.pushMatrix();
-        this.scene.scale(5,5,5);
-        this.scene.scale(0.6,0.8,0.6);
-        this.scene.translate(0,0.5,0);
-        this.pineapple.display();
+        this.weed.display();
         this.scene.popMatrix();
+
     }
 
     displayPillars(){
@@ -77,12 +79,48 @@ export class MySeaFloor extends CGFobject {
     }
 
     displayWeed(){
-        this.scene.pushMatrix();
-        for(var i = 0; i < 20; i++){
-            this.scene.setActiveShader(this.scene.shaderSeaWeed);
+        /*this.scene.pushMatrix();
+        this.scene.setActiveShader(this.scene.shaderSeaWeed);
+        for(var i = 0; i < 20; i++){            
             this.weed.weedSet[i].display();
-            this.scene.setActiveShader(this.scene.defaultShader);
         }
+        this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.popMatrix();*/
+    }
+
+    displayPineappleWeed(){
+        /*this.seaWeed = new MySeaWeed(this.scene, 1, 0, 0, 0);
+        this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.pushMatrix();
+        this.scene.translate(0,3,0);
+        this.seaWeed.display();
         this.scene.popMatrix();
+        this.seaWeed = new MySeaWeed(this.scene, 1, 0.3,0, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0,3,0);
+        this.seaWeed.display();
+        this.scene.popMatrix();
+        this.seaWeed = new MySeaWeed(this.scene, 1, -0.3,0, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0,3,0);
+        this.seaWeed.display();
+        this.scene.popMatrix();
+        this.seaWeed = new MySeaWeed(this.scene, 1, 0.5, 0, 0);
+        this.scene.pushMatrix();
+        this.scene.translate(0,3,0);
+        this.seaWeed.display();
+        this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);*/
+
+    }
+
+    displayPineapple(){
+        this.scene.pushMatrix();
+        this.scene.scale(5,5,5);
+        this.scene.scale(0.6,0.8,0.6);
+        this.scene.translate(0,0.5,0);
+        this.pineapple.display();
+        this.scene.popMatrix();
+        this.displayPineappleWeed();
     }
 }

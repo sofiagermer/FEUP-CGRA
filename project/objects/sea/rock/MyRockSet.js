@@ -1,6 +1,6 @@
 //o peixe deverá ser criado a partir de um corpo, desenvolvido através de uma esfera distorcida, c shader bipartido
-import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../lib/CGF.js';
-import { MyRock } from './MyRock.js';
+import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../../../../lib/CGF.js';
+import{MyRock} from './MyRock.js';
 
 /**
 * MyFish

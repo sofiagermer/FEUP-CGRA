@@ -1,9 +1,9 @@
 //o peixe deverá ser criado a partir de um corpo, desenvolvido através de uma esfera distorcida, c shader bipartido
-import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../lib/CGF.js';
-import {MySphere} from '../Objects/MySphere.js';
-import {MyFin} from '../Objects/MyFin.js';
-import {MyTail} from '../Objects/MyTail.js';
-import {MyEye} from '../Objects/MyEye.js';
+import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../../../lib/CGF.js';
+import {MySphere} from '../../basic_shapes/MySphere.js';
+import {MyFin} from './MyFin.js';
+import {MyTail} from './MyTail.js';
+import {MyEye} from './MyEye.js';
 
 /**
 * MyFish
@@ -23,12 +23,12 @@ export class MyFish extends CGFobject {
     }
 
     initMaterials() {
-        this.scene.materialRed = new CGFappearance(this.scene);
-        this.scene.materialRed.setAmbient(1.0, 0.0, 0.0, 0.0);
-        this.scene.materialRed.setDiffuse(1.0, 0.0, 0.0, 0.0);
-        this.scene.materialRed.setSpecular(1.0,1.0,1.0,1.0);
-        this.scene.materialRed.setEmission(0.0, 0.0, 0.0, 1.0);
-        this.scene.materialRed.setShininess(10.0);  
+        this.scene.materialSkin = new CGFappearance(this.scene); //------ MUDAR O NOME DE skin, VER ONDE É ENVIADO PARA O SHADER
+        this.scene.materialSkin.setAmbient(0.0, 0.0, 0.5, 0.0);
+        this.scene.materialSkin.setDiffuse(0.0, 0.0, 0.0, 0.0);
+        this.scene.materialSkin.setSpecular(1.0,1.0,1.0,1.0);
+        this.scene.materialSkin.setEmission(0.3, 0.3, 0.3, 1.0);
+        this.scene.materialSkin.setShininess(10.0);  
 
         this.scene.materialFish = new CGFappearance(this.scene);
         this.scene.materialFish.setAmbient(0.0, 0.0, 0.0, 0.0);
@@ -66,7 +66,7 @@ export class MyFish extends CGFobject {
         this.scene.translate(0.75,0,0);
         this.scene.rotate(this.tail.angle,0,1,0);
         this.scene.scale(0.4,0.4,0.4);
-        this.scene.materialRed.apply();
+        this.scene.materialSkin.apply();
         this.tail.display(); 
         this.scene.popMatrix();
 
@@ -76,7 +76,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(-this.fin.angle,1,0,0);
         this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
-        this.scene.materialRed.apply();
+        this.scene.materialSkin.apply();
         this.fin.display(); 
         this.scene.popMatrix(); 
 
@@ -86,7 +86,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(this.fin.angle,1,0,0);
         this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
-        this.scene.materialRed.apply();
+        this.scene.materialSkin.apply();
         this.fin.display(); 
         this.scene.popMatrix(); 
 
@@ -95,7 +95,7 @@ export class MyFish extends CGFobject {
         this.scene.translate(-0.2,0.6,0);
         this.scene.rotate(-Math.PI,0,1,0);
         this.scene.scale(0.3,0.3,0.3);
-        this.scene.materialRed.apply();
+        this.scene.materialSkin.apply();
         this.fin.display(); 
         this.scene.popMatrix(); 
 

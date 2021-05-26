@@ -1,12 +1,12 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
-import { MySphere } from "./Objects/MySphere.js";
-import { MyCubeMap } from "./Objects/MyCubeMap.js";
-import { MyCylinder } from "./Objects/MyCylinder.js";
-import { MySeaFloor } from "./Objects/MySeaFloor.js";
-import { MyWater } from "./Objects/MyWater.js";
-import { MyMovingFish } from "./Objects/MyMovingFish.js";
-import { MyFish } from "./Objects/MyFish.js";
-import { MyRockSet } from "./Objects/MyRockSet.js";
+import { MySphere } from "./objects/basic_shapes/MySphere.js";
+import { MyCubeMap } from "./objects/landscape/MyCubeMap.js";
+import { MyCylinder } from "./objects/basic_shapes/MyCylinder.js";
+import { MySeaFloor } from "./objects/sea/MySeaFloor.js";
+import { MyWater } from "./objects/sea/MyWater.js";
+import { MyMovingFish } from "./objects/sea/fish/MyMovingFish.js";
+import { MyFish } from "./objects/sea/fish/MyFish.js";
+import { MyRockSet } from "./objects/sea/rock/MyRockSet.js";
 /**
 * MyScene
 * @constructor
@@ -15,6 +15,7 @@ export class MyScene extends CGFscene {
     constructor() {
         super();
     }
+
     init(application) {
         super.init(application);
         this.initCameras();
@@ -102,6 +103,8 @@ export class MyScene extends CGFscene {
         this.textureRight_water = new CGFtexture(this, 'images/underwater_cubemap/right.jpg');
         this.textureFront_water = new CGFtexture(this, 'images/underwater_cubemap/front.jpg');
         this.textureBack_water = new CGFtexture(this, 'images/underwater_cubemap/back.jpg');
+
+
     }
 
     setDefaultTextures(){
@@ -200,7 +203,7 @@ export class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
-        this.shaderSeaWeed.setUniformsValues({ timeFactor: t / 100 % 100 });
+        this.seaWeedShader.setUniformsValues({ timeFactor: t / 10 % 100 });
         this.movingFish.update(t/100 % 10000);
     }
    
@@ -260,7 +263,6 @@ export class MyScene extends CGFscene {
             this.movingFish.display();
             this.popMatrix();
         } 
-    
          
         // ---- END Primitive drawing section
     }

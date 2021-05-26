@@ -1,4 +1,4 @@
-import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
+import {CGFobject,CGFappearance, CGFscene } from '../../../../lib/CGF.js';
 
 export class MyTail extends CGFobject {
 	constructor(scene) {
@@ -54,4 +54,6 @@ export class MyTail extends CGFobject {
     disableNormalViz(){
         this.disableNormalViz();
     }
+	
 }
+

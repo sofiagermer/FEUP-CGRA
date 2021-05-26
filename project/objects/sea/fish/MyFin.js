@@ -1,4 +1,4 @@
-import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
+import {CGFobject,CGFappearance, CGFscene } from '../../../../lib/CGF.js';
 
 export class MyFin extends CGFobject {
 	constructor(scene) {

@@ -1,21 +1,23 @@
-attribute vec3 aVertexPosition;
-attribute vec3 aVertexNormal;
+#ifdef GL_ES
+precision highp float;
+#endif
+
+varying vec2 vTextureCoord;
 attribute vec2 aTextureCoord;
+
+attribute vec3 aVertexPosition;
 
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
-uniform mat4 uNMatrix;
 
-varying vec2 vTextureCoord;
-
-uniform sampler2D uSampler;
-uniform sampler2D uSampler2;
-
-uniform float normScale;
 uniform float timeFactor;
+uniform float phaseFactor;
 
 void main() {
-    vec3 offset=vec3(0.0,0.05*sin(timeFactor*0.1),0.0);
+    vTextureCoord = aTextureCoord;
 
-    gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition+offset, 1.0);
+    vec3 vertexPosition = aVertexPosition;
+    vertexPosition.xz += sin(timeFactor * vertexPosition.y * phaseFactor) * vertexPosition.y;
+
+    gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
 }

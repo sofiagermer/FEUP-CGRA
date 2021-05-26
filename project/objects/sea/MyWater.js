@@ -1,6 +1,6 @@
-import {CGFobject,CGFappearance, CGFscene, CGFshader , CGFtexture} from '../../lib/CGF.js';
-import {MyPlane} from '../Objects/MyPlane.js';
-import {MyRockSet} from '../Objects/MyRockSet.js';
+import {CGFobject,CGFappearance, CGFscene, CGFshader , CGFtexture} from '../../../lib/CGF.js';
+import {MyPlane} from '../basic_shapes/MyPlane.js';
+import {MyRockSet} from './rock/MyRockSet.js';
 
 export class MyWater extends CGFobject {
     constructor(scene) {

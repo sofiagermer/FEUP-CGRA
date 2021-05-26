@@ -1,5 +1,5 @@
-import { CGFappearance, CGFobject, CGFtexture } from "../../lib/CGF.js";
-import { MyQuad } from "./MyQuad.js";
+import { CGFappearance, CGFobject, CGFtexture } from "../../../lib/CGF.js";
+import { MyQuad } from "../basic_shapes/MyQuad.js";
 
 export class MyCubeMap extends CGFobject {
     constructor(scene){

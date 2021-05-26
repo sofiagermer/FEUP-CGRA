@@ -1,4 +1,4 @@
-import {CGFobject} from '../../lib/CGF.js';
+import {CGFobject} from '../../../../lib/CGF.js';
 /**
 * MyPyramid
 * @constructor
@@ -88,4 +88,6 @@ export class MyPyramidStack extends CGFobject {
         this.initBuffers();
         this.initNormalVizBuffers();
     }
+   
+    
 }

@@ -1,5 +1,5 @@
-import { CGFappearance, CGFobject, CGFtexture } from "../../lib/CGF.js";
-import { MyMovingObject } from "./MyMovingObject.js";
+import { CGFappearance, CGFobject, CGFtexture } from "../../../../lib/CGF.js";
+import { MyMovingObject } from "../../landscape/MyMovingObject.js";
 import { MyFish } from "./MyFish.js";
 
 export class MyMovingFish extends MyMovingObject {
