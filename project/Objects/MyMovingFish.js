@@ -9,13 +9,30 @@ export class MyMovingFish extends MyMovingObject {
         this.catchedRock = false;
         this.fallingRock = false;
         this.rock = null;
-        this.turning = 0;
+        this.turningRight = false;
+        this.turningLeft = false;
     }
     
     update(){
+        //update fish actual movement
         super.update();
-        this.fish.update();
+        
+        //update fish fin's movement
+        this.fish.update(this.turningRight, this.turningLeft);
+
         this.updateRockPos();
+    }
+
+    turn(val){
+        super.turn(val);
+        if(val > 0){
+            this.turningLeft = true;
+        }
+        else{
+            this.turningRight = true;
+        }
+        this.turningLeft = false;
+        this.turningRight = false;
     }
 
     controlRock(){

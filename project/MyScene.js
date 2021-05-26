@@ -55,6 +55,7 @@ export class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayFish = true;
         this.displaySeaFloor = true;
+        this.displayWater = true;
 
         this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
         this.selectedTexture = 1;
@@ -201,8 +202,8 @@ export class MyScene extends CGFscene {
         this.checkKeys();
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.shaderSeaWeed.setUniformsValues({ timeFactor: t / 100 % 100 });
-        this.movingFish.update();
         this.t = t;
+        this.movingFish.update();
     }
    
     display() {
@@ -251,10 +252,12 @@ export class MyScene extends CGFscene {
             this.rockSet.display();
             this.popMatrix();
         }
-
-        this.pushMatrix();
-        this.water.display();
-        this.popMatrix();
+        
+        if(this.displayWater){
+            this.pushMatrix();
+            this.water.display();
+            this.popMatrix();
+        }
 
         if(this.displayFish){
             this.pushMatrix();
