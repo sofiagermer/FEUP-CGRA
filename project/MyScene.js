@@ -7,6 +7,8 @@ import { MyWater } from "./Objects/MyWater.js";
 import { MyMovingFish } from "./Objects/MyMovingFish.js";
 import { MyFish } from "./Objects/MyFish.js";
 import { MyRockSet } from "./Objects/MyRockSet.js";
+import { MySpongeBob } from "./Objects/MySpongeBob.js";
+import { MyMovingObject } from "./Objects/MyMovingObject.js";
 /**
 * MyScene
 * @constructor
@@ -45,16 +47,18 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.rockSet = new MyRockSet(this, 5);
         this.water = new MyWater(this);
+        this.spongeBob = new MyMovingObject(this, new MySpongeBob(this));
 
         this.initAppearence();
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayCubeMap = true;
+        this.displayCubeMap = false;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayFish = true;
-        this.displaySeaFloor = true;
+        this.displayFish = false;
+        this.displaySpongeBob = true;
+        this.displaySeaFloor = false;
         this.displayWater = true;
 
         this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
@@ -264,6 +268,11 @@ export class MyScene extends CGFscene {
             this.movingFish.display();
             this.popMatrix();
         } 
+        if(this.displaySpongeBob){
+            this.pushMatrix();
+            this.spongeBob.display();
+            this.popMatrix();
+        }
     
          
         // ---- END Primitive drawing section

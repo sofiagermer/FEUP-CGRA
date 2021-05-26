@@ -45,7 +45,7 @@ export class MyFish extends CGFobject {
         this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
     }
 
-    update(turningRight, turningRight){
+    update(turningRight, turningLeft){
         if(this.scene.speed < 0.1){
             this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
             this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed + 0.4) / 100 % 100);
@@ -54,15 +54,15 @@ export class MyFish extends CGFobject {
             this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
             this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed * 4.0) / 100 % 100);
         }
-        if(this.turningRight){
+        /*if(turningRight){
 
         }
-        else if(this.turningLeft){
+        else if(turningLeft){
 
         }
         else{
             
-        }
+        }*/
     }
 
     updateFins(direction){
