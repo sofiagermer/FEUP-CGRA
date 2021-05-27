@@ -6,7 +6,10 @@ export class MySeaWeed extends CGFobject {
         super(scene);
         this.scene = scene;
 
-        this.pyramid = new MyPyramid(this.scene, slices, stacks);
+        this.height = (Math.random() * this.offset) % 5.0 + 2.0;
+
+        this.pyramid = new MyPyramid(this.scene, 0.6, 3, 3, 3);
+        //this.pyramid = new MyPyramid(this.scene, 2, this.height ,slices, stacks);
 
         this.offset = offset;
         this.size = size;
@@ -15,18 +18,16 @@ export class MySeaWeed extends CGFobject {
         this.initShaders();
         this.initTexture();
         this.changePos();
-    }
+    }   
 
     initShaders(){
         this.scene.seaWeedShader = new CGFshader(this.scene.gl, 'shaders/seaweed.vert', 'shaders/seaweed.frag');
-
     }
 
     
     initTexture(){
         this.scene.weedTexture = new CGFtexture(this.scene, "images/sea_water.jpg");
         this.scene.seaWeedShader.setUniformsValues({ weedTex: 0 });
-
 
     }
 
@@ -46,9 +47,7 @@ export class MySeaWeed extends CGFobject {
 
         this.position = this.generatePos(this.ang, LIMIT_Y, LIMIT_Z);
 
-        this.height = (Math.random() * this.offset) % 2.0 + 1.0;
-
-        this.phase = Math.random() * (0.1 - 0.125) * 0.125;
+        this.phase = Math.random() * (0.2 - 0.125) * 0.125;
     }
     
     display(){
@@ -57,12 +56,11 @@ export class MySeaWeed extends CGFobject {
         this.scene.pushMatrix();
             
             this.scene.translate(this.position[0], this.position[1], this.position[2]);
-            this.scene.scale(0.5, this.height, 0.5);
-
+            this.scene.rotate(Math.PI, 0, 1, 1);
             this.scene.seaWeedShader.setUniformsValues({ phaseFactor: this.phase });
             
             this.pyramid.display();
         this.scene.popMatrix();
     }
 
-}
+}   

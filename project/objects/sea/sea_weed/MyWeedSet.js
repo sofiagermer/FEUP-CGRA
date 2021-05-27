@@ -5,7 +5,7 @@ import { MySeaWeed } from './MySeaWeed.js';
 /**
 * MyFish
 * @constructor
- * @param scene - Reference to MyScene object
+* @param scene - Reference to MyScene object
 */
 export class MyWeedSet extends CGFobject {
     constructor(scene, num_sea_weeds, offset, size) {
@@ -27,5 +27,3 @@ export class MyWeedSet extends CGFobject {
         this.scene.setActiveShaderSimple(this.scene.defaultShader);
     }
 }
-
-

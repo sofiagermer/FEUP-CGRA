@@ -6,75 +6,64 @@ import {CGFobject} from '../../../lib/CGF.js';
  * @param slices - number of divisions around the Y axis
  * @param stacks - number of divisions along the Y axis
 */
+ 
 export class MyPyramid extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, bottomRadius, height, slices, stacks) {
         super(scene);
+
         this.slices = slices;
         this.stacks = stacks;
+        this.topRadius = 0;
+        this.bottomRadius = bottomRadius;
+        this.currentHeight = 0;
+        this.heightStep = height / stacks
+        this.currentAngle = 0;
+        this.currentRadius = bottomRadius;
+        this.radiusStep = (Math.abs(bottomRadius - this.topRadius) / this.stacks);
+        this.angleStep = (2 * Math.PI) / this.slices;
         this.initBuffers();
     }
+
     initBuffers() {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
+        this.texCoords = []
 
-        var ang = 0;
-        var alphaAng = 2*Math.PI/this.slices;
+        for (let i = 0; i <= this.stacks; i++) {
+            this.currentAngle = 0
+            for (let j = 0; j <= this.slices; j++) {
 
-        for(var i = 0; i < this.slices; i++){
-            // All vertices have to be declared for a given face
-            // even if they are shared with others, as the normals 
-            // in each face will be different
+                this.vertices.push(this.currentRadius * Math.cos(this.currentAngle), this.currentRadius * Math.sin(this.currentAngle), this.currentHeight);
+                this.normals.push(Math.cos(this.currentAngle), Math.sin(this.currentAngle), 0)
+                this.texCoords.push((1 / this.slices) * j, -(1 / this.stacks) * i)
 
-            var sa=Math.sin(ang);
-            var saa=Math.sin(ang+alphaAng);
-            var ca=Math.cos(ang);
-            var caa=Math.cos(ang+alphaAng);
+                if (i != this.stacks && j != this.slices) {
+                    this.indices.push(j + (this.slices + 1) * i, j + (this.slices + 1) * i + 1, j + (this.slices + 1) * (i + 1) + 1);
+                    this.indices.push(j + (this.slices + 1) * (i + 1) + 1, j + (this.slices + 1) * (i + 1), j + (this.slices + 1) * i);
+                }
 
-            this.vertices.push(0,1,0);
-            this.vertices.push(ca, 0, -sa);
-            this.vertices.push(caa, 0, -saa);
+                this.currentAngle += this.angleStep;
 
-            // triangle normal computed by cross product of two edges
-            var normal= [
-                saa-sa,
-                ca*saa-sa*caa,
-                caa-ca
-            ];
+            }
+            if (this.bottomRadius >= this.topRadius) {
+                this.currentRadius -= this.radiusStep;
+            } else {
+                this.currentRadius += this.radiusStep;
+            }
 
-            // normalization
-            var nsize=Math.sqrt(
-                normal[0]*normal[0]+
-                normal[1]*normal[1]+
-                normal[2]*normal[2]
-                );
-            normal[0]/=nsize;
-            normal[1]/=nsize;
-            normal[2]/=nsize;
+            this.currentHeight += this.heightStep;
 
-            // push normal once for each vertex of this triangle
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-            this.normals.push(...normal);
-
-            this.indices.push(3*i, (3*i+1) , (3*i+2) );
-
-            ang+=alphaAng;
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
-    }
-    /**
-     * Called when user interacts with GUI to change object's complexity.
-     * @param {integer} complexity - changes number of slices
-     */
-    updateBuffers(complexity){
-        this.slices = 3 + Math.round(9 * complexity); //complexity varies 0-1, so slices varies 3-12
 
-        // reinitialize buffers
-        this.initBuffers();
-        this.initNormalVizBuffers();
+    }
+
+    updateTexCoords(s, t) {
+
+
     }
 }
 

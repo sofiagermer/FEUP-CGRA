@@ -203,7 +203,7 @@ export class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
-        this.seaWeedShader.setUniformsValues({ timeFactor: t / 10 % 100 });
+        this.seaWeedShader.setUniformsValues({ timeFactor: t / 1 % 100 });
         this.movingFish.update(t/100 % 10000);
     }
    
@@ -260,6 +260,7 @@ export class MyScene extends CGFscene {
 
         if(this.displayFish){
             this.pushMatrix();
+            this.translate(-3, 0, 0 )
             this.movingFish.display();
             this.popMatrix();
         } 

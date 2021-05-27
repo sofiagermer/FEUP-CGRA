@@ -8,12 +8,15 @@ export class MyNeast  extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sphere = new MySphere(this.scene, 16, 16);
+        this.crown = new MyRock(this.scene, 16, 16, 0, 0, 3, 0);
         this.initMaterials();
     }
 
    initMaterials() { 
     //Material
         this.pineapple = new CGFtexture(this.scene, "images/pineapple.png");
+        this.crowTexture = new CGFtexture(this.scene, "images/sea_water.jpg");
+
         
         this.materialPineapple = new CGFappearance(this.scene);
         this.materialPineapple.setAmbient(0.0, 0.0, 0.0, 0.0);
@@ -21,7 +24,18 @@ export class MyNeast  extends CGFobject {
         this.materialPineapple.setEmission(1.0, 1.0, 1.0, 1.0);
         this.materialPineapple.setShininess(10.0);
         this.materialPineapple.setTexture(this.pineapple);
-        this.materialPineapple.setTextureWrap('REPEAT', 'REPEAT'); 
+        this.materialPineapple.setTextureWrap('REPEAT', 'REPEAT');
+        
+        
+        this.materialCrown = new CGFappearance(this.scene);
+        this.materialCrown.setAmbient(0.0, 0.0, 0.0, 0.0);
+        this.materialCrown.setDiffuse(0.0, 0.0, 0.0, 0.0);
+        this.materialCrown.setEmission(1.0, 1.0, 1.0, 1.0);
+        this.materialCrown.setShininess(10.0);
+        this.materialCrown.setTexture(this.crowTexture);
+        this.materialCrown.setTextureWrap('REPEAT', 'REPEAT');
+        
+
     }
 
     changeFiltering() {
@@ -38,6 +52,13 @@ display(){
     this.scene.translate(0,0,0);
     this.materialPineapple.apply();
     this.sphere.display(); 
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    this.scene.scale(0.24,0.24,0.24);
+    this.scene.translate(0,3,0);
+    this.materialCrown.apply();
+    this.crown.display(); 
     this.scene.popMatrix();
 }
 
