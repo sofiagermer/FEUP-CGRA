@@ -1,5 +1,4 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
-<<<<<<< HEAD
 import { MySphere } from "./objects/basic_shapes/MySphere.js";
 import { MyCubeMap } from "./objects/landscape/MyCubeMap.js";
 import { MyCylinder } from "./objects/basic_shapes/MyCylinder.js";
@@ -8,19 +7,12 @@ import { MyWater } from "./objects/sea/MyWater.js";
 import { MyMovingFish } from "./objects/sea/fish/MyMovingFish.js";
 import { MyFish } from "./objects/sea/fish/MyFish.js";
 import { MyRockSet } from "./objects/sea/rock/MyRockSet.js";
-=======
-import { MySphere } from "./Objects/MySphere.js";
-import { MyCubeMap } from "./Objects/MyCubeMap.js";
-import { MyCylinder } from "./Objects/MyCylinder.js";
-import { MySeaFloor } from "./Objects/MySeaFloor.js";
-import { MyWater } from "./Objects/MyWater.js";
-import { MyMovingFish } from "./Objects/MyMovingFish.js";
-import { MyFish } from "./Objects/MyFish.js";
-import { MyRockSet } from "./Objects/MyRockSet.js";
-import { MySpongeBob } from "./Objects/MySpongeBob.js";
-import { MyMovingObject } from "./Objects/MyMovingObject.js";
-import { MyMovingSpongeBob } from "./Objects/MyMovingSpongeBob.js";
->>>>>>> adad18adc3523a22117d664cdbdd61e0cd1c28a3
+import { MySpongeBob } from "./objects/sea/spongeBob/MySpongeBob.js";
+import { MyMovingSpongeBob } from "./objects/sea/spongeBob/MyMovingSpongeBob.js";
+
+
+
+
 /**
 * MyScene
 * @constructor
@@ -296,6 +288,7 @@ export class MyScene extends CGFscene {
 
         if(this.displaySpongeBob){
             this.pushMatrix();
+            this.rotate(Math.PI/2,0,1,0)
             this.spongeBob.display();
             this.popMatrix();
         }

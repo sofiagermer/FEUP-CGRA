@@ -1,5 +1,5 @@
 import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../../../lib/CGF.js';
-import {MyQuad} from '../Objects/MyQuad.js';
+import {MyQuad} from '../../basic_shapes/MyQuad.js';
 /**
 * MyFish
 * @constructor
@@ -49,7 +49,7 @@ export class MySpongeBob extends CGFobject {
 
     display(){
         this.scene.pushMatrix();
-        this.scene.scale(3,1,3);
+        this.scene.scale(1.5,0.75,1.5);
 
         //Left 
         this.scene.pushMatrix();
