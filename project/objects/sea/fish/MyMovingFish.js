@@ -3,19 +3,36 @@ import { MyMovingObject } from "../../landscape/MyMovingObject.js";
 import { MyFish } from "./MyFish.js";
 
 export class MyMovingFish extends MyMovingObject {
-    constructor(scene,fish){
+   /* constructor(scene,fish){
         super(scene, fish);
         this.fish = fish;
         this.catchedRock = false;
         this.fallingRock = false;
         this.rock = null;
-        this.turning = 0;
+        this.turningRight = false;
+        this.turningLeft = false;
     }
     
-    update(t){
+    update(){
+        //update fish actual movement
         super.update();
-        this.fish.update(t);
+        
+        //update fish fin's movement
+        this.fish.update(this.turningRight, this.turningLeft);
+
         this.updateRockPos();
+    }
+
+    turn(val){
+        super.turn(val);
+        if(val > 0){
+            this.turningLeft = true;
+        }
+        else{
+            this.turningRight = true;
+        }
+        this.turningLeft = false;
+        this.turningRight = false;
     }
 
     controlRock(){
@@ -56,5 +73,5 @@ export class MyMovingFish extends MyMovingObject {
             this.catchedRock = false;
             this.rock = null;
         }
-    }
+    }*/
 }

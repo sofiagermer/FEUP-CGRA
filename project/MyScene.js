@@ -1,4 +1,5 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFtexture } from "../lib/CGF.js";
+<<<<<<< HEAD
 import { MySphere } from "./objects/basic_shapes/MySphere.js";
 import { MyCubeMap } from "./objects/landscape/MyCubeMap.js";
 import { MyCylinder } from "./objects/basic_shapes/MyCylinder.js";
@@ -7,6 +8,19 @@ import { MyWater } from "./objects/sea/MyWater.js";
 import { MyMovingFish } from "./objects/sea/fish/MyMovingFish.js";
 import { MyFish } from "./objects/sea/fish/MyFish.js";
 import { MyRockSet } from "./objects/sea/rock/MyRockSet.js";
+=======
+import { MySphere } from "./Objects/MySphere.js";
+import { MyCubeMap } from "./Objects/MyCubeMap.js";
+import { MyCylinder } from "./Objects/MyCylinder.js";
+import { MySeaFloor } from "./Objects/MySeaFloor.js";
+import { MyWater } from "./Objects/MyWater.js";
+import { MyMovingFish } from "./Objects/MyMovingFish.js";
+import { MyFish } from "./Objects/MyFish.js";
+import { MyRockSet } from "./Objects/MyRockSet.js";
+import { MySpongeBob } from "./Objects/MySpongeBob.js";
+import { MyMovingObject } from "./Objects/MyMovingObject.js";
+import { MyMovingSpongeBob } from "./Objects/MyMovingSpongeBob.js";
+>>>>>>> adad18adc3523a22117d664cdbdd61e0cd1c28a3
 /**
 * MyScene
 * @constructor
@@ -46,6 +60,7 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.rockSet = new MyRockSet(this, 5);
         this.water = new MyWater(this);
+        this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));
 
         this.initAppearence();
 
@@ -54,8 +69,10 @@ export class MyScene extends CGFscene {
         this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayFish = true;
+        this.displayFish = false;
+        this.displaySpongeBob = true;
         this.displaySeaFloor = true;
+        this.displayWater = true;
 
         this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
         this.selectedTexture = 1;
@@ -168,34 +185,42 @@ export class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyW")) {
             this.movingFish.accelerate(0.01 );
+            this.spongeBob.accelerate(0.01 );
         }
 
         if (this.gui.isKeyPressed("KeyS"))        {
             this.movingFish.accelerate(-0.01);
+            this.spongeBob.accelerate(-0.01);
         }
 
         if (this.gui.isKeyPressed("KeyA"))        {
             this.movingFish.turn(-0.1);
+            this.spongeBob.turn(-0.1);
         }
         
         if (this.gui.isKeyPressed("KeyD"))        {
             this.movingFish.turn(0.1);
+            this.spongeBob.turn(0.1);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.movingFish.reset();
+            this.spongeBob.reset();
         }
 
         if (this.gui.isKeyPressed("KeyP"))        {
             this.movingFish.up();
+            this.spongeBob.up();
         }
 
         if (this.gui.isKeyPressed("KeyL")) {
-            this.movingFish.down();
+           this.movingFish.down();
+           this.spongeBob.down();
         }
 
         if (this.gui.isKeyPressed("KeyC")){ 
             this.movingFish.controlRock();
+            this.spongeBob.controlRock();
         }
     }
 
@@ -204,7 +229,9 @@ export class MyScene extends CGFscene {
         this.checkKeys();
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.seaWeedShader.setUniformsValues({ timeFactor: t / 1 % 100 });
-        this.movingFish.update(t/100 % 10000);
+        this.t = t;
+        this.spongeBob.update();
+        this.movingFish.update();
     }
    
     display() {
@@ -253,10 +280,12 @@ export class MyScene extends CGFscene {
             this.rockSet.display();
             this.popMatrix();
         }
-
-        this.pushMatrix();
-        this.water.display();
-        this.popMatrix();
+        
+        if(this.displayWater){
+            this.pushMatrix();
+            this.water.display();
+            this.popMatrix();
+        }
 
         if(this.displayFish){
             this.pushMatrix();
@@ -264,6 +293,12 @@ export class MyScene extends CGFscene {
             this.movingFish.display();
             this.popMatrix();
         } 
+
+        if(this.displaySpongeBob){
+            this.pushMatrix();
+            this.spongeBob.display();
+            this.popMatrix();
+        }
          
         // ---- END Primitive drawing section
     }

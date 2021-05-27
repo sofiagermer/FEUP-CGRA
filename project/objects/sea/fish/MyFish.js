@@ -13,13 +13,16 @@ import {MyEye} from './MyEye.js';
 export class MyFish extends CGFobject {
     constructor(scene) {
         super(scene);
+        this.initFish(scene);
+        this.initShaders();
+        this.initMaterials();
+    }
+
+    initFish(scene){
         this.fishBody = new MySphere(this.scene, 16, 8);
         this.tail = new MyTail(scene);
         this.fin = new MyFin(scene);
         this.eye = new MyEye(scene);
-        this.currentSpeed = 0;
-        this.initShaders();
-        this.initMaterials();
     }
 
     initMaterials() {
@@ -42,13 +45,28 @@ export class MyFish extends CGFobject {
         this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
     }
 
-    update(t){
-        this.fin.angle =  Math.sin(0.4* t) * 0.2;
-        this.tail.angle = (Math.sin(t *this.currentSpeed ) * (Math.PI/8));
+    update(turningRight, turningLeft){
+        if(this.scene.speed < 0.1){
+            this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
+            this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed + 0.4) / 100 % 100);
+        }
+        else{
+            this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
+            this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed * 4.0) / 100 % 100);
+        }
+        /*if(turningRight){
+
+        }
+        else if(turningLeft){
+
+        }
+        else{
+            
+        }*/
     }
 
-    updateSpeed(speed){
-        this.currentSpeed = speed;
+    updateFins(direction){
+        this.direction = direction;
     }
 
     display(){
@@ -63,9 +81,9 @@ export class MyFish extends CGFobject {
         
         //TAIL
         this.scene.pushMatrix();
-        this.scene.translate(0.75,0,0);
-        this.scene.rotate(this.tail.angle,0,1,0);
         this.scene.scale(0.4,0.4,0.4);
+        this.scene.translate(1.63, 0.5, 0.0);
+        this.scene.rotate(this.tail.angle,0,1,0);
         this.scene.materialSkin.apply();
         this.tail.display(); 
         this.scene.popMatrix();
@@ -129,8 +147,4 @@ export class MyFish extends CGFobject {
         this.tail.disableNormalViz();
         this.eye.disableNormalViz();
     }
- 
-   
 }
-
-
