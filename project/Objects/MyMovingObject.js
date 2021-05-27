@@ -8,9 +8,9 @@ import {CGFobject,CGFappearance, CGFscene } from '../../lib/CGF.js';
  * @param stacks - number of divisions along the Y axis
 */
 export class MyMovingObject extends CGFobject {
-    constructor(scene, fish) {
+    constructor(scene, object) {
         super(scene);
-        this.fish = fish;
+        this.object = object;
 
         //Initial variables
         this.reset();
@@ -20,16 +20,16 @@ export class MyMovingObject extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(this.coordinates[0], this.coordinates[1], this.coordinates[2]);
         this.scene.rotate(this.orientationAngle, 0, 1, 0);
-        this.fish.display();
+        this.object.display();
         this.scene.popMatrix();
     }
 
     enableNormalViz(){
-        this.fish.enableNormalViz();
+        this.object.enableNormalViz();
     }
     
     disableNormalViz(){
-        this.fish.disableNormalViz();
+        this.object.disableNormalViz();
     }
 
     turn(val) {
@@ -40,8 +40,8 @@ export class MyMovingObject extends CGFobject {
     
     accelerate(val) {
         //Increases speed
-        this.scene.fishSpeed += val;
-        if(this.scene.fishSpeed < 0 ) this.scene.fishSpeed = 0;
+        this.object.speed += val;
+        if(this.object.speed < 0 ) this.object.speed = 0;
     }
 
     up(){
@@ -53,13 +53,13 @@ export class MyMovingObject extends CGFobject {
     }
     
     update(){
-        this.coordinates[0] += this.scene.fishSpeed* this.scene.speedFactor * Math.sin(this.orientationAngle - Math.PI/2);
-        this.coordinates[2] += this.scene.fishSpeed* this.scene.speedFactor * Math.cos(this.orientationAngle - Math.PI/2);
+        this.coordinates[0] += this.object.speed* this.scene.speedFactor * Math.sin(this.orientationAngle - Math.PI/2);
+        this.coordinates[2] += this.object.speed* this.scene.speedFactor * Math.cos(this.orientationAngle - Math.PI/2);
     }
 
     reset() {
         //Resets initial position
-        this.scene.fishSpeed = 0.0;
+        this.object.speed = 0.0;
         this.orientationAngle = 0.0;
         this.coordinates = [0.0, 5.0, 0.0];
     }

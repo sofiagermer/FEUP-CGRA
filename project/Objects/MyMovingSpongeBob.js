@@ -2,10 +2,10 @@ import { CGFappearance, CGFobject, CGFtexture } from "../../lib/CGF.js";
 import { MyMovingObject } from "./MyMovingObject.js";
 import { MyFish } from "./MyFish.js";
 
-export class MyMovingFish extends MyMovingObject {
-   /* constructor(scene,fish){
-        super(scene, fish);
-        this.fish = fish;
+export class MyMovingSpongeBob extends MyMovingObject {
+    constructor(scene,spongeBob){
+        super(scene, spongeBob);
+        this.spongeBob = spongeBob;
         this.catchedRock = false;
         this.fallingRock = false;
         this.rock = null;
@@ -14,25 +14,9 @@ export class MyMovingFish extends MyMovingObject {
     }
     
     update(){
-        //update fish actual movement
         super.update();
-        
-        //update fish fin's movement
-        this.fish.update(this.turningRight, this.turningLeft);
 
         this.updateRockPos();
-    }
-
-    turn(val){
-        super.turn(val);
-        if(val > 0){
-            this.turningLeft = true;
-        }
-        else{
-            this.turningRight = true;
-        }
-        this.turningLeft = false;
-        this.turningRight = false;
     }
 
     controlRock(){
@@ -73,5 +57,5 @@ export class MyMovingFish extends MyMovingObject {
             this.catchedRock = false;
             this.rock = null;
         }
-    }*/
+    }
 }

@@ -9,6 +9,7 @@ import { MyFish } from "./Objects/MyFish.js";
 import { MyRockSet } from "./Objects/MyRockSet.js";
 import { MySpongeBob } from "./Objects/MySpongeBob.js";
 import { MyMovingObject } from "./Objects/MyMovingObject.js";
+import { MyMovingSpongeBob } from "./Objects/MyMovingSpongeBob.js";
 /**
 * MyScene
 * @constructor
@@ -47,18 +48,18 @@ export class MyScene extends CGFscene {
         this.seaFloor = new MySeaFloor(this);
         this.rockSet = new MyRockSet(this, 5);
         this.water = new MyWater(this);
-        this.spongeBob = new MyMovingObject(this, new MySpongeBob(this));
+        this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));
 
         this.initAppearence();
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayCubeMap = false;
+        this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayFish = false;
         this.displaySpongeBob = true;
-        this.displaySeaFloor = false;
+        this.displaySeaFloor = true;
         this.displayWater = true;
 
         this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
@@ -170,34 +171,42 @@ export class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyW")) {
             this.movingFish.accelerate(0.01 );
+            this.spongeBob.accelerate(0.01 );
         }
 
         if (this.gui.isKeyPressed("KeyS"))        {
             this.movingFish.accelerate(-0.01);
+            this.spongeBob.accelerate(-0.01);
         }
 
         if (this.gui.isKeyPressed("KeyA"))        {
             this.movingFish.turn(-0.1);
+            this.spongeBob.turn(-0.1);
         }
         
         if (this.gui.isKeyPressed("KeyD"))        {
             this.movingFish.turn(0.1);
+            this.spongeBob.turn(0.1);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.movingFish.reset();
+            this.spongeBob.reset();
         }
 
         if (this.gui.isKeyPressed("KeyP"))        {
             this.movingFish.up();
+            this.spongeBob.up();
         }
 
         if (this.gui.isKeyPressed("KeyL")) {
-            this.movingFish.down();
+           this.movingFish.down();
+           this.spongeBob.down();
         }
 
         if (this.gui.isKeyPressed("KeyC")){ 
             this.movingFish.controlRock();
+            this.spongeBob.controlRock();
         }
     }
 
@@ -207,6 +216,7 @@ export class MyScene extends CGFscene {
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.shaderSeaWeed.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.t = t;
+        this.spongeBob.update();
         this.movingFish.update();
     }
    
