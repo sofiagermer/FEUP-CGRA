@@ -62,6 +62,7 @@ displaySmallPinneapple(){
     this.crown.display(); 
     this.scene.popMatrix();
 }
+
 display(){
     this.scene.pushMatrix();
     this.scene.scale(7,7,7);

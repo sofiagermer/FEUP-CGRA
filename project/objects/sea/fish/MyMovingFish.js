@@ -11,6 +11,8 @@ export class MyMovingFish extends MyMovingObject {
         this.rock = null;
         this.turningRight = false;
         this.turningLeft = false;
+        this.nestRocks = [];
+        this.indexNestRock = 0;
     }
     
     update(){
@@ -40,7 +42,10 @@ export class MyMovingFish extends MyMovingObject {
             this.fallingRock = true;
             this.catchedRock = false;
         }
-        else this.catchRock();
+        else {
+            this.catchRock();
+            if(this.catchedRock) console.log("no error in here darling");
+        }
     }
 
     catchRock() {
@@ -52,6 +57,15 @@ export class MyMovingFish extends MyMovingObject {
         }
     }
 
+    rockInNest(){
+        if(this.rock.getX < 3 && this.rock.getX > -3){
+            if(this.rock.getZ < 3 && this.rock.getZ >-3){
+                return true;
+            }
+        }
+        return false;
+    }
+
     updateRockPos() {
         if (this.catchedRock && !this.fallingRock) {
             var newPosition = [];
@@ -59,9 +73,18 @@ export class MyMovingFish extends MyMovingObject {
             this.rock.setPosition(newPosition[0], newPosition[1], newPosition[2]);
         }
         else if(this.catchedRock && this.fallingRock){
-            this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
-            this.fallingRock = false;
-            this.rock = null;
+            if(this.rockInNest()){
+                this.rock.setPosition(this.indexNestRock -3, 1.3, this.indexNestRock -3);
+                this.catchedRock = false;
+                this.fallingRock = false;
+                this.rock = null;
+            }
+            else{
+                this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
+                this.catchedRock = false;
+                this.fallingRock = false;
+                this.rock = null;
+            }
         }
 
     }

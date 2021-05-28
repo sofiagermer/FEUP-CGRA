@@ -225,7 +225,7 @@ export class MyScene extends CGFscene {
         this.spongeBob.update();
         this.movingFish.update();
     }
-   
+
     display() {
         // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
@@ -298,7 +298,6 @@ export class MyScene extends CGFscene {
             this.spongeBob.display();
             this.popMatrix();
         }
-         
         // ---- END Primitive drawing section
     }
 }

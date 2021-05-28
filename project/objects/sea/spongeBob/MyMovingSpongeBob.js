@@ -9,8 +9,6 @@ export class MyMovingSpongeBob extends MyMovingObject {
         this.catchedRock = false;
         this.fallingRock = false;
         this.rock = null;
-        this.turningRight = false;
-        this.turningLeft = false;
     }
     
     update(){

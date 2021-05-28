@@ -83,30 +83,4 @@ export class MySeaFloor extends CGFobject {
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();*/
     }
-
-    displayPineappleWeed(){
-        /*this.seaWeed = new MySeaWeed(this.scene, 1, 0, 0, 0);
-        this.scene.setActiveShader(this.scene.defaultShader);
-        this.scene.pushMatrix();
-        this.scene.translate(0,3,0);
-        this.seaWeed.display();
-        this.scene.popMatrix();
-        this.seaWeed = new MySeaWeed(this.scene, 1, 0.3,0, 0);
-        this.scene.pushMatrix();
-        this.scene.translate(0,3,0);
-        this.seaWeed.display();
-        this.scene.popMatrix();
-        this.seaWeed = new MySeaWeed(this.scene, 1, -0.3,0, 0);
-        this.scene.pushMatrix();
-        this.scene.translate(0,3,0);
-        this.seaWeed.display();
-        this.scene.popMatrix();
-        this.seaWeed = new MySeaWeed(this.scene, 1, 0.5, 0, 0);
-        this.scene.pushMatrix();
-        this.scene.translate(0,3,0);
-        this.seaWeed.display();
-        this.scene.popMatrix();
-        this.scene.setActiveShader(this.scene.defaultShader);*/
-
-    }
 }
