@@ -46,39 +46,39 @@ export class MyNeast  extends CGFobject {
         }
     }
 
-displaySmallPinneapple(){
-    this.scene.pushMatrix();
-    this.scene.scale(0.5,0.5,0.5);
-    this.scene.translate(0,0,0);
-    this.materialPineapple.apply();
-    this.sphere.display(); 
-    this.scene.popMatrix();
-   
+    displaySmallPinneapple(){
+        this.scene.pushMatrix();
+        this.scene.scale(0.5,0.5,0.5);
+        this.scene.translate(0,0,0);
+        this.materialPineapple.apply();
+        this.sphere.display(); 
+        this.scene.popMatrix();
+    
 
-    this.scene.pushMatrix();
-    this.scene.scale(0.24,0.24,0.24);
-    this.scene.translate(0,3,0);
-    this.materialCrown.apply();
-    this.crown.display(); 
-    this.scene.popMatrix();
-}
+        this.scene.pushMatrix();
+        this.scene.scale(0.24,0.24,0.24);
+        this.scene.translate(0,3,0);
+        this.materialCrown.apply();
+        this.crown.display(); 
+        this.scene.popMatrix();
+    }
 
-display(){
-    this.scene.pushMatrix();
-    this.scene.scale(7,7,7);
-    this.scene.scale(0.6,0.8,0.6);
-    this.scene.translate(0,0.5,0);
-    this.displaySmallPinneapple();
-    this.scene.popMatrix();
-}
+    display(){
+        this.scene.pushMatrix();
+        this.scene.scale(8,8,8);
+        this.scene.scale(0.6,0.8,0.6);
+        this.scene.translate(0,0.5,0);
+        this.displaySmallPinneapple();
+        this.scene.popMatrix();
+    }
 
-enableNormalViz(){
-    this.sphere.enableNormalViz();
-    this.weed.enableNormalViz();
-}
+    enableNormalViz(){
+        this.sphere.enableNormalViz();
+        this.weed.enableNormalViz();
+    }
 
-disableNormalViz(){
-    this.sphere.disableNormalViz();
-    this.weed.disableNormalViz();
-}
+    disableNormalViz(){
+        this.sphere.disableNormalViz();
+        this.weed.disableNormalViz();
+    }
 }

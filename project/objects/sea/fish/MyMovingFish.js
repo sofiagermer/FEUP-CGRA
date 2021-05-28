@@ -61,8 +61,34 @@ export class MyMovingFish extends MyMovingObject {
 
     letGoRock(){
         if(this.rockInNest()){
-            console.log("dentro do ninho");
-            this.rock.setPosition(this.indexNestRock -3, 1.3, this.indexNestRock -3);
+            if(this.indexNestRock == 0){
+                this.rock.setPosition(-1, 1.3, -1);
+            }
+            else if(this.indexNestRock == 1){
+                this.rock.setPosition(-1, 1.3, 0);
+            }
+            else if(this.indexNestRock == 2){
+                this.rock.setPosition(-1, 1.3, 1);
+            }
+            else if(this.indexNestRock == 3){
+                this.rock.setPosition(0, 1.3, -1);
+            }
+            else if(this.indexNestRock == 4){
+                this.rock.setPosition(0, 1.3, 0);
+            }
+            else if(this.indexNestRock == 5){
+                this.rock.setPosition(0, 1.3, 1);
+            }
+            else if(this.indexNestRock == 6){
+                this.rock.setPosition(1, 1.3, -1);
+            }
+            else if(this.indexNestRock == 7){
+                this.rock.setPosition(1, 1.3, 0);
+            }
+            else if(this.indexNestRock == 8){
+                this.rock.setPosition(1, 1.3, 1);
+            }
+            this.indexNestRock++;
         }
         else{
             console.log("fora do ninho");
@@ -70,14 +96,11 @@ export class MyMovingFish extends MyMovingObject {
         }
     }
 
-    rockInNest(){
-        if(this.rock.getX < 3 && this.rock.getX > -3){
-            if(this.rock.getZ < 3 && this.rock.getZ >-3){
-                return true;
-            }
-        }
+    rockInNest() {
+        if(Math.hypot(this.coordinates[0],this.coordinates[1],this.coordinates[2]) < 9)
+          return true;
         return false;
-    }
+      }
 
     updateRockPos() {
         if (this.catchedRock) {

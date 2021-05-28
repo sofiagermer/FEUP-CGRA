@@ -21,7 +21,6 @@ export class MySeaFloor extends CGFobject {
         this.scene.shaderSeaFloor = new CGFshader(this.scene.gl, "shaders/seafloor.vert", "shaders/seafloor.frag");
         this.scene.shaderSeaFloor.setUniformsValues({sandTex: 0});
         this.scene.shaderSeaFloor.setUniformsValues({sandMap: 1});
-        //this.scene.shaderSeaWeed = new CGFshader(this.scene.gl, "shaders/seaweed.vert", "shaders/seaweed.frag"); 
     }
 
     display(){
