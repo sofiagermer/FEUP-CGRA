@@ -27,6 +27,10 @@ export class MyFish extends CGFobject {
         this.eye = new MyEye(scene);
     }
 
+    initShaders(){
+        this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
+    }
+
     initMaterials() {
         this.scene.materialSkin = new CGFappearance(this.scene); //------ MUDAR O NOME DE skin, VER ONDE É ENVIADO PARA O SHADER
         this.scene.materialSkin.setAmbient(0.0, 0.0, 0.5, 0.0);
@@ -43,21 +47,21 @@ export class MyFish extends CGFobject {
         this.scene.materialFish.loadTexture('images/fish/fishBody.png'); 
     }
 
-    initShaders(){
-        this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
+    update(turningRight, turningLeft){
+        this.updateTail();
+        this.updateFins(turningRight, turningLeft);
     }
 
-    update(turningRight, turningLeft){
+    updateTail(){
         if(this.speed < 0.1){
             this.tail.angle = Math.sin(this.scene.t * (this.speed + 0.4) / 100 % 100);
         }
         else{
             this.tail.angle = Math.sin(this.scene.t * (this.speed * 4.0) / 100 % 100);
         }
+    }
 
-        // 0 no turns
-        // 1 right
-        // 2 left
+    updateFins(turningRight, turningLeft){
         if(!turningLeft && ! turningRight){
             this.leftFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
             this.rightFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
@@ -70,10 +74,6 @@ export class MyFish extends CGFobject {
             this.leftFin.angle =  0;
             this.rightFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
         }
-    }
-
-    updateFins(direction){
-        this.direction = direction;
     }
 
     display(){

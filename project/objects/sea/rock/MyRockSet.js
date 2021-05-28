@@ -37,15 +37,16 @@ export class MyRockSet extends CGFobject {
       }
 
     rockNearby(coordinates){
-        for(var i=0; i< this.numRocks; i++){
-            if(Math.sqrt(Math.pow(this.rockSet[i].transX - coordinates[0], 2) + Math.pow(this.rockSet[i].transZ - coordinates[2],2)) < 1.5){
+        for (let i = 0; i < this.numRocks; i++) {
+            if (Math.hypot(coordinates[0] - this.rockSet[i].transX, coordinates[1] - this.rockSet[i].transY, coordinates[2] - this.rockSet[i].transZ) < 1.5){
                 return this.rockSet[i];
             }
-        }
+          }
+          return null;
     }
 
     display(){
-        for (var i = 0; i < 5; i++){
+        for (var i = 0; i < this.numRocks; i++){
             this.scene.pushMatrix();    
             this.scene.translate(this.rockSet[i].transX,this.rockSet[i].transY, this.rockSet[i].transZ);
             this.scene.rotate(Math.PI/2,0,1,0);

@@ -44,16 +44,13 @@ export class MyMovingFish extends MyMovingObject {
         }
         else {
             this.catchRock();
-            if(this.catchedRock) console.log("no error in here darling");
         }
     }
 
     catchRock() {
-        if (this.coordinates[1] <= 1.5){
-            this.rock = this.scene.rockSet.rockNearby(this.coordinates);
-            if (this.rock != null) {
-                this.catchedRock = true;
-            }
+        this.rock = this.scene.rockSet.rockNearby(this.coordinates);
+        if (this.rock != null) {
+            this.catchedRock = true;
         }
     }
 

@@ -48,7 +48,7 @@ export class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this, 19);
         this.movingFish = new MyMovingFish(this, new MyFish(this));
         this.seaFloor = new MySeaFloor(this);
-        this.rockSet = new MyRockSet(this, 5);
+        this.rockSet = new MyRockSet(this, 10);
         this.water = new MyWater(this);
         this.pineapple = new MyNeast(this);
         this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));
@@ -222,8 +222,12 @@ export class MyScene extends CGFscene {
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.seaWeedShader.setUniformsValues({ timeFactor: t / 1 % 100 });
         this.t = t;
-        this.spongeBob.update();
-        this.movingFish.update();
+        if(this.displaySpongeBob){
+            this.spongeBob.update();
+        }
+        if(this.displayFish){
+            this.movingFish.update();
+        }
     }
 
     display() {
@@ -287,14 +291,12 @@ export class MyScene extends CGFscene {
 
         if(this.displayFish){
             this.pushMatrix();
-            this.translate(-3, 0, 0);
             this.movingFish.display();
             this.popMatrix();
         } 
 
         if(this.displaySpongeBob){
             this.pushMatrix();
-            this.translate(-3,0,0);
             this.spongeBob.display();
             this.popMatrix();
         }
