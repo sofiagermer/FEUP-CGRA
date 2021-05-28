@@ -6,6 +6,10 @@ export class MyMovingFish extends MyMovingObject {
     constructor(scene,fish){
         super(scene, fish);
         this.fish = fish;
+        this.initializeMovingFish();
+    }
+
+    initializeMovingFish(){
         this.catchedRock = false;
         this.fallingRock = false;
         this.rock = null;
@@ -39,8 +43,9 @@ export class MyMovingFish extends MyMovingObject {
 
     controlRock(){
         if(this.catchedRock) {
-            this.fallingRock = true;
+            this.letGoRock();
             this.catchedRock = false;
+            this.rock = null;
         }
         else {
             this.catchRock();
@@ -51,6 +56,15 @@ export class MyMovingFish extends MyMovingObject {
         this.rock = this.scene.rockSet.rockNearby(this.coordinates);
         if (this.rock != null) {
             this.catchedRock = true;
+        }
+    }
+
+    letGoRock(){
+        if(this.rockInNest()){
+            this.rock.setPosition(this.indexNestRock -3, 1.3, this.indexNestRock -3);
+        }
+        else{
+            this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
         }
     }
 
@@ -65,25 +79,11 @@ export class MyMovingFish extends MyMovingObject {
 
     updateRockPos() {
         if (this.catchedRock && !this.fallingRock) {
+            console.log("Swimming Rock")
             var newPosition = [];
             newPosition.push(this.coordinates[0] + Math.sin(this.orientationAngle - Math.PI/2), this.coordinates[1], this.coordinates[2] + Math.cos(this.orientationAngle - Math.PI/2));
             this.rock.setPosition(newPosition[0], newPosition[1], newPosition[2]);
         }
-        else if(this.catchedRock && this.fallingRock){
-            if(this.rockInNest()){
-                this.rock.setPosition(this.indexNestRock -3, 1.3, this.indexNestRock -3);
-                this.catchedRock = false;
-                this.fallingRock = false;
-                this.rock = null;
-            }
-            else{
-                this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
-                this.catchedRock = false;
-                this.fallingRock = false;
-                this.rock = null;
-            }
-        }
-
     }
     
     reset() {
