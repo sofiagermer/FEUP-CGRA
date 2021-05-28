@@ -61,9 +61,11 @@ export class MyMovingFish extends MyMovingObject {
 
     letGoRock(){
         if(this.rockInNest()){
+            console.log("dentro do ninho");
             this.rock.setPosition(this.indexNestRock -3, 1.3, this.indexNestRock -3);
         }
         else{
+            console.log("fora do ninho");
             this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
         }
     }
@@ -78,8 +80,7 @@ export class MyMovingFish extends MyMovingObject {
     }
 
     updateRockPos() {
-        if (this.catchedRock && !this.fallingRock) {
-            console.log("Swimming Rock")
+        if (this.catchedRock) {
             var newPosition = [];
             newPosition.push(this.coordinates[0] + Math.sin(this.orientationAngle - Math.PI/2), this.coordinates[1], this.coordinates[2] + Math.cos(this.orientationAngle - Math.PI/2));
             this.rock.setPosition(newPosition[0], newPosition[1], newPosition[2]);
@@ -87,11 +88,11 @@ export class MyMovingFish extends MyMovingObject {
     }
     
     reset() {
-        super.reset();
         if (this.catchedRock) {
-            this.rock.setPosition(this.rock.getInitialPosition());
+            this.rock.setPosition(this.rock.getInitialX(), this.rock.getInitialY(), this.rock.getInitialZ());
             this.catchedRock = false;
             this.rock = null;
         }
+        super.reset();
     }
 }

@@ -12,15 +12,9 @@ export class MyRock  extends CGFobject {
     this.latDivs = stacks * 2;
     this.longDivs = slices;
     this.initBuffers(); 
-    this.scaleX = scaleX;
-    this.scaleY = scaleY;
-    this.scaleZ = scaleZ;
-    this.transX = transX;
-    this.transY = 1;
-    this.transZ = transZ;
-    this.initialX = transX;
-    this.initialY = this.transY;
-    this.initialZ = transZ;
+    this.setScaling(scaleX, scaleY, scaleZ);
+    this.setPosition(transX, 1, transZ);
+    this.setInitialPosition(transX, 1, transZ);
     this.rot = rot;
   }
 
@@ -97,10 +91,34 @@ export class MyRock  extends CGFobject {
     
   }
 
-  getInitialPosition(){
-    var initialPosition = [];
-    initialPosition.push(this.initialX, this.initialY, this.initialZ);
-    return initialPosition;
+  setInitialPosition(x,y,z){
+    this.initialX = x;
+    this.initialY = y;
+    this.initialZ = z;
+  }
+
+  setPosition(transX, transY, transZ){
+    this.transX = transX;
+    this.transY = transY;
+    this.transZ = transZ;
+  }
+
+  setScaling(sX, sY, sZ){
+    this.scaleX = sX;
+    this.scaleY = sY;
+    this.scaleZ = sZ;
+  }
+
+  getInitialX(){
+    return this.initialX;
+  }
+
+  getInitialY(){
+    return this.initialY;
+  }
+
+  getInitialZ(){
+    return this.initialZ;
   }
   
   getX(){
@@ -113,12 +131,6 @@ export class MyRock  extends CGFobject {
 
   getZ(){
     return this.transZ;
-  }
-  
-  setPosition(transX, transY, transZ){
-    this.transX = transX;
-    this.transY = transY;
-    this.transZ = transZ;
   }
 }
 

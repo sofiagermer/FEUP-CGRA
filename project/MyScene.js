@@ -42,29 +42,12 @@ export class MyScene extends CGFscene {
         this.setDefaultTextures();
 
         //Initialize scene objects
-        this.axis = new CGFaxis(this);
-        this.sphere = new MySphere(this, 16, 8);
-        this.cubeMap = new MyCubeMap(this);
-        this.cylinder = new MyCylinder(this, 19);
-        this.movingFish = new MyMovingFish(this, new MyFish(this));
-        this.seaFloor = new MySeaFloor(this);
-        this.rockSet = new MyRockSet(this, 10);
-        this.water = new MyWater(this);
-        this.pineapple = new MyNeast(this);
-        this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));
+        this.initObjects();
 
         this.initAppearence();
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
-        this.displayCubeMap = true;
-        this.displayCylinder = false;
-        this.displaySphere = false;
-        this.displayFish = true;
-        this.displaySpongeBob = false;
-        this.displaySeaFloor = true;
-        this.displayWater = true;
-        this.displayPineapple = true;
+        this.initDisplayValues();
 
         this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
         this.selectedTexture = 1;
@@ -112,8 +95,6 @@ export class MyScene extends CGFscene {
         this.textureRight_water = new CGFtexture(this, 'images/underwater_cubemap/right.jpg');
         this.textureFront_water = new CGFtexture(this, 'images/underwater_cubemap/front.jpg');
         this.textureBack_water = new CGFtexture(this, 'images/underwater_cubemap/back.jpg');
-
-
     }
 
     setDefaultTextures(){
@@ -123,6 +104,32 @@ export class MyScene extends CGFscene {
         this.textureRight = this.textureRight_demo;
         this.textureFront = this.textureFront_demo;
         this.textureBack = this.textureBack_demo;
+    }
+
+    initObjects(){
+        this.axis = new CGFaxis(this);
+        this.sphere = new MySphere(this, 16, 8);
+        this.cubeMap = new MyCubeMap(this);
+        this.cylinder = new MyCylinder(this, 19);
+        this.movingFish = new MyMovingFish(this, new MyFish(this));
+        this.seaFloor = new MySeaFloor(this);
+        this.rockSet = new MyRockSet(this, 10);
+        this.water = new MyWater(this);
+        this.pineapple = new MyNeast(this);
+        this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));    
+    }
+
+    initDisplayValues(){
+        this.displayAxis = true;
+        this.displayCubeMap = true;
+        this.displayCylinder = false;
+        this.displaySphere = false;
+        this.displayFish = true;
+        this.displaySpongeBob = false;
+        this.displaySeaFloor = true;
+        this.displayWater = true;
+        this.displayPineapple = false;
+
     }
 
     updateTextures(){
