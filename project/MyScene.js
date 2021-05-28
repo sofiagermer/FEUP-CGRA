@@ -10,6 +10,7 @@ import { MyRockSet } from "./objects/sea/rock/MyRockSet.js";
 import { MySpongeBob } from "./objects/sea/spongeBob/MySpongeBob.js";
 import { MyMovingSpongeBob } from "./objects/sea/spongeBob/MyMovingSpongeBob.js";
 import { MyNeast } from './objects/sea/MyNeast.js';
+import { MyPillarSet } from "./objects/sea/pillar/MyPillarSet.js";
 
 /**
 * MyScene
@@ -116,6 +117,7 @@ export class MyScene extends CGFscene {
         this.rockSet = new MyRockSet(this, 10);
         this.water = new MyWater(this);
         this.pineapple = new MyNeast(this);
+        this.pillars = new MyPillarSet(this);
         this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));    
     }
 
@@ -128,6 +130,7 @@ export class MyScene extends CGFscene {
         this.displaySpongeBob = false;
         this.displaySeaFloor = true;
         this.displayWater = true;
+        this.displayPillars = true;
         this.displayPineapple = false;
 
     }
@@ -287,6 +290,12 @@ export class MyScene extends CGFscene {
         if(this.displayWater){
             this.pushMatrix();
             this.water.display();
+            this.popMatrix();
+        }
+
+        if(this.displayPillars){
+            this.pushMatrix();
+            this.pillars.display();
             this.popMatrix();
         }
 

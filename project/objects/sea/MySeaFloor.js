@@ -9,11 +9,6 @@ export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
-        
-        this.pillars_list = [];
-        for(var i = 0; i < 4 ; i++){
-            this.pillars_list.push(new MyPillar(this.scene));
-        }
 
         this.weed = new MyWeedSet(this.scene, 20, 6, 3);
         
@@ -41,37 +36,12 @@ export class MySeaFloor extends CGFobject {
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
         
-        this.displayPillars();
         this.displayWeed();   
 
         this.scene.pushMatrix();
         this.weed.display();
         this.scene.popMatrix();
 
-    }
-
-    displayPillars(){
-        this.scene.pushMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(3,0,0);
-        this.pillars_list[0].display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(3,0,-4);
-        this.pillars_list[1].display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(10,0,0);
-        this.pillars_list[2].display();
-        this.scene.popMatrix();
-
-        this.scene.pushMatrix();
-        this.scene.translate(10,0,-4);
-        this.pillars_list[3].display();
-        this.scene.popMatrix();
     }
 
     displayWeed(){
