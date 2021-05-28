@@ -46,11 +46,16 @@ export class MySpongeBob extends CGFobject {
         this.scene.materialSpongeBobTop.setTextureWrap('REPEAT', 'REPEAT');
     }
 
-
     display(){
         this.scene.pushMatrix();
+        this.scene.rotate(Math.PI/2,0,0,1);
+        this.displaySP();
+        this.scene.popMatrix();
+    }
+    displaySP(){
+        this.scene.pushMatrix();
         this.scene.scale(1.5,0.75,1.5);
-
+    
         //Left 
         this.scene.pushMatrix();
         this.scene.translate(0,0, -0.5);

@@ -15,7 +15,6 @@ export class MyMovingSpongeBob extends MyMovingObject {
     
     update(){
         super.update();
-
         this.updateRockPos();
     }
 

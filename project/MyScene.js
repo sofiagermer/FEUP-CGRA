@@ -281,14 +281,15 @@ export class MyScene extends CGFscene {
 
         if(this.displayFish){
             this.pushMatrix();
-            this.translate(-3, 0, 0 )
+            this.translate(-3, 0, 0);
             this.movingFish.display();
             this.popMatrix();
         } 
 
         if(this.displaySpongeBob){
             this.pushMatrix();
-            this.rotate(Math.PI/2,0,1,0)
+            //this.rotate(Math.PI/2,0,0,1);
+            //this.rotate(Math.PI/2,1,0,0);
             this.spongeBob.display();
             this.popMatrix();
         }
