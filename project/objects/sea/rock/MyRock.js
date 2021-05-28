@@ -95,15 +95,6 @@ export class MyRock  extends CGFobject {
     
   }
 
-  initMaterials() {
-    this.scene.materialBlack = new CGFappearance(this.scene);
-    this.scene.materialBlack.setAmbient(0.0, 0.0, 0.0, 0.0);
-    this.scene.materialBlack.setDiffuse(0.0, 0.0, 0.0, 0.0);
-    this.scene.materialBlack.setSpecular(1.0,1.0,1.0,1.0);
-    this.scene.materialBlack.setEmission(0.0, 0.0, 0.0, 1.0);
-    this.scene.materialBlack.setShininess(10.0);  
-  }
-
   getInitialPosition(){
     var initialPosition = [];
     initialPosition.push(this.initialX, this.initialY, this.initialZ);

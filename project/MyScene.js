@@ -64,7 +64,7 @@ export class MyScene extends CGFscene {
         this.displaySpongeBob = false;
         this.displaySeaFloor = true;
         this.displayWater = true;
-        this.displayPineapple = false;
+        this.displayPineapple = true;
 
         this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
         this.selectedTexture = 1;
