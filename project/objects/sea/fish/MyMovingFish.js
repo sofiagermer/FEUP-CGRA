@@ -3,7 +3,7 @@ import { MyMovingObject } from "../../landscape/MyMovingObject.js";
 import { MyFish } from "./MyFish.js";
 
 export class MyMovingFish extends MyMovingObject {
-   /* constructor(scene,fish){
+    constructor(scene,fish){
         super(scene, fish);
         this.fish = fish;
         this.catchedRock = false;
@@ -45,6 +45,7 @@ export class MyMovingFish extends MyMovingObject {
 
     catchRock() {
         if (this.coordinates[1] <= 1.5){
+            //console.log("apanhei a pedra");
             this.rock = this.scene.rockSet.rockNearby(this.coordinates);
             if (this.rock != null) {
                 this.catchedRock = true;
@@ -73,5 +74,5 @@ export class MyMovingFish extends MyMovingObject {
             this.catchedRock = false;
             this.rock = null;
         }
-    }*/
+    }
 }

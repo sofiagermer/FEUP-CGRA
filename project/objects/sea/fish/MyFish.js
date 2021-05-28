@@ -46,13 +46,13 @@ export class MyFish extends CGFobject {
     }
 
     update(turningRight, turningLeft){
-        if(this.scene.speed < 0.1){
+        if(this.speed < 0.1){
             this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
-            this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed + 0.4) / 100 % 100);
+            this.tail.angle = Math.sin(this.scene.t * (this.speed + 0.4) / 100 % 100);
         }
         else{
             this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
-            this.tail.angle = Math.sin(this.scene.t * (this.scene.fishSpeed * 4.0) / 100 % 100);
+            this.tail.angle = Math.sin(this.scene.t * (this.speed * 4.0) / 100 % 100);
         }
         /*if(turningRight){
 

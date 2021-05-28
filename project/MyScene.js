@@ -61,8 +61,8 @@ export class MyScene extends CGFscene {
         this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayFish = false;
-        this.displaySpongeBob = true;
+        this.displayFish = true;
+        this.displaySpongeBob = false;
         this.displaySeaFloor = true;
         this.displayWater = true;
 
@@ -288,8 +288,7 @@ export class MyScene extends CGFscene {
 
         if(this.displaySpongeBob){
             this.pushMatrix();
-            //this.rotate(Math.PI/2,0,0,1);
-            //this.rotate(Math.PI/2,1,0,0);
+            this.translate(-3,0,0);
             this.spongeBob.display();
             this.popMatrix();
         }
