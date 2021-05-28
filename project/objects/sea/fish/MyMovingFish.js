@@ -19,6 +19,8 @@ export class MyMovingFish extends MyMovingObject {
         
         //update fish fin's movement
         this.fish.update(this.turningRight, this.turningLeft);
+        this.turningLeft = false;
+        this.turningRight = false;
 
         this.updateRockPos();
     }
@@ -31,8 +33,6 @@ export class MyMovingFish extends MyMovingObject {
         else{
             this.turningRight = true;
         }
-        this.turningLeft = false;
-        this.turningRight = false;
     }
 
     controlRock(){
@@ -45,7 +45,6 @@ export class MyMovingFish extends MyMovingObject {
 
     catchRock() {
         if (this.coordinates[1] <= 1.5){
-            //console.log("apanhei a pedra");
             this.rock = this.scene.rockSet.rockNearby(this.coordinates);
             if (this.rock != null) {
                 this.catchedRock = true;

@@ -21,7 +21,9 @@ export class MyFish extends CGFobject {
     initFish(scene){
         this.fishBody = new MySphere(this.scene, 16, 8);
         this.tail = new MyTail(scene);
-        this.fin = new MyFin(scene);
+        this.topFin = new MyFin(scene);
+        this.leftFin = new MyFin(scene);
+        this.rightFin = new MyFin(scene);
         this.eye = new MyEye(scene);
     }
 
@@ -47,22 +49,27 @@ export class MyFish extends CGFobject {
 
     update(turningRight, turningLeft){
         if(this.speed < 0.1){
-            this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
             this.tail.angle = Math.sin(this.scene.t * (this.speed + 0.4) / 100 % 100);
         }
         else{
-            this.fin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
             this.tail.angle = Math.sin(this.scene.t * (this.speed * 4.0) / 100 % 100);
         }
-        /*if(turningRight){
 
+        // 0 no turns
+        // 1 right
+        // 2 left
+        if(!turningLeft && ! turningRight){
+            this.leftFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
+            this.rightFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
+        }
+        else if(turningRight){
+            this.leftFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
+            this.rightFin.angle =  0;
         }
         else if(turningLeft){
-
+            this.leftFin.angle =  0;
+            this.rightFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
         }
-        else{
-            
-        }*/
     }
 
     updateFins(direction){
@@ -91,21 +98,21 @@ export class MyFish extends CGFobject {
         //RIGHT FIN
         this.scene.pushMatrix();
         this.scene.translate(1.4,-0.2,-0.51);
-        this.scene.rotate(-this.fin.angle,1,0,0);
+        this.scene.rotate(-this.rightFin.angle,1,0,0);
         this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialSkin.apply();
-        this.fin.display(); 
+        this.rightFin.display(); 
         this.scene.popMatrix(); 
 
         //LEFT FIN
         this.scene.pushMatrix();
         this.scene.translate(1.4,-0.2,0.51);
-        this.scene.rotate(this.fin.angle,1,0,0);
+        this.scene.rotate(this.leftFin.angle,1,0,0);
         this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
         this.scene.materialSkin.apply();
-        this.fin.display(); 
+        this.leftFin.display(); 
         this.scene.popMatrix(); 
 
         //TOP FIN
@@ -114,7 +121,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(-Math.PI,0,1,0);
         this.scene.scale(0.3,0.3,0.3);
         this.scene.materialSkin.apply();
-        this.fin.display(); 
+        this.topFin.display(); 
         this.scene.popMatrix(); 
 
         //Right Eye
@@ -136,14 +143,18 @@ export class MyFish extends CGFobject {
 
     enableNormalViz(){
         this.fishBody.enableNormalViz();
-        this.fin.enableNormalViz();
+        this.rightFin.enableNormalViz();
+        this.leftFin.enableNormalViz();
+        this.topFin.enableNormalViz();
         this.tail.enableNormalViz();
         this.eye.enableNormalViz();
     }
     
     disableNormalViz(){
         this.fishBody.disableNormalViz();
-        this.fin.disableNormalViz();
+        this.rightFin.disableNormalViz();
+        this.leftFin.disableNormalViz();
+        this.topFin.disableNormalViz();
         this.tail.disableNormalViz();
         this.eye.disableNormalViz();
     }
