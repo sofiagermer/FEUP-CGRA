@@ -11,6 +11,7 @@ import { MySpongeBob } from "./objects/sea/spongeBob/MySpongeBob.js";
 import { MyMovingSpongeBob } from "./objects/sea/spongeBob/MyMovingSpongeBob.js";
 import { MyNeast } from './objects/sea/MyNeast.js';
 import { MyPillarSet } from "./objects/sea/pillar/MyPillarSet.js";
+import { CGFcamera2 } from "./CGFcamera2.js";
 
 /**
 * MyScene
@@ -165,7 +166,7 @@ export class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.6, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0 , 0));
+        this.camera = new CGFcamera2(0.6, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0 , 0));
     }
 
     setDefaultAppearance() {
@@ -230,7 +231,7 @@ export class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
-        this.seaWeedShader.setUniformsValues({ timeFactor: t / 1 % 100 });
+        this.seaWeedShader.setUniformsValues({ timeFactor: t / 100 % 100 });
         this.t = t;
         if(this.displaySpongeBob){
             this.spongeBob.update();
