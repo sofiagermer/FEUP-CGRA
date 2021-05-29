@@ -34,13 +34,13 @@
 
 ### 5 - Pillar Set
 
-![Screenshot 5.1](screenshots/proj-t3g5-5a.png)
-![Screenshot 5.2](screenshots/proj-t3g5-5b.png)
+![Screenshot 5.1](screenshots/proj-t3g7-5a.png)
+![Screenshot 5.2](screenshots/proj-t3g7-5b.png)
 
 
 ### 6 - Updated Sea Floor
 
-![Screenshot 6](screenshots/proj-t3g5-6.png)
+![Screenshot 6](screenshots/proj-t3g7-6.png)
 
 ### 6.3 - Fish catching Rocks
 
@@ -49,9 +49,9 @@
 
 ### 7.1 - Sea Weed
 
-![Screenshot 7.1.1](screenshots/proj-t3g7-8a.png)
-![Screenshot 7.1.2](screenshots/proj-t3g5-8b.png)
+![Screenshot 7.1](screenshots/proj-t3g7-8a.png)
+![Screenshot 7.2](screenshots/proj-t3g7-8b.png)
 
 ### 7.2 - My Animated Fish
 
-![Screenshot 7.2.](screenshots/proj-t3g7-8c.png)
+![Screenshot 7.3](screenshots/proj-t3g7-8c.png)
