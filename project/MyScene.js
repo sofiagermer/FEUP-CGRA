@@ -166,7 +166,7 @@ export class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera2(0.6, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0 , 0));
+        this.camera = new CGFcamera2(0.6, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
 
     setDefaultAppearance() {
@@ -231,7 +231,7 @@ export class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
-        this.seaWeedShader.setUniformsValues({ timeFactor: t / 100 % 100 });
+        this.seaWeedShader.setUniformsValues({ timeFactor: t / 50 % 100 });
         this.t = t;
         if(this.displaySpongeBob){
             this.spongeBob.update();

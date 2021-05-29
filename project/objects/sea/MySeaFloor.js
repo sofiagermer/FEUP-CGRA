@@ -10,7 +10,7 @@ export class MySeaFloor extends CGFobject {
         super(scene);
         this.sand = new MyPlane(this.scene, 50);
 
-        this.weed = new MyWeedSet(this.scene, 20, 6, 3);
+        this.weed = new MyWeedSet(this.scene, 40, 6, 3);
         
         this.initShaders();
     }
