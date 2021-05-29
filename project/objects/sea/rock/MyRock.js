@@ -135,8 +135,9 @@ export class MyRock  extends CGFobject {
   }
 
   rockInNest(x,y,z) {
-    if(Math.hypot(x,y,z) < 2)
+    if(Math.hypot(x,y,z) < 2){
       return true;
+    }
     return false;
   }
 }

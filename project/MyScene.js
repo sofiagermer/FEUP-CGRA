@@ -193,7 +193,6 @@ export class MyScene extends CGFscene {
     checkKeys()  {
 
         if (this.gui.isKeyPressed("KeyW")) {
-            console.log("w");
             this.movingFish.accelerate(0.01 );
          //   this.spongeBob.accelerate(0.01 );
         }

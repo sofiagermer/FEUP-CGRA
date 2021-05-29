@@ -28,7 +28,6 @@ export class MyMovingFish extends MyMovingObject {
         this.turningLeft = false;
         this.turningRight = false;
         if (this.catchedRock){
-            console.log("Swimming with a rock");
             this.updateRockPos();
         }
     }
@@ -59,9 +58,10 @@ export class MyMovingFish extends MyMovingObject {
 
     largar(){
         if(this.lowerBound()){
-            this.letGoRock();
-            this.catchedRock = false;
-            this.rock = null;
+            console.log("letting go rock");
+            if(this.catchedRock){
+                this.letGoRock();
+            }
         }
     }
     
@@ -91,7 +91,9 @@ export class MyMovingFish extends MyMovingObject {
     }
 
     letGoRock(){
-        if(this.rock.rockInNest()){
+        console.log(Math.hypot(this.rock.getX(),1.3,this.rock.getZ()));
+        if(this.rock.rockInNest(this.rock.getX(), 1.3, this.rock.getZ())){
+            console.log("aqui aqui aqui");
             if(this.indexNestRock == 0){
                 this.rock.setPosition(-1, 1.3, -1);
             }
@@ -120,10 +122,8 @@ export class MyMovingFish extends MyMovingObject {
                 this.rock.setPosition(1, 1.3, 1);
             }
             this.indexNestRock++;
-        }
-        else{
-            //console.log("fora do ninho");
-            this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
+            this.catchedRock = false;
+            this.rock = null;
         }
     }
 
