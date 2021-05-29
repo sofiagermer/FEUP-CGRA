@@ -25,6 +25,7 @@ export class MyPillar extends CGFobject {
   
     display() {
       this.scene.pushMatrix();
+      this.scene.scale(0.5,1,0.5);
       this.materialPillar.apply();
       for(var i = 0; i < 15; i++){
         this.cylinders_list[i].display();
