@@ -229,13 +229,13 @@ export class MyScene extends CGFscene {
         }
 
         if (this.gui.isKeyPressed("KeyC")){ 
-            this.movingFish.controlRock();
-           //this.movingFish.apanhar();
+          //  this.movingFish.controlRock();
+           this.movingFish.apanhar();
            // this.spongeBob.controlRock();
         } 
 
         if (this.gui.isKeyPressed("KeyF")){ 
-            //this.movingFish.largar();
+            this.movingFish.largar();
            // this.movingFish.controlRock();
            // this.spongeBob.controlRock();
         }

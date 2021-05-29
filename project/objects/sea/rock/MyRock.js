@@ -139,13 +139,5 @@ export class MyRock  extends CGFobject {
       return true;
     return false;
   }
-
-  getInNest(){
-    return this.inNest;
-  }
-
-  placeInNest(){
-    this.inNest = true;
-  }
 }
 

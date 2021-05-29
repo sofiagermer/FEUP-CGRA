@@ -65,7 +65,7 @@ export class MyMovingFish extends MyMovingObject {
         }
     }
     
-    controlRock(){
+    /*controlRock(){
         if(this.lowerBound()){
             if(!this.catchedRock){
                 console.log("VOU APANHAR PEDRA");
@@ -78,15 +78,14 @@ export class MyMovingFish extends MyMovingObject {
                 this.rock = null;
             }
         }
-    }
+    }*/
 
     catchRock() {
         this.rock = this.scene.rockSet.rockNearby(this.coordinates);
         if (this.rock != null) {
-            if(this.rock.getInNest() == false){
+            if(this.rock.rockInNest(this.rock.getX, 1.3, this.rock.getZ) == false){
                // console.log("Apanhei uma pedra que não estava no ninho");
                 this.catchedRock = true;
-                this.rock.placeInNest();
             }
         }
     }
