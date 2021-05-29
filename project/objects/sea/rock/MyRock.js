@@ -15,6 +15,7 @@ export class MyRock  extends CGFobject {
     this.setScaling(scaleX, scaleY, scaleZ);
     this.setPosition(transX, 1, transZ);
     this.setInitialPosition(transX, 1, transZ);
+    this.inNest = this.rockInNest(transX,1, transZ);
     this.rot = rot;
   }
 
@@ -131,6 +132,20 @@ export class MyRock  extends CGFobject {
 
   getZ(){
     return this.transZ;
+  }
+
+  rockInNest(x,y,z) {
+    if(Math.hypot(x,y,z) < 2)
+      return true;
+    return false;
+  }
+
+  getInNest(){
+    return this.inNest;
+  }
+
+  placeInNest(){
+    this.inNest = true;
   }
 }
 

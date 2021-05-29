@@ -27,8 +27,10 @@ export class MyMovingFish extends MyMovingObject {
         this.fish.update(this.turningRight, this.turningLeft);
         this.turningLeft = false;
         this.turningRight = false;
-
-        this.updateRockPos();
+        if (this.catchedRock){
+            console.log("Swimming with a rock");
+            this.updateRockPos();
+        }
     }
 
     turn(val){
@@ -41,26 +43,56 @@ export class MyMovingFish extends MyMovingObject {
         }
     }
 
-    controlRock(){
-        if(this.catchedRock) {
+    lowerBound(){
+        if(this.coordinates[1] < 2) return true;
+        return false;
+    }
+
+    apanhar(){
+        if(this.lowerBound()){
+            if(!this.catchedRock){
+                console.log("VOU APANHAR PEDRA");
+                this.catchRock();
+            }  
+        }
+    }
+
+    largar(){
+        if(this.lowerBound()){
             this.letGoRock();
             this.catchedRock = false;
             this.rock = null;
         }
-        else {
-            this.catchRock();
+    }
+    
+    controlRock(){
+        if(this.lowerBound()){
+            if(!this.catchedRock){
+                console.log("VOU APANHAR PEDRA");
+                this.catchRock();
+            }
+            else {
+                console.log("VOU LARGAR PEDRA");
+                this.letGoRock();
+                this.catchedRock = false;
+                this.rock = null;
+            }
         }
     }
 
     catchRock() {
         this.rock = this.scene.rockSet.rockNearby(this.coordinates);
         if (this.rock != null) {
-            this.catchedRock = true;
+            if(this.rock.getInNest() == false){
+               // console.log("Apanhei uma pedra que não estava no ninho");
+                this.catchedRock = true;
+                this.rock.placeInNest();
+            }
         }
     }
 
     letGoRock(){
-        if(this.rockInNest()){
+        if(this.rock.rockInNest()){
             if(this.indexNestRock == 0){
                 this.rock.setPosition(-1, 1.3, -1);
             }
@@ -91,23 +123,15 @@ export class MyMovingFish extends MyMovingObject {
             this.indexNestRock++;
         }
         else{
-            console.log("fora do ninho");
+            //console.log("fora do ninho");
             this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
         }
     }
 
-    rockInNest() {
-        if(Math.hypot(this.coordinates[0],this.coordinates[1],this.coordinates[2]) < 9)
-          return true;
-        return false;
-      }
-
     updateRockPos() {
-        if (this.catchedRock) {
-            var newPosition = [];
-            newPosition.push(this.coordinates[0] + Math.sin(this.orientationAngle - Math.PI/2), this.coordinates[1], this.coordinates[2] + Math.cos(this.orientationAngle - Math.PI/2));
-            this.rock.setPosition(newPosition[0], newPosition[1], newPosition[2]);
-        }
+        var newPosition = [];
+        newPosition.push(this.coordinates[0] + Math.sin(this.orientationAngle - Math.PI/2), this.coordinates[1], this.coordinates[2] + Math.cos(this.orientationAngle - Math.PI/2));
+        this.rock.setPosition(newPosition[0], newPosition[1], newPosition[2]);
     }
     
     reset() {

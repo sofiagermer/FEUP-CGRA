@@ -37,7 +37,7 @@ export class MyScene extends CGFscene {
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
 
-        this.setUpdatePeriod(50);
+        this.setUpdatePeriod(20);
         
         this.enableTextures(true);
 
@@ -193,46 +193,69 @@ export class MyScene extends CGFscene {
     checkKeys()  {
 
         if (this.gui.isKeyPressed("KeyW")) {
+            console.log("w");
             this.movingFish.accelerate(0.01 );
-            this.spongeBob.accelerate(0.01 );
+         //   this.spongeBob.accelerate(0.01 );
         }
 
         if (this.gui.isKeyPressed("KeyS"))        {
             this.movingFish.accelerate(-0.01);
-            this.spongeBob.accelerate(-0.01);
+         //   this.spongeBob.accelerate(-0.01);
         }
 
         if (this.gui.isKeyPressed("KeyA"))        {
             this.movingFish.turn(-0.1);
-            this.spongeBob.turn(-0.1);
+         //   this.spongeBob.turn(-0.1);
         }
         
         if (this.gui.isKeyPressed("KeyD"))        {
             this.movingFish.turn(0.1);
-            this.spongeBob.turn(0.1);
+          //  this.spongeBob.turn(0.1);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.movingFish.reset();
-            this.spongeBob.reset();
+          //  this.spongeBob.reset();
         }
 
         if (this.gui.isKeyPressed("KeyP"))        {
             this.movingFish.up();
-            this.spongeBob.up();
+          //  this.spongeBob.up();
         }
 
         if (this.gui.isKeyPressed("KeyL")) {
            this.movingFish.down();
-           this.spongeBob.down();
+         //  this.spongeBob.down();
         }
 
         if (this.gui.isKeyPressed("KeyC")){ 
             this.movingFish.controlRock();
-            this.spongeBob.controlRock();
+           //this.movingFish.apanhar();
+           // this.spongeBob.controlRock();
+        } 
+
+        if (this.gui.isKeyPressed("KeyF")){ 
+            //this.movingFish.largar();
+           // this.movingFish.controlRock();
+           // this.spongeBob.controlRock();
         }
     }
-
+    /*
+    controlRock(){
+        if(this.movingFish.lowerBound()){
+            console.log("tá em baixo");
+            if(!this.movingFish.catchedRock){
+                console.log("VOU APANHAR PEDRA");
+                this.movingFish.catchRock();
+            }
+            else {
+                console.log("VOU LARGAR PEDRA");
+                this.movingFish.letGoRock();
+                this.movingFish.catchedRock = false;
+                this.movingFish.rock = null;
+            }
+        }
+    }*/
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
