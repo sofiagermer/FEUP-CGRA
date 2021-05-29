@@ -9,7 +9,7 @@
 ----
 ## Screenshots
 
-### 1 - MyFish
+### 1 - MyFish/MySpongeBob
 
 ![Screenshot 1.1](screenshots/proj-t3g7-1a.png)
 ![Screenshot 1.2](screenshots/proj-t3g7-1b.png)
@@ -22,15 +22,14 @@
 
 ![Screenshot 3](screenshots/proj-t3g7-2b.png)
 
-### 3 - Water Surface
+### 3 - Sea Water
 
 ![Screenshot 3](screenshots/proj-t3g7-3.png)
 
 ### 4 - Rock and Rock sets
 
-![Screenshot 4.1](screenshots/proj-t3g5-4.a.png)
-
-![Screenshot 4.2](screenshots/proj-t3g5-4.b.png)
+![Screenshot 4.1](screenshots/proj-t3g7-4a.png)
+![Screenshot 4.2](screenshots/proj-t3g7-4b.png)
 
 ### 5 - Pillar Set
 
@@ -38,20 +37,22 @@
 ![Screenshot 5.2](screenshots/proj-t3g7-5b.png)
 
 
-### 6 - Updated Sea Floor
+### 6.1 - Fish/SpongeBob catching Rocks
 
-![Screenshot 6](screenshots/proj-t3g7-6.png)
+![Screenshot 6.1](screenshots/proj-t3g7-6a.png)
+![Screenshot 6.2](screenshots/proj-t3g7-6b.png)
+![Screenshot 6.2](screenshots/proj-t3g7-6c.png)
 
-### 6.3 - Fish catching Rocks
+
+### 6.2 - Fish letting go Rocks
+
+![Screenshot 6.2](screenshots/proj-t3g7-6d.png)
+
+### 7.1 - Animated Sea Weed
 
 ![Screenshot 7.1](screenshots/proj-t3g7-7a.png)
 ![Screenshot 7.2](screenshots/proj-t3g7-7b.png)
 
-### 7.1 - Sea Weed
+### 7.2 - Animated Fish
 
-![Screenshot 7.1](screenshots/proj-t3g7-8a.png)
-![Screenshot 7.2](screenshots/proj-t3g7-8b.png)
-
-### 7.2 - My Animated Fish
-
-![Screenshot 7.3](screenshots/proj-t3g7-8c.png)
+![Screenshot 7.3](screenshots/proj-t3g7-7c.png)
