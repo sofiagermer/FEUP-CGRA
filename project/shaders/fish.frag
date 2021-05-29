@@ -18,17 +18,19 @@ struct lightProperties {
 };
 
 varying vec4 coords;
+varying vec3 headColor;
 
 varying vec2 vTextureCoord;
 
 uniform sampler2D uSampler;
 
+uniform float ratio;
+
 void main() {
 
-    vec4 color = texture2D(uSampler, vTextureCoord);
-
-    if (coords.x <= -0.03)
-        gl_FragColor = vec4(0.0, 0.0, 0.1, 0.6);
+    if (coords.x <= -ratio)
+        gl_FragColor = vec4(headColor[0], headColor[1], headColor[2], 0.6);
     else
-        gl_FragColor =  color;
+        gl_FragColor = texture2D(uSampler, vTextureCoord);
 }
+

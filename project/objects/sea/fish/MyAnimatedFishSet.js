@@ -15,7 +15,10 @@ export class MyAnimatedFishSet extends CGFobject {
         this.animatedFish = [];
         
         for (let n = 0; n < num_fishes; ++n) {
-            let animated_fish =  new MyAnimatedFish(this.scene);
+            let headRatio = (Math.random() * 0.01) + 0.01;
+            let headColor = [Math.random() * 0.1, Math.random() * 0.1, Math.random() * 0.1];
+
+            let animated_fish =  new MyAnimatedFish(this.scene, headRatio, headColor);
             this.animatedFish.push(animated_fish);
         }
     }   

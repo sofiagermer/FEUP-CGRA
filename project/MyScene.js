@@ -59,6 +59,8 @@ export class MyScene extends CGFscene {
         
         this.scaleFactor = 1;
         this.speedFactor = 1;
+
+        this.canDrop = false;
     }
 
     initAppearence(){
@@ -131,8 +133,8 @@ export class MyScene extends CGFscene {
         this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayFish = true;
-        this.displaySpongeBob = false;
+        this.displayFish = false;
+        this.displaySpongeBob = true;
         this.displaySeaFloor = true;
         this.displayWater = true;
         this.displayWeed = true;
@@ -199,57 +201,59 @@ export class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyW")) {
             this.movingFish.accelerate(0.01 );
-         //   this.spongeBob.accelerate(0.01 );
+            this.spongeBob.accelerate(0.01 );
         }
 
         if (this.gui.isKeyPressed("KeyS"))        {
             this.movingFish.accelerate(-0.01);
-         //   this.spongeBob.accelerate(-0.01);
+            this.spongeBob.accelerate(-0.01);
         }
 
         if (this.gui.isKeyPressed("KeyA"))        {
             this.movingFish.turn(-0.1);
-         //   this.spongeBob.turn(-0.1);
+            this.spongeBob.turn(-0.1);
         }
         
         if (this.gui.isKeyPressed("KeyD"))        {
             this.movingFish.turn(0.1);
-          //  this.spongeBob.turn(0.1);
+            this.spongeBob.turn(0.1);
         }
 
         if (this.gui.isKeyPressed("KeyR")) {
             this.movingFish.reset();
-          //  this.spongeBob.reset();
+            this.spongeBob.reset();
         }
 
         if (this.gui.isKeyPressed("KeyP"))        {
             this.movingFish.up();
-          //  this.spongeBob.up();
+            this.spongeBob.up();
         }
 
         if (this.gui.isKeyPressed("KeyL")) {
            this.movingFish.down();
-         //  this.spongeBob.down();
+           this.spongeBob.down();
         }
 
         if (this.gui.isKeyPressed("KeyC")){ 
-          //  this.movingFish.controlRock();
-           this.movingFish.apanhar();
-           // this.spongeBob.controlRock();
-        } 
-
-        if (this.gui.isKeyPressed("KeyF")){ 
+           if(this.canDrop){
+            console.log("LARGAR");
             this.movingFish.largar();
-           // this.movingFish.controlRock();
-           // this.spongeBob.controlRock();
-        }
+            this.spongeBob.largar();
+           }
+           else{
+            console.log("APANHAR");
+            this.movingFish.apanhar();
+            this.spongeBob.apanhar();
+           }
+
+        } 
     }
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
         this.shaderWater.setUniformsValues({ timeFactor: t / 100 % 100 });
-        this.seaWeedShader.setUniformsValues({ timeFactor: t / 50 % 100 });
+        this.seaWeedShader.setUniformsValues({ timeFactor: t / 1000 % 100 });
         this.t = t;
         if(this.displaySpongeBob){
             this.spongeBob.update();

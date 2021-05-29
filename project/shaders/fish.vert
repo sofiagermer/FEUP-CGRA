@@ -12,6 +12,8 @@ attribute vec2 aTextureCoord;
 
 uniform sampler2D uSampler2;
 
+varying vec3 headColor;
+
 varying vec4 coords;
 varying vec4 normal;
 

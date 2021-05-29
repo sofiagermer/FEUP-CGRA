@@ -25,7 +25,7 @@ export class MySeaWeed extends CGFobject {
 
     initTexture(){
         let weedTextures = [ new CGFtexture(this.scene, "images/sea_water.jpg"), new CGFtexture(this.scene, "images/red_algae.jpg")];
-        this.scene.weedTexture =  weedTextures[Math.floor(Math.random() * 2)];
+        this.weedTexture =  weedTextures[Math.floor(Math.random() * 2)];
         this.scene.seaWeedShader.setUniformsValues({ weedTex: 1 });
     }
 
@@ -50,7 +50,7 @@ export class MySeaWeed extends CGFobject {
     
     display(){
 
-        this.scene.weedTexture.bind(1);
+        this.weedTexture.bind(1);
         this.scene.pushMatrix();
             
             this.scene.translate(this.position[0], this.position[1], this.position[2]);

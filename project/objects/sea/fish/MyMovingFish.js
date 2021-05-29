@@ -51,6 +51,7 @@ export class MyMovingFish extends MyMovingObject {
         if(this.lowerBound()){
             if(!this.catchedRock){
                 this.catchRock();
+                this.scene.canDrop = true;
             }  
         }
     }
@@ -59,6 +60,7 @@ export class MyMovingFish extends MyMovingObject {
         if(this.lowerBound()){
             if(this.catchedRock){
                 this.letGoRock();
+                this.scene.canDrop = false;
             }
         }
     }

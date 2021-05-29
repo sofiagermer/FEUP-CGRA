@@ -24,26 +24,51 @@ export class MyMovingSpongeBob extends MyMovingObject {
         this.updateRockPos();
     }
 
-    controlRock(){
-        if(this.catchedRock) {
-            this.letGoRock();
-            this.catchedRock = false;
-            this.rock = null;
+    turn(val){
+        super.turn(val);
+        if(val > 0){
+            this.turningLeft = true;
         }
-        else {
-            this.catchRock();
+        else{
+            this.turningRight = true;
         }
     }
+
+    lowerBound(){
+        if(this.coordinates[1] < 2) return true;
+        return false;
+    }
+
+    apanhar(){
+        if(this.lowerBound()){
+            if(!this.catchedRock){
+                this.catchRock();
+                this.scene.canDrop = true;
+            }  
+        }
+    }
+
+    largar(){
+        if(this.lowerBound()){
+            if(this.catchedRock){
+                this.letGoRock();
+                this.scene.canDrop = false;
+            }
+        }
+    }
+
 
     catchRock() {
         this.rock = this.scene.rockSet.rockNearby(this.coordinates);
         if (this.rock != null) {
-            this.catchedRock = true;
+            if(this.rock.rockInNest(this.rock.getX, 1.3, this.rock.getZ) == false){
+                this.catchedRock = true;
+            }
         }
     }
 
     letGoRock(){
-        if(this.rockInNest()){
+        if(this.rock.rockInNest(this.rock.getX(), 1.3, this.rock.getZ())){
             if(this.indexNestRock == 0){
                 this.rock.setPosition(-1, 1.3, -1);
             }
@@ -72,19 +97,11 @@ export class MyMovingSpongeBob extends MyMovingObject {
                 this.rock.setPosition(1, 1.3, 1);
             }
             this.indexNestRock++;
-        }
-        else{
-            console.log("fora do ninho");
-            this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
+            this.catchedRock = false;
+            this.rock = null;
         }
     }
-
-    rockInNest() {
-        if(Math.hypot(this.coordinates[0],this.coordinates[1],this.coordinates[2]) < 9)
-          return true;
-        return false;
-      }
-
+   
     updateRockPos() {
         if (this.catchedRock) {
             var newPosition = [];
@@ -93,6 +110,10 @@ export class MyMovingSpongeBob extends MyMovingObject {
         }
     }
     
+    setVelocity(speed){
+        super.setVelocity(speed);
+    }
+
     reset() {
         if (this.catchedRock) {
             this.rock.setPosition(this.rock.getInitialX(), this.rock.getInitialY(), this.rock.getInitialZ());
@@ -100,5 +121,9 @@ export class MyMovingSpongeBob extends MyMovingObject {
             this.rock = null;
         }
         super.reset();
+    }
+
+    display(){
+        super.display();
     }
 }

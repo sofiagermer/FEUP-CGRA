@@ -11,10 +11,13 @@ import {MyEye} from './MyEye.js';
  * @param scene - Reference to MyScene object
 */
 export class MyFish extends CGFobject {
-    constructor(scene) {
+    constructor(scene, ratio, color) {
         super(scene);
+        this.ratio = ratio;
         this.initFish(scene);
+        this.color = color | [0.0, 0.0, 0.1];
         this.initShaders();
+
         this.initMaterials();
     }
 
@@ -28,16 +31,17 @@ export class MyFish extends CGFobject {
     }
 
     initShaders(){
-        this.scene.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
+        this.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
+        this.fishShader.setUniformsValues({ ratio: this.ratio, headColor: this.color});
     }
 
     initMaterials() {
-        this.scene.materialSkin = new CGFappearance(this.scene); //------ MUDAR O NOME DE skin, VER ONDE É ENVIADO PARA O SHADER
-        this.scene.materialSkin.setAmbient(0.0, 0.0, 0.5, 0.0);
-        this.scene.materialSkin.setDiffuse(0.0, 0.0, 0.0, 0.0);
-        this.scene.materialSkin.setSpecular(1.0,1.0,1.0,1.0);
-        this.scene.materialSkin.setEmission(0.3, 0.3, 0.3, 1.0);
-        this.scene.materialSkin.setShininess(10.0);  
+        this.materialSkin = new CGFappearance(this.scene);
+        this.materialSkin.setAmbient(0.0, 0.0, 0.5, 0.0);
+        this.materialSkin.setDiffuse(this.color[0], this.color[1], this.color[2], 0.6);
+        this.materialSkin.setSpecular(1.0,1.0,1.0,1.0);
+        this.materialSkin.setEmission(0.3, 0.3, 0.3, 1.0);
+        this.materialSkin.setShininess(10.0);  
 
         this.scene.materialFish = new CGFappearance(this.scene);
         this.scene.materialFish.setAmbient(0.0, 0.0, 0.0, 0.0);
@@ -81,7 +85,7 @@ export class MyFish extends CGFobject {
         this.scene.pushMatrix();
         this.scene.scale(0.8,0.6,0.5);
         this.scene.materialFish.apply();
-        this.scene.setActiveShader(this.scene.fishShader);
+        this.scene.setActiveShader(this .fishShader);
         this.fishBody.display();
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
@@ -91,7 +95,7 @@ export class MyFish extends CGFobject {
         this.scene.scale(0.4,0.4,0.4);
         this.scene.translate(1.63, 0.5, 0.0);
         this.scene.rotate(this.tail.angle,0,1,0);
-        this.scene.materialSkin.apply();
+        this.materialSkin.apply();
         this.tail.display(); 
         this.scene.popMatrix();
 
@@ -101,7 +105,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(-this.rightFin.angle,1,0,0);
         this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
-        this.scene.materialSkin.apply();
+        this.materialSkin.apply();
         this.rightFin.display(); 
         this.scene.popMatrix(); 
 
@@ -111,7 +115,7 @@ export class MyFish extends CGFobject {
         this.scene.rotate(this.leftFin.angle,1,0,0);
         this.scene.translate(-1,-0,0);
         this.scene.scale(0.2,0.2,0.2);
-        this.scene.materialSkin.apply();
+        this.materialSkin.apply();
         this.leftFin.display(); 
         this.scene.popMatrix(); 
 
@@ -120,7 +124,7 @@ export class MyFish extends CGFobject {
         this.scene.translate(-0.2,0.6,0);
         this.scene.rotate(-Math.PI,0,1,0);
         this.scene.scale(0.3,0.3,0.3);
-        this.scene.materialSkin.apply();
+        this.materialSkin.apply();
         this.topFin.display(); 
         this.scene.popMatrix(); 
 

@@ -6,8 +6,8 @@ import { MyMovingFish } from "./MyMovingFish.js";
 
 
 export class MyAnimatedFish extends MyMovingFish {
-    constructor(scene){
-        super(scene, new MyFish(scene));
+    constructor(scene,  headRatio, headColor){
+        super(scene, new MyFish(scene, headRatio, headColor));
         this.coordinates = [Math.random() * 35 - 20, Math.random() * 4 + 1, Math.random() * 35 - 20];
         /**Each turn can take between 2 to 10 seconds */
         this.period = Math.random() * (10 - 2) + 2;
@@ -25,8 +25,8 @@ export class MyAnimatedFish extends MyMovingFish {
     }
 
     display() {
-        console.log(this.coordinates[0]);
-        console.log(this.coordinates[2])
+        //console.log(this.coordinates[0]);
+        //console.log(this.coordinates[2])
         super.display();
     }
 
