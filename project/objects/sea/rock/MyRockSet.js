@@ -13,8 +13,8 @@ export class MyRockSet extends CGFobject {
         this.rockSet=[];
         this.numRocks = numRocks;
         for(var i=0; i< numRocks; i++){
-            var transX = Math.random()*10;
-            var transZ = Math.random()*10;
+            var transX = Math.random()*50 - 25;
+            var transZ = Math.random()*50 - 25;
             var scaleX = (Math.floor(Math.random() * 10) + 11) / 70;
             var scaleY = (Math.floor(Math.random() * 10) + 11) / 70;
             var scaleZ = (Math.floor(Math.random() * 10) + 11) / 70;
@@ -48,7 +48,7 @@ export class MyRockSet extends CGFobject {
     display(){
         for (var i = 0; i < this.numRocks; i++){
             this.scene.pushMatrix();    
-            this.scene.translate(this.rockSet[i].transX,this.rockSet[i].transY, this.rockSet[i].transZ);
+            this.scene.translate(this.rockSet[i].transX,this.rockSet[i].transY-0.25, this.rockSet[i].transZ);
             this.scene.rotate(Math.PI/2,0,1,0);
             this.scene.scale( this.rockSet[i].scaleX,  this.rockSet[i].scaleY,  this.rockSet[i].scaleZ); 
             this.scene.materialRock.apply();

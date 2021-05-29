@@ -4,6 +4,7 @@ import {MyRockSet} from './rock//MyRockSet.js';
 import {MyPillar} from './pillar/MyPillar.js';
 import { MyWeedSet } from './sea_weed/MyWeedSet.js';
 import { MySeaWeed } from './sea_weed/MySeaWeed.js';
+import { MyAnimatedFish } from './fish/MyAnimatedFish.js';
 
 export class MySeaFloor extends CGFobject {
     constructor(scene) {

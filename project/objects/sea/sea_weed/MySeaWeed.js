@@ -8,7 +8,7 @@ export class MySeaWeed extends CGFobject {
 
         this.height = - (Math.random() * this.offset) % 5.0 + 2.0;
 
-        this.pyramid = new MyPyramid(this.scene, 0.5, 3, 4, 3);       
+        this.pyramid = new MyPyramid(this.scene, 0.4, 3, 4, 3);       
 
         this.offset = offset;
         this.size = size;
@@ -56,6 +56,7 @@ export class MySeaWeed extends CGFobject {
             
             this.scene.translate(this.position[0], this.position[1], this.position[2]);
             this.scene.rotate(Math.PI, 0, 1, 1);
+            //this.scene.rotate(Math.PI, 0, 1, 0);
             this.scene.seaWeedShader.setUniformsValues({ phaseFactor: this.phase });
 
             
