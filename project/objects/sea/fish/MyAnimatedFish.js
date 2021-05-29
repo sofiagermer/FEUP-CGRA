@@ -30,4 +30,12 @@ export class MyAnimatedFish extends MyMovingFish {
         super.display();
     }
 
+    setShaderColors(headColor){
+        super.setShaderColors(headColor);
+    }
+
+    setMaterialColor(headColor){
+        super.setMaterialColor(headColor);
+    }
+
 }

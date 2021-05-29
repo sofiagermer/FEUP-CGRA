@@ -32,13 +32,19 @@ export class MyFish extends CGFobject {
 
     initShaders(){
         this.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
-        this.fishShader.setUniformsValues({ ratio: this.ratio, headColor: this.color});
+        //this.fishShader.setUniformsValues({ ratio: this.ratio, headColor: this.color});
+        /*this.fishShader.shader.setUniformsValues({
+            r: this.colors[0],
+            g: this.colors[1],
+            b: this.colors[2],
+          });*/
+        this.fishShader.setUniformsValues({ r: 1, g: 0.5, b: 0 });
     }
 
     initMaterials() {
         this.materialSkin = new CGFappearance(this.scene);
         this.materialSkin.setAmbient(0.0, 0.0, 0.5, 0.0);
-        this.materialSkin.setDiffuse(this.color[0], this.color[1], this.color[2], 0.6);
+        this.materialSkin.setDiffuse(this.color[0], this.color[1], this.color[2], 1.0);
         this.materialSkin.setSpecular(1.0,1.0,1.0,1.0);
         this.materialSkin.setEmission(0.3, 0.3, 0.3, 1.0);
         this.materialSkin.setShininess(10.0);  
@@ -78,6 +84,19 @@ export class MyFish extends CGFobject {
             this.leftFin.angle =  0;
             this.rightFin.angle =  Math.sin(0.4* this.scene.t) * 0.2;
         }
+    }
+
+    setShaderColors(headColor){
+        this.fishShader.setUniformsValues({ r: headColor[0], g: headColor[1], b: headColor[2]});
+    }
+
+    setMaterialColor(headColor){
+        this.materialSkin = new CGFappearance(this.scene);
+        this.materialSkin.setAmbient(0.0, 0.0, 0.5, 0.0);
+        this.materialSkin.setDiffuse(headColor[0], headColor[1], headColor[2], 0.6);
+        this.materialSkin.setSpecular(1.0,1.0,1.0,1.0);
+        this.materialSkin.setEmission(0.3, 0.3, 0.3, 1.0);
+        this.materialSkin.setShininess(10.0);
     }
 
     display(){

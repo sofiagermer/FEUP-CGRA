@@ -18,7 +18,15 @@ export class MyMovingFish extends MyMovingObject {
         this.nestRocks = [];
         this.indexNestRock = 0;
     }
-    
+
+    setShaderColors(headColor){
+        this.fish.setShaderColors(headColor);
+    }
+
+    setMaterialColor(headColor){
+        this.fish.setMaterialColor(headColor);
+    }
+
     update(){
         //update fish actual movement
         super.update();
