@@ -46,7 +46,7 @@ export class MySeaWeed extends CGFobject {
 
         this.position = this.generatePos(this.ang, LIMIT_Y, LIMIT_Z);
 
-        this.phase = (Math.random() + 0.01) * 0.1;
+        this.phase = (Math.random() + 0.01) - 0.25;
     }
     
     display(){

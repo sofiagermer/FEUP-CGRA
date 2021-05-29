@@ -13,31 +13,34 @@ export class MyAnimatedFish extends MyMovingObject {
     constructor(scene, startX, startY, startZ) {
         let fish = new MyMovingFish(scene, new MyFish(scene));
         super(scene, fish);
-        this.moving_fish = fish;
         this.scene = scene;
-        this.ang = Math.random() * 2.0 * Math.PI;
-        this.position = [startX, startY, startZ];
+        this.circle_angle = 0;
+        this.startX = startX;
+        this.startY = startY;
+        this.startZ = startZ;
+        this.pos = [this.startX, this.startY, this.startZ];
     }
 
     move(value) {
         this.pos = value;
     }
 
-    change_angle(value) {
-        this.ang = value;
+    change_ang(value) {
+        this.circle_angle = value;
     }
-    
+
+
     update() {
-        this.move([3*Math.sin(this.ang)+this.position[0], this.position[1], 3*Math.cos(this.ang)+this.position[2]]);
-        this.ang -= Math.PI/100;  
-        this.change_angle(this.ang);
+        this.move([3*Math.sin(this.circle_angle)+this.startX,this.startY,3*Math.cos(this.circle_angle)+this.startZ]);
+        this.circle_angle -= Math.PI/100;
+        this.change_ang(this.circle_angle);
     }
    
 
     display() {
         this.scene.pushMatrix();
-        this.scene.translate(this.position[0], this.position[1], this.position[2]);
-        this.scene.rotate(this.ang,0,1,0);
+        this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
+        this.scene.rotate(this.circle_angle,0,1,0);
         this.object.display();
         this.scene.popMatrix();
     
