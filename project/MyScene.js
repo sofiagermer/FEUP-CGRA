@@ -123,17 +123,17 @@ export class MyScene extends CGFscene {
 
     initDisplayValues(){
         this.displayAxis = false;
-        this.displayCubeMap = false;
+        this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayFish =false;
+        this.displayFish = true;
         this.displaySpongeBob = false;
-        this.displaySeaFloor = false;
-        this.displayWater = false;
+        this.displaySeaFloor = true;
+        this.displayWater = true;
         this.displayWeed = true;
-        this.displayPillars = false;
-        this.displayPineapple = false;
-        this.displayAnimatedFishes = false;
+        this.displayPillars = true;
+        this.displayPineapple = true;
+        this.displayAnimatedFishes = true;
 
     }
 
