@@ -2,11 +2,7 @@
 import {CGFobject,CGFappearance, CGFscene, CGFshader } from '../../../../../lib/CGF.js';
 import{MyRock} from './MyRock.js';
 
-/**
-* MyFish
-* @constructor
- * @param scene - Reference to MyScene object
-*/
+
 export class MyRockSet extends CGFobject {
     constructor(scene, numRocks) {
         super(scene);

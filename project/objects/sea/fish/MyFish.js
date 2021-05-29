@@ -32,12 +32,6 @@ export class MyFish extends CGFobject {
 
     initShaders(){
         this.fishShader = new CGFshader(this.scene.gl, "shaders/fish.vert", "shaders/fish.frag");
-        //this.fishShader.setUniformsValues({ ratio: this.ratio, headColor: this.color});
-        /*this.fishShader.shader.setUniformsValues({
-            r: this.colors[0],
-            g: this.colors[1],
-            b: this.colors[2],
-          });*/
         this.fishShader.setUniformsValues({ r: 1, g: 0.5, b: 0 });
     }
 

@@ -12,40 +12,35 @@ varying vec4 light;
 varying vec4 coords;
 
 struct lightProperties {
-    vec4 position;                  // Default: (0, 0, 1, 0)
-    vec4 ambient;                   // Default: (0, 0, 0, 1)
-    vec4 diffuse;                   // Default: (0, 0, 0, 1)
-    vec4 specular;                  // Default: (0, 0, 0, 1)
+    vec4 position;                  
+    vec4 ambient;                   
+    vec4 diffuse;                  
+    vec4 specular;                  
     vec4 half_vector;
-    vec3 spot_direction;            // Default: (0, 0, -1)
-    float spot_exponent;            // Default: 0 (possible values [0, 128]
-    float spot_cutoff;              // Default: 180 (possible values [0, 90] or 180)
-    float constant_attenuation;     // Default: 1 (value must be >= 0)
-    float linear_attenuation;       // Default: 0 (value must be >= 0)
-    float quadratic_attenuation;    // Default: 0 (value must be >= 0)
-    bool enabled;                   // Default: false
+    vec3 spot_direction;            
+    float spot_exponent;            
+    float spot_cutoff;              
+    float constant_attenuation;     
+    float linear_attenuation;       
+    float quadratic_attenuation;    
+    bool enabled;                   
 };
 
 struct materialProperties {
-    vec4 ambient;                   // Default: (0, 0, 0, 1)
-    vec4 diffuse;                   // Default: (0, 0, 0, 1)
-    vec4 specular;                  // Default: (0, 0, 0, 1)
-    vec4 emission;                  // Default: (0, 0, 0, 1)
-    float shininess;                // Default: 0 (possible values [0, 128])
+    vec4 ambient;                   
+    vec4 diffuse;                   
+    vec4 specular;                  
+    vec4 emission;                  
+    float shininess;                
 };
 
 uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 uniform mat4 uNMatrix;
 
-uniform bool uLightEnabled;	// not being used
-uniform bool uLightModelTwoSided;	// not being used
-
-#define NUMBER_OF_LIGHTS 8
-
 uniform vec4 uGlobalAmbient;
 
-uniform lightProperties uLight[NUMBER_OF_LIGHTS];
+uniform lightProperties uLight[8];
 
 uniform materialProperties uFrontMaterial;
 uniform materialProperties uBackMaterial;
@@ -57,7 +52,7 @@ vec4 lighting(vec4 vertex, vec3 E, vec3 N) {
 
     vec4 result = vec4(0.0, 0.0, 0.0, 0.0);
 
-    for (int i = 0; i < NUMBER_OF_LIGHTS; i++) {
+    for (int i = 0; i < 8; i++) {
         if (uLight[i].enabled) {
 
             float att = 1.0;

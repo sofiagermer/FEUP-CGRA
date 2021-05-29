@@ -53,7 +53,7 @@ export class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.initDisplayValues();
 
-        this.texturesID = { 'Demo': 0, 'Water': 1, 'Test':2 };
+        this.texturesID = { 'Demo': 0, 'Water': 1};
         this.selectedTexture = 1;
         this.updateTextures();
         
@@ -87,13 +87,6 @@ export class MyScene extends CGFscene {
         this.textureRight_demo = new CGFtexture(this, 'images/demo_cubemap/right.png');
         this.textureFront_demo = new CGFtexture(this, 'images/demo_cubemap/front.png');
         this.textureBack_demo = new CGFtexture(this, 'images/demo_cubemap/back.png');
-
-        this.textureBottom_test = new CGFtexture(this, 'images/test_cubemap/ny.png');
-        this.textureTop_test = new CGFtexture(this, 'images/test_cubemap/py.png');
-        this.textureLeft_test = new CGFtexture(this, 'images/test_cubemap/nx.png');
-        this.textureRight_test = new CGFtexture(this, 'images/test_cubemap/px.png');
-        this.textureFront_test = new CGFtexture(this, 'images/test_cubemap/nz.png');
-        this.textureBack_test = new CGFtexture(this, 'images/test_cubemap/pz.png');
 
         this.textureBottom_water = new CGFtexture(this, 'images/underwater_cubemap/bottom.jpg');
         this.textureTop_water = new CGFtexture(this, 'images/underwater_cubemap/top.jpg');
@@ -152,14 +145,6 @@ export class MyScene extends CGFscene {
             this.textureRight = this.textureRight_water;
             this.textureFront = this.textureFront_water;
             this.textureBack = this.textureBack_water;
-        }
-        else if(this.selectedTexture == 2){
-            this.textureBottom = this.textureBottom_test;
-            this.textureTop = this.textureTop_test;
-            this.textureLeft = this.textureLeft_test;
-            this.textureRight = this.textureRight_test;
-            this.textureFront = this.textureFront_test;
-            this.textureBack = this.textureBack_test;
         }
         else{
             this.setDefaultTextures();

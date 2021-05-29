@@ -25,8 +25,6 @@ export class MyAnimatedFish extends MyMovingFish {
     }
 
     display() {
-        //console.log(this.coordinates[0]);
-        //console.log(this.coordinates[2])
         super.display();
     }
 
