@@ -13,9 +13,8 @@ export class MyAnimatedFish extends MyMovingObject {
     constructor(scene, startX, startY, startZ) {
         let fish = new MyMovingFish(scene, new MyFish(scene));
         super(scene, fish);
-        this.moving_fish = fish;
         this.scene = scene;
-        this.circle_angle = Math.random() * 2.0 * Math.PI;
+        this.circle_angle = 0;
         this.startX = startX;
         this.startY = startY;
         this.startZ = startZ;
@@ -26,15 +25,15 @@ export class MyAnimatedFish extends MyMovingObject {
         this.pos = value;
     }
 
-    change_angle(value) {
+    change_ang(value) {
         this.circle_angle = value;
     }
 
 
     update() {
         this.move([3*Math.sin(this.circle_angle)+this.startX,this.startY,3*Math.cos(this.circle_angle)+this.startZ]);
-        this.circle_angle -= Math.PI/100;  
-        this.change_angle(this.circle_angle);
+        this.circle_angle -= Math.PI/100;
+        this.change_ang(this.circle_angle);
     }
    
 

@@ -8,7 +8,7 @@ export class MySeaWeed extends CGFobject {
 
         this.height = - (Math.random() * this.offset) % 5.0 + 2.0;
 
-        this.pyramid = new MyPyramid(this.scene, 0.4, 3, 4, 3);       
+        this.pyramid = new MyPyramid(this.scene, 0.4, 3, 3, 3);       
 
         this.offset = offset;
         this.size = size;
@@ -26,7 +26,7 @@ export class MySeaWeed extends CGFobject {
     
     initTexture(){
         this.scene.weedTexture = new CGFtexture(this.scene, "images/sea_water.jpg");
-        this.scene.seaWeedShader.setUniformsValues({ weedTex: 0 });
+        this.scene.seaWeedShader.setUniformsValues({ weedTex: 1 });
 
     }
 
@@ -46,12 +46,12 @@ export class MySeaWeed extends CGFobject {
 
         this.position = this.generatePos(this.ang, LIMIT_Y, LIMIT_Z);
 
-        this.phase = (Math.random() + 0.01) * 0.2;
+        this.phase = (Math.random() + 0.01) - 0.25;
     }
     
     display(){
 
-        this.scene.weedTexture.bind(0);
+        this.scene.weedTexture.bind(1);
         this.scene.pushMatrix();
             
             this.scene.translate(this.position[0], this.position[1], this.position[2]);
