@@ -8,7 +8,7 @@ export class MySeaWeed extends CGFobject {
 
         this.height = - (Math.random() * this.offset) % 5.0 + 2.0;
 
-        this.pyramid = new MyPyramid(this.scene, 0.4, 3, 3, 3);       
+        this.pyramid = new MyPyramid(this.scene, 0.3, Math.random()*3+1, 4, 4);       
 
         this.offset = offset;
         this.size = size;
@@ -23,11 +23,10 @@ export class MySeaWeed extends CGFobject {
         this.scene.seaWeedShader = new CGFshader(this.scene.gl, 'shaders/seaweed.vert', 'shaders/seaweed.frag');
     }
 
-    
     initTexture(){
-        this.scene.weedTexture = new CGFtexture(this.scene, "images/sea_water.jpg");
+        let weedTextures = [ new CGFtexture(this.scene, "images/sea_water.jpg"), new CGFtexture(this.scene, "images/red_algae.jpg")];
+        this.scene.weedTexture =  weedTextures[Math.floor(Math.random() * 2)];
         this.scene.seaWeedShader.setUniformsValues({ weedTex: 1 });
-
     }
 
     generatePos(minAng, height, maxAng){
