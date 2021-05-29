@@ -263,6 +263,7 @@ export class MyScene extends CGFscene {
         
         
         this.defaultAppearance.apply();
+
         // Draw axis
         if (this.displayAxis){
             this.pushMatrix();
@@ -270,6 +271,13 @@ export class MyScene extends CGFscene {
             this.popMatrix();
         }
         
+        this.displayBasicShapes();
+        this.displaySeaElements();
+        this.displayMovingElements();    
+
+        // ---- END Primitive drawing section
+    }
+    displayBasicShapes(){
         if(this.displaySphere){
             this.pushMatrix();
             this.materialSphere.apply();
@@ -289,7 +297,8 @@ export class MyScene extends CGFscene {
             this.cubeMap.display();
             this.popMatrix();
         }
-
+    }
+    displaySeaElements(){
         if(this.displaySeaFloor){
             this.pushMatrix();
             this.seaFloor.display();
@@ -315,6 +324,14 @@ export class MyScene extends CGFscene {
             this.popMatrix();
         }
 
+        if(this.displayWeed){
+            this.pushMatrix();
+            this.weed.display();
+            this.popMatrix();
+        }
+    }
+
+    displayMovingElements(){
         if(this.displayFish){
             this.pushMatrix();
             this.movingFish.display();
@@ -327,17 +344,11 @@ export class MyScene extends CGFscene {
             this.popMatrix();
         }
 
+        
         if(this.displayAnimatedFishes){
             this.pushMatrix();
             this.animatedFishSet.display();
             this.popMatrix();
         }
-
-        if(this.displayWeed){
-            this.pushMatrix();
-            this.weed.display();
-            this.popMatrix();
-        }
-        // ---- END Primitive drawing section
     }
 }
