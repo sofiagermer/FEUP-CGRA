@@ -14,7 +14,7 @@ import { MyPillarSet } from "./objects/sea/pillar/MyPillarSet.js";
 import { MyAnimatedFish } from "./objects/sea/fish/MyAnimatedFish.js";
 import { CGFcamera2 } from "./Camera2.js";
 import { MyAnimatedFishSet } from "./objects/sea/fish/MyAnimatedFishSet.js";
-
+import { MyWeedSet } from './objects/sea/sea_weed/MyWeedSet.js';
 /**
 * MyScene
 * @constructor
@@ -115,10 +115,11 @@ export class MyScene extends CGFscene {
         this.sphere = new MySphere(this, 16, 8);
         this.cubeMap = new MyCubeMap(this);
         this.cylinder = new MyCylinder(this, 19);
-        //this.movingFish = new MyMovingFish(this, new MyFish(this));
+        this.movingFish = new MyMovingFish(this, new MyFish(this));
         this.seaFloor = new MySeaFloor(this);
         this.rockSet = new MyRockSet(this, 40);
         this.water = new MyWater(this);
+        this.weed = new MyWeedSet(this, 40, 6, 3);
         this.pineapple = new MyNeast(this);
         this.pillars = new MyPillarSet(this);
         this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));    
@@ -130,13 +131,14 @@ export class MyScene extends CGFscene {
         this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayFish = false;
-        this.displaySpongeBob = true;
+        this.displayFish = true;
+        this.displaySpongeBob = false;
         this.displaySeaFloor = true;
         this.displayWater = true;
-        this.displayPillars = true;
+        this.displayWeed = false;
+        this.displayPillars = false;
         this.displayPineapple = false;
-        this.displayAnimatedFishes = true;
+        this.displayAnimatedFishes = false;
 
     }
 
@@ -328,6 +330,12 @@ export class MyScene extends CGFscene {
         if(this.displayAnimatedFishes){
             this.pushMatrix();
             this.animatedFishSet.display();
+            this.popMatrix();
+        }
+
+        if(this.displayWeed){
+            this.pushMatrix();
+            this.weed.display();
             this.popMatrix();
         }
         // ---- END Primitive drawing section

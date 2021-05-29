@@ -2,17 +2,13 @@ import {CGFobject,CGFappearance, CGFscene, CGFshader , CGFtexture} from '../../.
 import {MyPlane} from '../basic_shapes/MyPlane.js';
 import {MyRockSet} from './rock//MyRockSet.js';
 import {MyPillar} from './pillar/MyPillar.js';
-import { MyWeedSet } from './sea_weed/MyWeedSet.js';
 import { MySeaWeed } from './sea_weed/MySeaWeed.js';
 import { MyAnimatedFish } from './fish/MyAnimatedFish.js';
 
 export class MySeaFloor extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.sand = new MyPlane(this.scene, 50);
-
-        this.weed = new MyWeedSet(this.scene, 40, 6, 3);
-        
+        this.sand = new MyPlane(this.scene, 50);       
         this.initShaders();
     }
 
@@ -35,22 +31,5 @@ export class MySeaFloor extends CGFobject {
         this.sand.display();
         this.scene.setActiveShader(this.scene.defaultShader);
         this.scene.popMatrix();
-        
-        this.displayWeed();   
-
-        this.scene.pushMatrix();
-        this.weed.display();
-        this.scene.popMatrix();
-
-    }
-
-    displayWeed(){
-        /*this.scene.pushMatrix();
-        this.scene.setActiveShader(this.scene.shaderSeaWeed);
-        for(var i = 0; i < 20; i++){            
-            this.weed.weedSet[i].display();
-        }
-        this.scene.setActiveShader(this.scene.defaultShader);
-        this.scene.popMatrix();*/
     }
 }
