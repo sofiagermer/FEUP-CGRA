@@ -130,17 +130,17 @@ export class MyScene extends CGFscene {
 
     initDisplayValues(){
         this.displayAxis = false;
-        this.displayCubeMap = true;
+        this.displayCubeMap = false;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayFish = false;
-        this.displaySpongeBob = true;
-        this.displaySeaFloor = true;
-        this.displayWater = true;
-        this.displayWeed = true;
-        this.displayPillars = true;
+        this.displayFish =false;
+        this.displaySpongeBob = false;
+        this.displaySeaFloor = false;
+        this.displayWater = false;
+        this.displayWeed = false;
+        this.displayPillars = false;
         this.displayPineapple = false;
-        this.displayAnimatedFishes = true;
+        this.displayAnimatedFishes = false;
 
     }
 
@@ -236,12 +236,10 @@ export class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyC")){ 
            if(this.canDrop){
-            console.log("LARGAR");
             this.movingFish.largar();
             this.spongeBob.largar();
            }
            else{
-            console.log("APANHAR");
             this.movingFish.apanhar();
             this.spongeBob.apanhar();
            }
