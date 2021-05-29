@@ -198,7 +198,6 @@ export class MyScene extends CGFscene {
     checkKeys()  {
 
         if (this.gui.isKeyPressed("KeyW")) {
-            console.log("w");
             this.movingFish.accelerate(0.01 );
          //   this.spongeBob.accelerate(0.01 );
         }
@@ -234,13 +233,13 @@ export class MyScene extends CGFscene {
         }
 
         if (this.gui.isKeyPressed("KeyC")){ 
-            this.movingFish.controlRock();
-           //this.movingFish.apanhar();
+          //  this.movingFish.controlRock();
+           this.movingFish.apanhar();
            // this.spongeBob.controlRock();
         } 
 
         if (this.gui.isKeyPressed("KeyF")){ 
-            //this.movingFish.largar();
+            this.movingFish.largar();
            // this.movingFish.controlRock();
            // this.spongeBob.controlRock();
         }

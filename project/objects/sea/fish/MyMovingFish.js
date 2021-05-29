@@ -28,7 +28,6 @@ export class MyMovingFish extends MyMovingObject {
         this.turningLeft = false;
         this.turningRight = false;
         if (this.catchedRock){
-            console.log("Swimming with a rock");
             this.updateRockPos();
         }
     }
@@ -59,13 +58,14 @@ export class MyMovingFish extends MyMovingObject {
 
     largar(){
         if(this.lowerBound()){
-            this.letGoRock();
-            this.catchedRock = false;
-            this.rock = null;
+            console.log("letting go rock");
+            if(this.catchedRock){
+                this.letGoRock();
+            }
         }
     }
     
-    controlRock(){
+    /*controlRock(){
         if(this.lowerBound()){
             if(!this.catchedRock){
                 console.log("VOU APANHAR PEDRA");
@@ -78,21 +78,22 @@ export class MyMovingFish extends MyMovingObject {
                 this.rock = null;
             }
         }
-    }
+    }*/
 
     catchRock() {
         this.rock = this.scene.rockSet.rockNearby(this.coordinates);
         if (this.rock != null) {
-            if(this.rock.getInNest() == false){
+            if(this.rock.rockInNest(this.rock.getX, 1.3, this.rock.getZ) == false){
                // console.log("Apanhei uma pedra que não estava no ninho");
                 this.catchedRock = true;
-                this.rock.placeInNest();
             }
         }
     }
 
     letGoRock(){
-        if(this.rock.rockInNest()){
+        console.log(Math.hypot(this.rock.getX(),1.3,this.rock.getZ()));
+        if(this.rock.rockInNest(this.rock.getX(), 1.3, this.rock.getZ())){
+            console.log("aqui aqui aqui");
             if(this.indexNestRock == 0){
                 this.rock.setPosition(-1, 1.3, -1);
             }
@@ -121,10 +122,8 @@ export class MyMovingFish extends MyMovingObject {
                 this.rock.setPosition(1, 1.3, 1);
             }
             this.indexNestRock++;
-        }
-        else{
-            //console.log("fora do ninho");
-            this.rock.setPosition(this.rock.getX(), 1.3, this.rock.getZ());
+            this.catchedRock = false;
+            this.rock = null;
         }
     }
 
