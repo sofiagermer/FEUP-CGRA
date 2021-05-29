@@ -50,7 +50,6 @@ export class MyMovingFish extends MyMovingObject {
     apanhar(){
         if(this.lowerBound()){
             if(!this.catchedRock){
-                console.log("VOU APANHAR PEDRA");
                 this.catchRock();
             }  
         }
@@ -58,7 +57,6 @@ export class MyMovingFish extends MyMovingObject {
 
     largar(){
         if(this.lowerBound()){
-            console.log("letting go rock");
             if(this.catchedRock){
                 this.letGoRock();
             }
@@ -122,5 +120,13 @@ export class MyMovingFish extends MyMovingObject {
             this.rock = null;
         }
         super.reset();
+    }
+
+    setVelocity(speed){
+        super.setVelocity(speed);
+    }
+
+    display(){
+        super.display();
     }
 }

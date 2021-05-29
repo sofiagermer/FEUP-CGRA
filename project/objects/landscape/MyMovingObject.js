@@ -63,6 +63,10 @@ export class MyMovingObject extends CGFobject {
         this.orientationAngle = 0.0;
         this.coordinates = [0.0, 5.0, 0.0];
     }
+
+    setVelocity(speed){
+        this.speed = speed;
+    }
 }
 
 

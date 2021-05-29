@@ -123,7 +123,7 @@ export class MyScene extends CGFscene {
         this.pineapple = new MyNeast(this);
         this.pillars = new MyPillarSet(this);
         this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));    
-        this.animatedFishSet = new MyAnimatedFishSet(this, 15);
+        this.animatedFishSet = new MyAnimatedFishSet(this, 3);
     }
 
     initDisplayValues(){
@@ -355,7 +355,6 @@ export class MyScene extends CGFscene {
             this.spongeBob.display();
             this.popMatrix();
         }
-
         
         if(this.displayAnimatedFishes){
             this.pushMatrix();

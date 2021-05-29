@@ -28,7 +28,8 @@ export class MyInterface extends CGFinterface {
         objects.add(this.scene, 'displayWater').name('Display Water');
         objects.add(this.scene, 'displayPineapple').name('Display Pine');
         objects.add(this.scene, 'displaySpongeBob').name('Display Sponge');
-        objects.add(this.scene, 'displayWeed').name('Display Weed');
+        objects.add(this.scene, 'displaySpongeBob').name('Display Sponge');
+        objects.add(this.scene, 'displayAnimatedFishes').name('Display Afishes');
 
         //Slider element in GUI
         var movement = this.gui.addFolder('Movement');
