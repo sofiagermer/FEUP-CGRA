@@ -28,8 +28,8 @@ uniform float ratio;
 
 void main() {
 
-    if (coords.x <= -0.03)
-        gl_FragColor = vec4(0.0, 0.0, 0.1, 0.6);
+    if (coords.x <= -ratio)
+        gl_FragColor = vec4(headColor[0], headColor[1], headColor[2], 0.6);
     else
         gl_FragColor = texture2D(uSampler, vTextureCoord);
 }
