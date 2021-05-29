@@ -239,22 +239,7 @@ export class MyScene extends CGFscene {
            // this.spongeBob.controlRock();
         }
     }
-    /*
-    controlRock(){
-        if(this.movingFish.lowerBound()){
-            console.log("tá em baixo");
-            if(!this.movingFish.catchedRock){
-                console.log("VOU APANHAR PEDRA");
-                this.movingFish.catchRock();
-            }
-            else {
-                console.log("VOU LARGAR PEDRA");
-                this.movingFish.letGoRock();
-                this.movingFish.catchedRock = false;
-                this.movingFish.rock = null;
-            }
-        }
-    }*/
+
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();

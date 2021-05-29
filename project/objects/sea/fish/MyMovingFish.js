@@ -64,36 +64,18 @@ export class MyMovingFish extends MyMovingObject {
             }
         }
     }
-    
-    /*controlRock(){
-        if(this.lowerBound()){
-            if(!this.catchedRock){
-                console.log("VOU APANHAR PEDRA");
-                this.catchRock();
-            }
-            else {
-                console.log("VOU LARGAR PEDRA");
-                this.letGoRock();
-                this.catchedRock = false;
-                this.rock = null;
-            }
-        }
-    }*/
 
     catchRock() {
         this.rock = this.scene.rockSet.rockNearby(this.coordinates);
         if (this.rock != null) {
             if(this.rock.rockInNest(this.rock.getX, 1.3, this.rock.getZ) == false){
-               // console.log("Apanhei uma pedra que não estava no ninho");
                 this.catchedRock = true;
             }
         }
     }
 
     letGoRock(){
-        console.log(Math.hypot(this.rock.getX(),1.3,this.rock.getZ()));
         if(this.rock.rockInNest(this.rock.getX(), 1.3, this.rock.getZ())){
-            console.log("aqui aqui aqui");
             if(this.indexNestRock == 0){
                 this.rock.setPosition(-1, 1.3, -1);
             }
