@@ -31,7 +31,7 @@ export class MyPyramid extends CGFobject {
         this.texCoords = []
 
         for (let i = 0; i <= this.stacks; i++) {
-            this.currentAngle = 0
+            this.currentAngle = 0;
             for (let j = 0; j <= this.slices; j++) {
 
                 this.vertices.push(this.currentRadius * Math.cos(this.currentAngle), this.currentRadius * Math.sin(this.currentAngle), this.currentHeight);

@@ -17,7 +17,7 @@ void main() {
     vTextureCoord = aTextureCoord;
 
     vec3 vertexPosition = aVertexPosition;
-    vertexPosition.xz += 0.7 * sin(timeFactor * vertexPosition.y * phaseFactor) * vertexPosition.y;
+    vertexPosition.xz +=  sin(timeFactor * vertexPosition.y * phaseFactor) * vertexPosition.y;
 
     gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
 }

@@ -127,7 +127,7 @@ export class MyScene extends CGFscene {
     }
 
     initDisplayValues(){
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayCubeMap = true;
         this.displayCylinder = false;
         this.displaySphere = false;
@@ -135,10 +135,10 @@ export class MyScene extends CGFscene {
         this.displaySpongeBob = false;
         this.displaySeaFloor = true;
         this.displayWater = true;
-        this.displayWeed = false;
-        this.displayPillars = false;
+        this.displayWeed = true;
+        this.displayPillars = true;
         this.displayPineapple = false;
-        this.displayAnimatedFishes = false;
+        this.displayAnimatedFishes = true;
 
     }
 
@@ -172,7 +172,12 @@ export class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera2(0.5, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera2(1.5,
+            0.1,
+            500,
+            vec3.fromValues(2, 2, 2),
+            vec3.fromValues(0, 2, 0)
+          );
     }
 
     setDefaultAppearance() {
