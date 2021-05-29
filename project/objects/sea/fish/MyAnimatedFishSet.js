@@ -15,7 +15,7 @@ export class MyAnimatedFishSet extends CGFobject {
         this.animatedFish = [];
         
         for (let n = 0; n < num_fishes; ++n) {
-            let animated_fish =  new MyAnimatedFish(this.scene, Math.random() * 50 - 25 , Math.random()*4+1, Math.random() * 50 - 25);
+            let animated_fish =  new MyAnimatedFish(this.scene);
             this.animatedFish.push(animated_fish);
         }
     }   
@@ -24,7 +24,7 @@ export class MyAnimatedFishSet extends CGFobject {
         this.animatedFish.forEach(animated_fish => { animated_fish.display(); });
     }
 
-    update(t){
-        this.animatedFish.forEach(animated_fish => { animated_fish.update(t); });
+    update(){
+        this.animatedFish.forEach(animated_fish => { animated_fish.update(); });
     }
 }

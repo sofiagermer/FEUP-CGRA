@@ -3,47 +3,31 @@ import { CGFappearance, CGFobject, CGFtexture } from "../../../../lib/CGF.js";
 import { MyMovingObject } from "../../landscape/MyMovingObject.js";
 import { MyFish } from "./MyFish.js";
 import { MyMovingFish } from "./MyMovingFish.js";
-/**
- * MyAnimatedFish
- * @constructor
- * @param scene - Reference to MyScene object
- */
 
-export class MyAnimatedFish extends MyMovingObject {
-    constructor(scene, startX, startY, startZ) {
-        let fish = new MyMovingFish(scene, new MyFish(scene));
-        super(scene, fish);
-        this.scene = scene;
-        this.circle_angle = 0;
-        this.startX = startX;
-        this.startY = startY;
-        this.startZ = startZ;
-        this.pos = [this.startX, this.startY, this.startZ];
+
+export class MyAnimatedFish extends MyMovingFish {
+    constructor(scene){
+        super(scene, new MyFish(scene));
+        this.coordinates = [Math.random() * 35 - 20, Math.random() * 4 + 1, Math.random() * 35 - 20];
+        /**Each turn can take between 2 to 10 seconds */
+        this.period = Math.random() * (10 - 2) + 2;
+        this.lastT = 0.0;
     }
-
-    move(value) {
-        this.pos = value;
-    }
-
-    change_ang(value) {
-        this.circle_angle = value;
-    }
-
 
     update() {
-        this.move([3*Math.sin(this.circle_angle)+this.startX,this.startY,3*Math.cos(this.circle_angle)+this.startZ]);
-        this.circle_angle -= Math.PI/100;
-        this.change_ang(this.circle_angle);
+        super.update();
+        if (this.lastT == 0.0)
+            this.lastT = this.scene.t - 1;
+        
+        super.setVelocity(2 * Math.PI * 5 / (this.period * (1000 / (this.scene.t - this.lastT))));
+        super.turn(2 * Math.PI / (this.period * (1000 / (this.scene.t - this.lastT))));
+        this.lastT = this.scene.t;
     }
-   
 
     display() {
-        this.scene.pushMatrix();
-        this.scene.translate(this.pos[0], this.pos[1], this.pos[2]);
-        this.scene.rotate(this.circle_angle,0,1,0);
-        this.object.display();
-        this.scene.popMatrix();
-    
+        console.log(this.coordinates[0]);
+        console.log(this.coordinates[2])
+        super.display();
     }
-      
+
 }

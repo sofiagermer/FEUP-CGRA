@@ -123,7 +123,7 @@ export class MyScene extends CGFscene {
         this.pineapple = new MyNeast(this);
         this.pillars = new MyPillarSet(this);
         this.spongeBob = new MyMovingSpongeBob(this, new MySpongeBob(this));    
-        this.animatedFishSet = new MyAnimatedFishSet(this, 15);
+        this.animatedFishSet = new MyAnimatedFishSet(this, 3);
     }
 
     initDisplayValues(){
@@ -244,22 +244,7 @@ export class MyScene extends CGFscene {
            // this.spongeBob.controlRock();
         }
     }
-    /*
-    controlRock(){
-        if(this.movingFish.lowerBound()){
-            console.log("tá em baixo");
-            if(!this.movingFish.catchedRock){
-                console.log("VOU APANHAR PEDRA");
-                this.movingFish.catchRock();
-            }
-            else {
-                console.log("VOU LARGAR PEDRA");
-                this.movingFish.letGoRock();
-                this.movingFish.catchedRock = false;
-                this.movingFish.rock = null;
-            }
-        }
-    }*/
+
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
@@ -370,7 +355,6 @@ export class MyScene extends CGFscene {
             this.spongeBob.display();
             this.popMatrix();
         }
-
         
         if(this.displayAnimatedFishes){
             this.pushMatrix();
