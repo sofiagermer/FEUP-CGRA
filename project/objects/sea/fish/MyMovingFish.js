@@ -24,7 +24,7 @@ export class MyMovingFish extends MyMovingObject {
         super.update();
         
         //update fish fin's movement
-        this.fish.update(this.turningRight, this.turningLeft);
+        this.fish.update(this.turningRight, this.turningLeft, this.speed);
         this.turningLeft = false;
         this.turningRight = false;
         if (this.catchedRock){

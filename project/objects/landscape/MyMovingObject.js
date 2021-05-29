@@ -40,8 +40,8 @@ export class MyMovingObject extends CGFobject {
     
     accelerate(val) {
         //Increases speed
-        this.object.speed += val;
-        if(this.object.speed < 0 ) this.object.speed = 0;
+        this.speed += val;
+        if(this.speed < 0 ) this.speed = 0;
     }
 
     up(){
@@ -53,13 +53,13 @@ export class MyMovingObject extends CGFobject {
     }
     
     update(){
-        this.coordinates[0] += this.object.speed* this.scene.speedFactor * Math.sin(this.orientationAngle - Math.PI/2);
-        this.coordinates[2] += this.object.speed* this.scene.speedFactor * Math.cos(this.orientationAngle - Math.PI/2);
+        this.coordinates[0] += this.speed* this.scene.speedFactor * Math.sin(this.orientationAngle - Math.PI/2);
+        this.coordinates[2] += this.speed* this.scene.speedFactor * Math.cos(this.orientationAngle - Math.PI/2);
     }
 
     reset() {
         //Resets initial position
-        this.object.speed = 0.0;
+        this.speed = 0.0;
         this.orientationAngle = 0.0;
         this.coordinates = [0.0, 5.0, 0.0];
     }

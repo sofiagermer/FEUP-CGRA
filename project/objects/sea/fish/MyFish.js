@@ -47,17 +47,17 @@ export class MyFish extends CGFobject {
         this.scene.materialFish.loadTexture('images/fish/fishBody.png'); 
     }
 
-    update(turningRight, turningLeft){
-        this.updateTail();
+    update(turningRight, turningLeft,speed){
+        this.updateTail(speed);
         this.updateFins(turningRight, turningLeft);
     }
 
-    updateTail(){
-        if(this.speed < 0.1){
-            this.tail.angle = Math.sin(this.scene.t * (this.speed + 0.4) / 100 % 100);
+    updateTail(speed){
+        if(speed < 0.1){
+            this.tail.angle = Math.sin(this.scene.t * (speed + 0.4) / 100 % 100);
         }
         else{
-            this.tail.angle = Math.sin(this.scene.t * (this.speed * 4.0) / 100 % 100);
+            this.tail.angle = Math.sin(this.scene.t * (speed * 4.0) / 100 % 100);
         }
     }
 
